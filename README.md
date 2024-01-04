@@ -10,9 +10,55 @@ Will need two projects that work together.
  - Take url and determine relevant stats.
  - Save as json.
 
+#### Info Needed
+ - Final score between the two teams - INT(2)
+ - Shots on goal for both teams - INT(3)
+ - Hits for both teams - INT(3)
+ - Powerplay fraction for both teams - STRING(5)
+ - Faceoff wins for both teams - INT(3)
+ 
+ - For each Canucks goal:
+ - Last name of goal scorer, their total goal number, which period, and at what time in the period.
+ - Last name of primary assistor, their total assists.
+ - Last name of secondary assistor, their total assists.
+
 2. PhotoScape Editor
  - Unzip template input json format.
  - Alter json file and zip file as psxprj or jpg.
+
+#### Final Score
+ - Canucks Logo
+ - Opposition Logo - Need to request from Kyle
+ - Final Score between the two teams
+ - Shots on goal for both teams
+ - Hits for both teams
+ - Powerplay fraction for both teams
+ - Faceoff wins for both teams
+ - Win or Lose
+ - Date in form MMM DD, YYYY, could be D
+
+
+#### Box Score
+ - Column list of Goal information, left is always Canucks.
+ - Period - (Time Scored)
+ - G: Last name of goal scorer (# of goals)
+ - A: Last name of primary assistor (# of assists)(optional), last name of secondary assistor (# of assists)(optional)
+
+ - On the other side:
+ - (Time Scored) - Period
+ - Last name of goal scorer :G
+ - Last name of primary assistor (optional), last name of secondary assistor (optional) :A
+
+
+#### Other
+Maybe I should keep a small database for canucks players' stats. That would be useful to get total goals and total assists for players. Also would be interesting to track stats in general about those players as it caters to our audience.
+
+Format: JSON
+ESPN Data:
+ - G
+ - A
+ - +/-
+ - S 
 
 ## Installation
 [Todo]
