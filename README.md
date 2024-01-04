@@ -1,2 +1,17 @@
-# photoscape-editor
-A project devoted to automating game score updates for social media posts, particularly for sports using PhotoScape X.
+# Photoscape-Editor
+Notes about what the project is.
+
+## Initial Thoughts
+
+## Installation
+[Todo]
+
+## Usage
+[Todo]
+
+## Design Decisions
+[Todo]
+
+## License
+This project is private for now and licensed under [MIT License](https://opensource.org/licenses/MIT).
+
