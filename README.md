@@ -22,6 +22,7 @@ Will need two projects that work together.
  - Last name of primary assistor, their total assists.
  - Last name of secondary assistor, their total assists.
 
+------------------------------------------------------
 2. PhotoScape Editor
  - Unzip template input json format.
  - Alter json file and zip file as psxprj or jpg.
@@ -49,7 +50,16 @@ Will need two projects that work together.
  - Last name of goal scorer :G
  - Last name of primary assistor (optional), last name of secondary assistor (optional) :A
 
+ #### Unzip Process
+ 1. Take .psxprj file and unzip it into a folder called unzip
+ 2. Edit psxproject.json as required
 
+ #### Zip Process
+ 1. In unzip/ recursively zip all files into {DATE}.psxprj
+ 2. Open the file in Photoscape X, click edit
+ 3. Save file as a jpg.
+
+-------------------------------------------------------
 #### Other
 Maybe I should keep a small database for canucks players' stats. That would be useful to get total goals and total assists for players. Also would be interesting to track stats in general about those players as it caters to our audience.
 
