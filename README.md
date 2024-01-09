@@ -11,11 +11,15 @@ Will need two projects that work together.
  - Save as json.
 
 #### Info Needed
+ - Who the two teams are
+ - Is vancouver Home or Away
  - Final score between the two teams - INT(2)
+ - Did van win, was it in ot or shootout?
  - Shots on goal for both teams - INT(3)
  - Hits for both teams - INT(3)
  - Powerplay fraction for both teams - STRING(5)
  - Faceoff wins for both teams - INT(3)
+ - Date played
  
  - For each Canucks goal:
  - Last name of goal scorer, their total goal number, which period, and at what time in the period.

@@ -82,7 +82,26 @@ import os
 #    - Filter out text without first word and space to get day and year
 
 
-# Fetch Goal Info
+# Fetch Goal Info (BOX SCORE)
+#    - div w class tabs__content
+#    - get each div w class Table__scroller
+#    - Skip table[0] - Complete summary
+#    - find each tbody w class Table__TBODY, get tr_list
+#    - Keep track of the score for AWAY and HOME, away is first home is second
+#    - for each tr, increment PERIOD, unless PERIOD = 5, then break. and get td_list
+#    - if td_list[0] does not has div w class playByPlay__text-assists.getText, continue
+#    - td_list[0].getText = time of goal
+#    - td_list[2].getText = First name initial. Last name
+#    - for td_list[2], get span_list[0].getText as number of goals that player has scored and 
+#    - if that text is not "Unassisted"
+#    - Take the substring after \n and split by ','
+#    - These are the assistors and their number of assists
+#    - if td_list[3].getText != away goal total, list as an away goal and increment away goal, else, list as a home goal and increment home goal
+#   NOTE: If period = 4 period = OT and OT = True, if vanWin = True, winFinal = WIN (OT) else winFinal = LOSS (OT)
+
+#   NOTE: If period = 5, period = SHOOTOUT and SHOOTOUT = True, if vanWin = True, winFinal = WIN (SO) else winFinal = LOSS (SO)
+
+
 
 def main():
     players = {}
