@@ -135,7 +135,7 @@
                         "_t": "image",
                         "_v": {
                             "_t": "string",
-                            "_v": "embed0.png"
+                            "_v": "VAN.png"
                         }
                     },
                     "innerGlow": {
@@ -469,7 +469,7 @@
                         "_t": "image",
                         "_v": {
                             "_t": "string",
-                            "_v": "embed1.png"
+                            "_v": "OTHER.png"
                         }
                     },
                     "innerGlow": {
