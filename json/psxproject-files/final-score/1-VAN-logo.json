@@ -1,10 +1,6 @@
 {
     "_t": "map",
     "_v": {
-        "alignment": {
-            "_t": "string",
-            "_v": "center"
-        },
         "anchor": {
             "_t": "string",
             "_v": ""
@@ -21,13 +17,21 @@
             "_t": "string",
             "_v": "color=4281219144&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
         },
-        "bold": {
+        "bmpAntiAlias": {
             "_t": "bool",
             "_v": "true"
+        },
+        "clipType": {
+            "_t": "string",
+            "_v": ""
         },
         "compositionMode": {
             "_t": "string",
             "_v": "normal"
+        },
+        "decorationMode": {
+            "_t": "string",
+            "_v": "clip"
         },
         "distortion": {
             "_t": "map",
@@ -69,7 +73,7 @@
         },
         "dropShadowLength": {
             "_t": "int",
-            "_v": "25"
+            "_v": "15"
         },
         "dropShadowRadius": {
             "_t": "int",
@@ -99,13 +103,25 @@
             "_t": "int",
             "_v": "0"
         },
-        "fontFamily": {
+        "fillBrush": {
             "_t": "string",
-            "_v": "Arial"
+            "_v": "color=4294967295&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=%3A%2Fres%2Fpatterns%2Ffree%2FA01-2-002.svg&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
         },
-        "fontSize": {
-            "_t": "double",
-            "_v": "181.97309032976844"
+        "fillBrushEnabled": {
+            "_t": "bool",
+            "_v": "false"
+        },
+        "filterColor": {
+            "_t": "map",
+            "_v": {
+            }
+        },
+        "image": {
+            "_t": "image",
+            "_v": {
+                "_t": "string",
+                "_v": "embed0.png"
+            }
         },
         "innerGlow": {
             "_t": "bool",
@@ -143,21 +159,9 @@
             "_t": "int",
             "_v": "25"
         },
-        "italic": {
-            "_t": "bool",
-            "_v": "false"
-        },
         "keepAspectRatio": {
             "_t": "bool",
             "_v": "true"
-        },
-        "letterSpacing": {
-            "_t": "int",
-            "_v": "0"
-        },
-        "lineSpacing": {
-            "_t": "int",
-            "_v": "0"
         },
         "longShadowAngle": {
             "_t": "int",
@@ -207,9 +211,18 @@
             "_t": "int",
             "_v": "20"
         },
+        "mask": {
+            "_t": "map",
+            "_v": {
+            }
+        },
+        "mode": {
+            "_t": "string",
+            "_v": "bitmap"
+        },
         "objectType": {
             "_t": "string",
-            "_v": "text"
+            "_v": "image"
         },
         "opacity": {
             "_t": "double",
@@ -229,19 +242,15 @@
         },
         "outlineBrush": {
             "_t": "string",
-            "_v": "color=4294955264&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
+            "_v": "color=4278190080&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
         },
         "outlineEnabled": {
             "_t": "bool",
-            "_v": "true"
-        },
-        "outlineType": {
-            "_t": "int",
-            "_v": "0"
+            "_v": "false"
         },
         "outlineWidth": {
             "_t": "int",
-            "_v": "30"
+            "_v": "25"
         },
         "overlay": {
             "_t": "map",
@@ -263,11 +272,11 @@
         },
         "pos": {
             "_t": "pointf",
-            "_v": "195.51,-427.403"
+            "_v": "-226.369,-304.326"
         },
         "rect": {
             "_t": "rectf",
-            "_v": "-282.629,-60.3347,565.258,120.669"
+            "_v": "-198.861,-198.861,397.721,397.721"
         },
         "refSize": {
             "_t": "sizef",
@@ -277,39 +286,43 @@
             "_t": "double",
             "_v": "0"
         },
+        "roundAmount": {
+            "_t": "int",
+            "_v": "0"
+        },
         "shadowMode": {
             "_t": "string",
             "_v": ""
         },
-        "strikeThrough": {
-            "_t": "bool",
-            "_v": "false"
-        },
-        "text": {
+        "shapeFile": {
             "_t": "string",
-            "_v": "SCORE"
+            "_v": ""
         },
-        "textBrush": {
-            "_t": "string",
-            "_v": "color=4278190080&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
+        "shapeMargin": {
+            "_t": "int",
+            "_v": "0"
         },
-        "textHeight": {
-            "_t": "double",
-            "_v": "120.66948962715882"
-        },
-        "textWidth": {
-            "_t": "double",
-            "_v": "565.2582072570408"
-        },
-        "transparentText": {
+        "shapeStretch": {
             "_t": "bool",
             "_v": "false"
         },
-        "underline": {
-            "_t": "bool",
-            "_v": "false"
+        "shapeTransform": {
+            "_t": "transform",
+            "_v": "1,0,0,0,1,0,0,0,1"
+        },
+        "transform": {
+            "_t": "transform",
+            "_v": "1,0,0,0,1,0,0,0,1"
         },
         "useBackground": {
+            "_t": "bool",
+            "_v": "false"
+        },
+        "useFilterColor": {
+            "_t": "bool",
+            "_v": "false"
+        },
+        "useMask": {
             "_t": "bool",
             "_v": "false"
         },

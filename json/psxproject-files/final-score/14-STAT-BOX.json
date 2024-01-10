@@ -1,10 +1,6 @@
 {
     "_t": "map",
     "_v": {
-        "alignment": {
-            "_t": "string",
-            "_v": "center"
-        },
         "anchor": {
             "_t": "string",
             "_v": ""
@@ -17,13 +13,17 @@
             "_t": "double",
             "_v": "0"
         },
+        "arrowType": {
+            "_t": "string",
+            "_v": ""
+        },
         "backgroundBrush": {
             "_t": "string",
             "_v": "color=4281219144&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
         },
-        "bold": {
-            "_t": "bool",
-            "_v": "true"
+        "brush": {
+            "_t": "string",
+            "_v": "color=4294967295&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
         },
         "compositionMode": {
             "_t": "string",
@@ -69,7 +69,7 @@
         },
         "dropShadowLength": {
             "_t": "int",
-            "_v": "25"
+            "_v": "7"
         },
         "dropShadowRadius": {
             "_t": "int",
@@ -98,14 +98,6 @@
         "embossSoftness": {
             "_t": "int",
             "_v": "0"
-        },
-        "fontFamily": {
-            "_t": "string",
-            "_v": "Arial"
-        },
-        "fontSize": {
-            "_t": "double",
-            "_v": "181.97309032976844"
         },
         "innerGlow": {
             "_t": "bool",
@@ -142,22 +134,6 @@
         "innerShadowRadius": {
             "_t": "int",
             "_v": "25"
-        },
-        "italic": {
-            "_t": "bool",
-            "_v": "false"
-        },
-        "keepAspectRatio": {
-            "_t": "bool",
-            "_v": "true"
-        },
-        "letterSpacing": {
-            "_t": "int",
-            "_v": "0"
-        },
-        "lineSpacing": {
-            "_t": "int",
-            "_v": "0"
         },
         "longShadowAngle": {
             "_t": "int",
@@ -209,7 +185,7 @@
         },
         "objectType": {
             "_t": "string",
-            "_v": "text"
+            "_v": "shape"
         },
         "opacity": {
             "_t": "double",
@@ -221,11 +197,11 @@
         },
         "outerShadowLength": {
             "_t": "int",
-            "_v": "25"
+            "_v": "30"
         },
         "outerShadowRadius": {
             "_t": "int",
-            "_v": "25"
+            "_v": "30"
         },
         "outlineBrush": {
             "_t": "string",
@@ -233,15 +209,11 @@
         },
         "outlineEnabled": {
             "_t": "bool",
-            "_v": "true"
-        },
-        "outlineType": {
-            "_t": "int",
-            "_v": "0"
+            "_v": "false"
         },
         "outlineWidth": {
             "_t": "int",
-            "_v": "30"
+            "_v": "50"
         },
         "overlay": {
             "_t": "map",
@@ -263,11 +235,11 @@
         },
         "pos": {
             "_t": "pointf",
-            "_v": "195.51,-427.403"
+            "_v": "9.61799,195.015"
         },
         "rect": {
             "_t": "rectf",
-            "_v": "-282.629,-60.3347,565.258,120.669"
+            "_v": "-483.072,-250.879,966.145,501.758"
         },
         "refSize": {
             "_t": "sizef",
@@ -277,37 +249,33 @@
             "_t": "double",
             "_v": "0"
         },
+        "round": {
+            "_t": "int",
+            "_v": "30"
+        },
         "shadowMode": {
             "_t": "string",
             "_v": ""
         },
-        "strikeThrough": {
-            "_t": "bool",
-            "_v": "false"
-        },
-        "text": {
+        "shapeType": {
             "_t": "string",
-            "_v": "SCORE"
+            "_v": "rect"
         },
-        "textBrush": {
+        "shapeVector": {
             "_t": "string",
-            "_v": "color=4278190080&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
+            "_v": "filePath=&transform=1%2C0%2C0%2C0%2C1%2C0%2C0%2C0%2C1"
         },
-        "textHeight": {
-            "_t": "double",
-            "_v": "120.66948962715882"
+        "strokeCap": {
+            "_t": "string",
+            "_v": "square"
         },
-        "textWidth": {
-            "_t": "double",
-            "_v": "565.2582072570408"
+        "strokePattern": {
+            "_t": "string",
+            "_v": ""
         },
-        "transparentText": {
-            "_t": "bool",
-            "_v": "false"
-        },
-        "underline": {
-            "_t": "bool",
-            "_v": "false"
+        "strokeWidth": {
+            "_t": "int",
+            "_v": "6"
         },
         "useBackground": {
             "_t": "bool",

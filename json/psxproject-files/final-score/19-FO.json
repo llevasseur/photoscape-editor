@@ -105,7 +105,7 @@
         },
         "fontSize": {
             "_t": "double",
-            "_v": "181.97309032976844"
+            "_v": "64.20949493535355"
         },
         "innerGlow": {
             "_t": "bool",
@@ -229,7 +229,7 @@
         },
         "outlineBrush": {
             "_t": "string",
-            "_v": "color=4294955264&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
+            "_v": "color=4294967295&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
         },
         "outlineEnabled": {
             "_t": "bool",
@@ -241,7 +241,7 @@
         },
         "outlineWidth": {
             "_t": "int",
-            "_v": "30"
+            "_v": "40"
         },
         "overlay": {
             "_t": "map",
@@ -263,11 +263,11 @@
         },
         "pos": {
             "_t": "pointf",
-            "_v": "195.51,-427.403"
+            "_v": "11.2711,396.626"
         },
         "rect": {
             "_t": "rectf",
-            "_v": "-282.629,-60.3347,565.258,120.669"
+            "_v": "-36.6405,-21.2752,73.2809,42.5504"
         },
         "refSize": {
             "_t": "sizef",
@@ -287,7 +287,7 @@
         },
         "text": {
             "_t": "string",
-            "_v": "SCORE"
+            "_v": "FO"
         },
         "textBrush": {
             "_t": "string",
@@ -295,11 +295,11 @@
         },
         "textHeight": {
             "_t": "double",
-            "_v": "120.66948962715882"
+            "_v": "42.55035421125156"
         },
         "textWidth": {
             "_t": "double",
-            "_v": "565.2582072570408"
+            "_v": "73.2809160970135"
         },
         "transparentText": {
             "_t": "bool",
