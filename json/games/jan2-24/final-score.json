@@ -1,0 +1,22 @@
+{
+    "CANUCKS": {
+        "SCORE": "6",
+        "WIN": "True",
+        "OT": "False",
+        "SO": "False",
+        "SOG": "26",
+        "HITS": "19",
+        "PP": "1/1",
+        "PIM": "2",
+        "FO": "27"
+    },
+    "OTHER": {
+        "TEAM": "OTT",
+        "SCORE": "3",
+        "SOG": "38",
+        "HITS": "22",
+        "PP": "0/1",
+        "PIM": "12",
+        "FO": "26"
+    }
+}
