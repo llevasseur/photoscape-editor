@@ -1,0 +1,108 @@
+{
+    "ANA": {
+        "IMG": "./assets/logos/pacific/ANA.webp",
+        "ALT": "./assets/logos/pacific/ANA_1.webp"
+    },
+    "ARI": {
+        "IMG": "./assets/logos/central/ARI.png",
+        "ALT": "./assets/logos/central/ARI_1.png"
+    },
+    "BOS": {
+        "IMG": "./assets/logos/atlantic/BOS.png"
+    },
+    "BUF": {
+        "IMG": "./assets/logos/atlantic/BUF.png",
+        "ALT": "./assets/logos/atlantic/BUF_1.png"
+    },
+    "CAR": {
+        "IMG": "./assets/logos/metro/CAR.png"
+    },
+    "CBJ": {
+        "IMG": "./assets/logos/metro/CBJ.png"
+    },
+    "CGY": {
+        "IMG": "./assets/logos/pacific/CGY.png"
+    },
+    "CHI": {
+        "IMG": "./assets/logos/central/CHI.png"
+    },
+    "COL": {
+        "IMG": "./assets/logos/central/COL.png"
+    },
+    "DAL": {
+        "IMG": "./assets/logos/central/DAL.png"
+    },
+    "DET": {
+        "IMG": "./assets/logos/atlantic/DET.png"
+    },
+    "EDM": {
+        "IMG": "./assets/logos/pacific/EDM.png"
+    },
+    "FLA": {
+        "IMG": "./assets/logos/atlantic/FLA.png",
+        "ALT": "./assets/logos/atlantic/FLA_1.png"
+    },
+    "LAK": {
+        "IMG": "./assets/logos/pacific/LAK.png",
+        "ALT": "./assets/logos/pacific/LAK_1.png"
+    },
+    "MIN": {
+        "IMG": "./assets/logos/central/MIN.png"
+    },
+    "MTL": {
+        "IMG": "./assets/logos/atlantic/MTL.png"
+    },
+    "NJD": {
+        "IMG": "./assets/logos/metro/NJD.png"
+    },
+    "NSH": {
+        "IMG": "./assets/logos/central/NSH.png"
+    },
+    "NYI": {
+        "IMG": "./assets/logos/metro/NYI.png"
+    },
+    "NYR": {
+        "IMG": "./assets/logos/metro/NYR.png"
+    },
+    "OTT": {
+        "IMG": "./assets/logos/atlantic/OTT.png"
+    },
+    "PHI": {
+        "IMG": "./assets/logos/metro/PHI.png"
+    },
+    "PIT": {
+        "IMG": "./assets/logos/metro/PIT.png"
+    },
+    "SEA": {
+        "IMG": "./assets/logos/pacific/SEA.png"
+    },
+    "SJS": {
+        "IMG": "./assets/logos/pacific/SJS.png"
+    },
+    "STL": {
+        "IMG": "./assets/logos/central/STL.png",
+        "ALT": "./assets/logos/central/STL_1.png"
+    },
+    "TBL": {
+        "IMG": "./assets/logos/atlantic/TBL.png"
+    },
+    "TOR": {
+        "IMG": "./assets/logos/atlantic/TOR.png"
+    },
+    "VAN": {
+        "IMG": "./assets/logos/pacific/VAN.png",
+        "ALT1": "./assets/logos/pacific/VAN_1.png",
+        "ALT2": "./assets/logos/pacific/VAN_2.png",
+        "ALT3": "./assets/logos/pacific/VAN_3.png"
+    },
+    "VGK": {
+        "IMG": "./assets/logos/pacific/VGK.png"
+    },
+    "WPG": {
+        "IMG": "./assets/logos/central/WPG.png",
+        "ALT": "./assets/logos/central/WPG_1.png"
+    },
+    "WSH": {
+        "IMG": "./assets/logos/metro/WAS.png"
+    }
+}

@@ -67,6 +67,8 @@ Will need two projects that work together.
 #### PhotoScape Notes
 Note that z-index matters in photoscape json files. This means objects at the bottom of the json appear on top of objects above them.
 
+Note you must change the name of the logo pngs in the json and the template.
+
 #### Other
 Maybe I should keep a small database for canucks players' stats. That would be useful to get total goals and total assists for players. Also would be interesting to track stats in general about those players as it caters to our audience.
 
