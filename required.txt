@@ -1,5 +1,7 @@
 Requirements
 
-1. make
-2. python3
+1. make - install using chocolatey (nodejs)
+    $ choco install make
+    
+2. python3 (Make sure executable is called python3.exe on windows)
 3. 

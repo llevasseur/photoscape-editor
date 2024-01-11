@@ -1,0 +1,321 @@
+{
+    "_t": "map",
+    "_v": {
+        "alignment": {
+            "_t": "string",
+            "_v": "center"
+        },
+        "anchor": {
+            "_t": "string",
+            "_v": ""
+        },
+        "anchorX": {
+            "_t": "double",
+            "_v": "0"
+        },
+        "anchorY": {
+            "_t": "double",
+            "_v": "0"
+        },
+        "backgroundBrush": {
+            "_t": "string",
+            "_v": "color=4281219144&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
+        },
+        "bold": {
+            "_t": "bool",
+            "_v": "true"
+        },
+        "compositionMode": {
+            "_t": "string",
+            "_v": "normal"
+        },
+        "distortion": {
+            "_t": "map",
+            "_v": {
+                "enabled": {
+                    "_t": "bool",
+                    "_v": "false"
+                },
+                "perspective": {
+                    "_t": "list",
+                    "_v": [
+                        {
+                            "_t": "pointf",
+                            "_v": "0,0"
+                        },
+                        {
+                            "_t": "pointf",
+                            "_v": "1,0"
+                        },
+                        {
+                            "_t": "pointf",
+                            "_v": "1,1"
+                        },
+                        {
+                            "_t": "pointf",
+                            "_v": "0,1"
+                        }
+                    ]
+                }
+            }
+        },
+        "dropShadowAngle": {
+            "_t": "int",
+            "_v": "45"
+        },
+        "dropShadowColor": {
+            "_t": "uint",
+            "_v": "4278190080"
+        },
+        "dropShadowLength": {
+            "_t": "int",
+            "_v": "25"
+        },
+        "dropShadowRadius": {
+            "_t": "int",
+            "_v": "0"
+        },
+        "emboss": {
+            "_t": "bool",
+            "_v": "false"
+        },
+        "embossAngle": {
+            "_t": "int",
+            "_v": "45"
+        },
+        "embossBrightness": {
+            "_t": "int",
+            "_v": "0"
+        },
+        "embossLength": {
+            "_t": "int",
+            "_v": "25"
+        },
+        "embossOpacity": {
+            "_t": "int",
+            "_v": "50"
+        },
+        "embossSoftness": {
+            "_t": "int",
+            "_v": "0"
+        },
+        "fontFamily": {
+            "_t": "string",
+            "_v": "Arial"
+        },
+        "fontSize": {
+            "_t": "double",
+            "_v": "68.71440497290081"
+        },
+        "innerGlow": {
+            "_t": "bool",
+            "_v": "false"
+        },
+        "innerGlowColor": {
+            "_t": "uint",
+            "_v": "4293617056"
+        },
+        "innerGlowLength": {
+            "_t": "int",
+            "_v": "25"
+        },
+        "innerGlowRadius": {
+            "_t": "int",
+            "_v": "25"
+        },
+        "innerShadow": {
+            "_t": "bool",
+            "_v": "false"
+        },
+        "innerShadowAngle": {
+            "_t": "int",
+            "_v": "45"
+        },
+        "innerShadowColor": {
+            "_t": "uint",
+            "_v": "4278190080"
+        },
+        "innerShadowOffset": {
+            "_t": "int",
+            "_v": "25"
+        },
+        "innerShadowRadius": {
+            "_t": "int",
+            "_v": "25"
+        },
+        "italic": {
+            "_t": "bool",
+            "_v": "false"
+        },
+        "keepAspectRatio": {
+            "_t": "bool",
+            "_v": "true"
+        },
+        "letterSpacing": {
+            "_t": "int",
+            "_v": "0"
+        },
+        "lineSpacing": {
+            "_t": "int",
+            "_v": "0"
+        },
+        "longShadowAngle": {
+            "_t": "int",
+            "_v": "45"
+        },
+        "longShadowBrush": {
+            "_t": "string",
+            "_v": "color=4278190080&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
+        },
+        "longShadowGradient": {
+            "_t": "string",
+            "_v": "angle=0&duoColor0=4294901862&duoColor1=4294940928&duoCurve=%3A%2Fres%2Fobject%2Fgradient%2Fcurve-17-s.acv&enabled=false&hue=0&monoColor=4294967295&monoColorGradient=0%3D4283914071%260.49585%3D4290887872%261%3D4285887861&monoOpacityGradient=0%3D4294967295%261%3D4294967295&offsetx=0&offsety=0&polyColorGradient=0%3D4294901760%261%3D4294953728&polyOpacityGradient=0%3D4294967295%261%3D4294967295&reverse=false&saturation=0&scale=100&style=0&type=duo"
+        },
+        "longShadowLength": {
+            "_t": "int",
+            "_v": "100"
+        },
+        "longShadowOpacityBrush": {
+            "_t": "string",
+            "_v": "color=4278190080&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
+        },
+        "longShadowOpacityCurve": {
+            "_t": "string",
+            "_v": ""
+        },
+        "longShadowPerspective": {
+            "_t": "int",
+            "_v": "0"
+        },
+        "longShadowType": {
+            "_t": "int",
+            "_v": "0"
+        },
+        "marginBottom": {
+            "_t": "int",
+            "_v": "20"
+        },
+        "marginLeft": {
+            "_t": "int",
+            "_v": "20"
+        },
+        "marginRight": {
+            "_t": "int",
+            "_v": "20"
+        },
+        "marginTop": {
+            "_t": "int",
+            "_v": "20"
+        },
+        "objectType": {
+            "_t": "string",
+            "_v": "text"
+        },
+        "opacity": {
+            "_t": "double",
+            "_v": "1"
+        },
+        "outerShadowColor": {
+            "_t": "uint",
+            "_v": "4293617056"
+        },
+        "outerShadowLength": {
+            "_t": "int",
+            "_v": "25"
+        },
+        "outerShadowRadius": {
+            "_t": "int",
+            "_v": "25"
+        },
+        "outlineBrush": {
+            "_t": "string",
+            "_v": "color=4294967295&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
+        },
+        "outlineEnabled": {
+            "_t": "bool",
+            "_v": "false"
+        },
+        "outlineType": {
+            "_t": "int",
+            "_v": "0"
+        },
+        "outlineWidth": {
+            "_t": "int",
+            "_v": "25"
+        },
+        "overlay": {
+            "_t": "map",
+            "_v": {
+                "enabled": {
+                    "_t": "bool",
+                    "_v": "false"
+                },
+                "items": {
+                    "_t": "map",
+                    "_v": {
+                    }
+                },
+                "type": {
+                    "_t": "int",
+                    "_v": "0"
+                }
+            }
+        },
+        "pos": {
+            "_t": "pointf",
+            "_v": "247.059,93.9738"
+        },
+        "rect": {
+            "_t": "rectf",
+            "_v": "-30.5046,-21.1419,61.0092,42.2837"
+        },
+        "refSize": {
+            "_t": "sizef",
+            "_v": "1080,1080"
+        },
+        "rotation": {
+            "_t": "double",
+            "_v": "0"
+        },
+        "shadowMode": {
+            "_t": "string",
+            "_v": ""
+        },
+        "strikeThrough": {
+            "_t": "bool",
+            "_v": "false"
+        },
+        "text": {
+            "_t": "string",
+            "_v": "22"
+        },
+        "textBrush": {
+            "_t": "string",
+            "_v": "color=4294967295&gradient=angle%3D0%26duoColor0%3D4294901862%26duoColor1%3D4294940928%26duoCurve%3D%253A%252Fres%252Fobject%252Fgradient%252Fcurve-17-s.acv%26enabled%3Dtrue%26hue%3D0%26monoColor%3D4294967295%26monoColorGradient%3D0%253D4283914071%25260.49585%253D4290887872%25261%253D4285887861%26monoOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26offsetx%3D0%26offsety%3D0%26polyColorGradient%3D0%253D4294901760%25261%253D4294953728%26polyOpacityGradient%3D0%253D4294967295%25261%253D4294967295%26reverse%3Dfalse%26saturation%3D0%26scale%3D100%26style%3D0%26type%3Dduo&opacity=255&pattern=&patternAngle=0&patternScale=1&patternX=0&patternY=0&texture=&textureAngle=0&textureHue=0&textureSaturation=0&textureScale=1&textureX=0&textureY=0&type=color"
+        },
+        "textHeight": {
+            "_t": "double",
+            "_v": "42.28371280953193"
+        },
+        "textWidth": {
+            "_t": "double",
+            "_v": "61.00919290890535"
+        },
+        "transparentText": {
+            "_t": "bool",
+            "_v": "false"
+        },
+        "underline": {
+            "_t": "bool",
+            "_v": "false"
+        },
+        "useBackground": {
+            "_t": "bool",
+            "_v": "false"
+        },
+        "visible": {
+            "_t": "bool",
+            "_v": "true"
+        }
+    }
+}
