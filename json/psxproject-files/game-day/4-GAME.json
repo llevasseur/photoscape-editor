@@ -3,7 +3,7 @@
     "_v": {
         "alignment": {
             "_t": "string",
-            "_v": "center"
+            "_v": "left"
         },
         "anchor": {
             "_t": "string",
@@ -105,7 +105,7 @@
         },
         "fontSize": {
             "_t": "double",
-            "_v": "188.4635973632729"
+            "_v": "196"
         },
         "innerGlow": {
             "_t": "bool",
@@ -287,7 +287,7 @@
         },
         "text": {
             "_t": "string",
-            "_v": "GAMEDAY"
+            "_v": "GAME"
         },
         "textBrush": {
             "_t": "string",
