@@ -1,11 +1,11 @@
 {
     "game-day": {
-        "PATH": "./assets/templates/box-score-temp/"
+        "PATH": "/assets/templates/box-score-temp/"
     },
     "final-score": {
-        "PATH": "./assets/templates/final-score-temp/"
+        "PATH": "/assets/templates/final-score-temp/"
     },
     "box-score": {
-        "PATH": "./assets/templates/box-score-temp/"
+        "PATH": "/assets/templates/box-score-temp/"
     }
 }
