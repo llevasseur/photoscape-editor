@@ -27,6 +27,26 @@ def zip_directory(directory_path, zip_name):
             file_path = os.path.join(directory_path, file)
             if os.path.isfile(file_path):
                 zipf.write(file_path, arcname=os.path.basename(file_path))
+
+def update_psxprj(selected_choice, source):
+    # Find psxprj from source
+    with open(source + '/psxproject.json', 'r') as json_file:
+        psxprj = json.load(json_file)
+
+    match selected_choice:
+        case "game-day":
+            # Need to update psxprj["object"]
+            object = psxprj.get('object')["_v"]
+            test_0 = object[3]
+            print(f"Test: {test_0}")
+            return
+        
+        case "final-score":
+            return
+        
+        case "box-score":
+            return
+    return
     
 
 def main():
@@ -77,7 +97,7 @@ def main():
     source = cwd + f'/json/games/{date}/{selected_choice}-temp'
 
     # Update template copy
-    # TODO
+    update_psxprj(selected_choice, source)
 
     # Zip updated template
     zip_directory(source, cwd + f'/json/games/{date}/{selected_choice}.psxprj')
