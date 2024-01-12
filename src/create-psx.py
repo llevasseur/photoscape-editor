@@ -15,11 +15,13 @@ DEBUG = 1
 def create_directory(directory_path):
     if not os.path.exists(directory_path):
         os.makedirs(directory_path)
+    return
 
 def copy_directory(source_directory, destination_directory):
     if os.path.exists(destination_directory):
         shutil.rmtree(destination_directory)
     shutil.copytree(source_directory, destination_directory)
+    return
 
 def zip_directory(directory_path, zip_name):
     with zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED) as zipf:
@@ -27,26 +29,113 @@ def zip_directory(directory_path, zip_name):
             file_path = os.path.join(directory_path, file)
             if os.path.isfile(file_path):
                 zipf.write(file_path, arcname=os.path.basename(file_path))
+    return
+
+def copy_file_to_directory(source_file, destination_directory):
+    # Ensure that the destination directory exists
+    os.makedirs(destination_directory, exists_ok=True)
+
+    # Build the full path for the destination file
+    destination_file = os.path.join(destination_directory, os.path.basename(source_file))
+
+    # Copy the file to the destination directory
+    shutil.copy(source_file, destination_file)
+
+    return
+
+def update_logo(source, object, logo_path, type):
+    # Copy logo into source
+    copy_file_to_directory(logo_path, source)
+    destination_file = os.path.basename(logo_path)
+
+    # Reference logo basename in object
+    object = destination_file
+    
+    if (DEBUG):
+        print(f'''
+        Update {type} : Complete
+        ''')
+    return
+
+def update_text(object, text, type):
+    object = text
+    if (DEBUG):
+        print(f'''
+        Update {type} : Complete
+        ''')
+    return
+
 
 def update_psxprj(selected_choice, source):
     # Find psxprj from source
     with open(source + '/psxproject.json', 'r') as json_file:
         psxprj = json.load(json_file)
+        
+    with open(cwd + '/json/lookup/teams.json', 'r') as logo_file:
+        team_lookup = json.load(logo_file)
 
     match selected_choice:
         case "game-day":
-            # Need to update psxprj["object"]
-            object = psxprj.get('object')["_v"]
-            test_0 = object[3]
-            print(f"Test: {test_0}")
-            return
+            try:
+                # Update VAN LOGO
+                type = "VAN Logo"
+                object = psxprj.get('object')['_v'][0]['_v']['image']['_v']['_v']
+                logo = team_lookup.get('VAN')['IMG']
+                update_logo(object, logo, type)
+
+                # Update OTHER LOGO
+                type = "OTHER Logo"
+                object = psxprj.get('object')['_v'][1]['_v']['image']['_v']['_v']
+                logo = team_lookup.get('NYI')['IMG']
+                update_logo(object, logo, type)
+
+                # Update TIME
+                type = "Time"
+                object = psxprj.get('object')['_v'][9]['_v']['text']['_v']
+                time = "4:00 PM"
+                update_text(object, time, type)
+
+                # Update DATE
+                type = "Date"
+                object = psxprj.get('object')['_v'][10]['_v']['text']['_v']
+                date = "January 9, 2024"
+                update_text(object, date, type)
+
+                # Update VAN RECORD
+                type = "VAN Record"
+                object = psxprj.get('object')['_v'][13]['_v']['text']['_v']
+                record = "27-11-3"
+                update_text(object, record, type)
+
+                # Update OTHER RECORD
+                type = "OTHER Record"
+                object = psxprj.get('object')['_v'][14]['_v']['text']['_v']
+                record = "13-16-5"
+                update_text(object, record, type)
+
+                # Update HOME or AWAY
+                type = "HOME or AWAY"
+                object = psxprj.get('object')['_v'][16]['_v']['text']['_v']
+                where = "HOME"
+                update_text(object, where, type)
+            
+            except:
+                print(f'''
+                Update {type} : Failed
+                ''')
+                return False
+            
+            # Update the source json
+            with open(source + '/psxproject.json', 'w') as json_file:
+                json.dump(psxprj, json_file, indent=4)
+
+            return True
         
         case "final-score":
             return
         
         case "box-score":
             return
-    return
     
 
 def main():
@@ -97,7 +186,8 @@ def main():
     source = cwd + f'/json/games/{date}/{selected_choice}-temp'
 
     # Update template copy
-    update_psxprj(selected_choice, source)
+    if not update_psxprj(selected_choice, source):
+        return
 
     # Zip updated template
     zip_directory(source, cwd + f'/json/games/{date}/{selected_choice}.psxprj')
@@ -105,6 +195,7 @@ def main():
     print(f'''
     A new {selected_choice} PSX file has been zipped to games/date/{selected_choice}.psxprj.
     ''')
+    return
     
     
 if __name__ == "__main__":
