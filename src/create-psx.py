@@ -71,7 +71,7 @@ def update_psxprj(selected_choice, source):
     with open(source + '/psxproject.json', 'r') as json_file:
         psxprj = json.load(json_file)
         
-    with open(cwd + '/json/lookup/teams.json', 'r') as logo_file:
+    with open(cwd + '/json/look-up/teams.json', 'r') as logo_file:
         team_lookup = json.load(logo_file)
 
     match selected_choice:
