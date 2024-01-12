@@ -1,9 +1,10 @@
 # Makefile
 
-.PHONY: preview final
+.PHONY: preview final box
 
 preview: run_game_day
-final: run_final_score run_box_score
+final: run_final_score
+box: run_box_score
 
 run_game_day:
 	python3 src/create-psx.py --choice game-day

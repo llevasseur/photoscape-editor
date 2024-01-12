@@ -1,6 +1,7 @@
 {
     "CANUCKS": {
         "SCORE": "6",
+        "HOME": "False",
         "WIN": "True",
         "OT": "False",
         "SO": "False",
@@ -18,5 +19,10 @@
         "PP": "1/2",
         "PIM": "0",
         "FO": "35"
+    },
+    "DATE": {
+        "MONTH": "Jan",
+        "DAY": "9",
+        "YEAR": "2024"
     }
 }

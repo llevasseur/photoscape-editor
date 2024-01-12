@@ -93,7 +93,8 @@ def update_psxprj(selected_choice, source, date_file):
                 update_logo(source, psxprj, index, logo, type)
 
                 # Update OTHER LOGO
-                type = 'OTHER Logo'
+                other = stats.get('OTHER')['TEAM']
+                type = f'{other} Logo'
                 index = 1
                 logo = team_lookup.get(stats.get('OTHER')['TEAM'])['IMG']
                 update_logo(source, psxprj, index, logo, type)
@@ -117,7 +118,7 @@ def update_psxprj(selected_choice, source, date_file):
                 update_text(psxprj, index, record, type)
 
                 # Update OTHER RECORD
-                type = 'OTHER Record'
+                type = f'{other} Record'
                 index = 14
                 record = stats.get('OTHER')['RECORD']
                 update_text(psxprj, index, record, type)
@@ -134,22 +135,138 @@ def update_psxprj(selected_choice, source, date_file):
                 {e}
                 ''')
                 return False
-            
-            # Update the source json
-            with open(source + '/psxproject.json', 'w') as json_file:
-                json.dump(psxprj, json_file, indent=4)
-                if (DEBUG):
-                    print(f'''
-                    JSON File : Updated!
-                    ''')
-
-            return True
         
         case 'final-score':
-            return
+            try:
+                # Update VAN LOGO
+                type = 'VAN Logo'
+                index = 0
+                #NOTE Change IMG to ALT1, ALT2, ALT3
+                logo = team_lookup.get('VAN')['IMG']
+                update_logo(source, psxprj, index, logo, type)
+
+                # Update OTHER LOGO
+                # TODO Make a function
+                other = stats.get('OTHER')['TEAM']
+                type = f'{other} Logo'
+                index = 1
+                logo = team_lookup.get(stats.get('OTHER')['TEAM'])['IMG']
+                update_logo(source, psxprj, index, logo, type)
+
+                # Update VAN SCORE
+                type = 'VAN Score'
+                index = 11
+                score = stats.get('CANUCKS')['SCORE']
+                update_text(psxprj, index, score, type)
+
+                # Update OTHER SCORE
+                type = f'{other} Score'
+                index = 12
+                score = stats.get('OTHER')['SCORE']
+                update_text(psxprj, index, score, type)
+
+                # Update VAN SOG
+                type = 'VAN SOG'
+                index = 20
+                sog = stats.get('CANUCKS')['SOG']
+                update_text(psxprj, index, sog, type)
+
+                # Update VAN HITS
+                type = 'VAN HITS'
+                index = 21
+                hits = stats.get('CANUCKS')['HITS']
+                update_text(psxprj, index, hits, type)
+
+                # Update VAN PP
+                type = 'VAN PP'
+                index = 22
+                pp = stats.get('CANUCKS')['PP']
+                update_text(psxprj, index, pp, type)
+
+                # Update VAN PIM
+                type = 'VAN PIM'
+                index = 23
+                pim = stats.get('CANUCKS')['PIM']
+                update_text(psxprj, index, pim, type)
+
+                # Update VAN FO
+                type = 'VAN FO'
+                index = 24
+                fo = stats.get('CANUCKS')['FO']
+                update_text(psxprj, index, fo, type)
+
+                # Update OTHER SOG
+                type = f'{other} SOG'
+                index = 25
+                sog = stats.get('OTHER')['SOG']
+                update_text(psxprj, index, sog, type)
+
+                # Update OTHER HITS
+                type = f'{other} HITS'
+                index = 26
+                hits = stats.get('OTHER')['HITS']
+                update_text(psxprj, index, hits, type)
+
+                # Update OTHER PP
+                type = f'{other} PP'
+                index = 27
+                pp = stats.get('OTHER')['PP']
+                update_text(psxprj, index, pp, type)
+
+                # Update OTHER PIM
+                type = f'{other} PIM'
+                index = 28
+                pim = stats.get('OTHER')['PIM']
+                update_text(psxprj, index, pim, type)
+
+                # Update OTHER FO
+                type = f'{other} FO'
+                index = 29
+                fo = stats.get('OTHER')['FO']
+                update_text(psxprj, index, fo, type)
+
+                # Update DATE
+                type = 'Date'
+                index = 30
+                date = f'{stats.get("DATE")["MONTH"]} {stats.get("DATE")["DAY"]}, {stats.get("DATE")["YEAR"]}'
+                update_text(psxprj, index, date, type)
+
+                # Update HOME or AWAY
+                type = 'HOME or AWAY'
+                index = 31
+                where = 'HOME' if stats.get('CANUCKS')['HOME'] == 'True' else 'AWAY'
+                update_text(psxprj, index, where, type)
+
+                # Update WIN or LOSS
+                type = 'WIN or LOSS'
+                index = 33
+                win = 'WIN' if stats.get('CANUCKS')['WIN'] == 'True' else 'LOSS'
+                if stats.get('CANUCKS')['OT'] == 'True':
+                    if stats.get('CANUCKS')['SO'] == 'True':
+                        win += ' (SO)'
+                    else:
+                        win += ' (OT)'
+                update_text(psxprj, index, win, type)
+
+            except Exception as e:
+                print(f'''
+                Update {type} : Failed
+                {e}
+                ''')
+                return False
         
         case 'box-score':
+            print("hit box-score")
             return
+        
+    # Update the source json
+    with open(source + '/psxproject.json', 'w') as json_file:
+        json.dump(psxprj, json_file, indent=4)
+        if (DEBUG):
+            print(f'''
+            JSON File : Updated!
+            ''')
+    return True
     
 
 def main():
