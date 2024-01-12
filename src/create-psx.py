@@ -69,57 +69,63 @@ def update_text(psxprj, i, text, type):
     return
 
 
-def update_psxprj(selected_choice, source):
-    # Find psxprj from source
+def update_psxprj(selected_choice, source, date_file):
+    # Find psxprj from copied template source json
     with open(source + '/psxproject.json', 'r') as json_file:
         psxprj = json.load(json_file)
         
+    # Get team logo data from team look-up json
     with open(cwd + '/json/look-up/teams.json', 'r') as logo_file:
         team_lookup = json.load(logo_file)
 
+    # Get selected choice data from related json
+    with open(cwd + f'/json/games/{date_file}/{selected_choice}.json', 'r') as stats_file:
+        stats = json.load(stats_file)
+
     match selected_choice:
-        case "game-day":
+        case 'game-day':
             try:
                 # Update VAN LOGO
-                type = "VAN Logo"
+                type = 'VAN Logo'
                 index = 0
+                #NOTE Change IMG to ALT1, ALT2, ALT3
                 logo = team_lookup.get('VAN')['IMG']
                 update_logo(source, psxprj, index, logo, type)
 
                 # Update OTHER LOGO
-                type = "OTHER Logo"
+                type = 'OTHER Logo'
                 index = 1
-                logo = team_lookup.get('NYI')['IMG']
+                logo = team_lookup.get(stats.get('OTHER')['TEAM'])['IMG']
                 update_logo(source, psxprj, index, logo, type)
 
                 # Update TIME
-                type = "Time"
+                type = 'Time'
                 index = 9
-                time = "4:00 PM"
+                time = stats.get('DATE')['TIME']
                 update_text(psxprj, index, time, type)
 
                 # Update DATE
-                type = "Date"
+                type = 'Date'
                 index = 10
-                date = "January 9, 2024"
+                date = f'{stats.get("DATE")["MONTH"]} {stats.get("DATE")["DAY"]}, {stats.get("DATE")["YEAR"]}'
                 update_text(psxprj, index, date, type)
 
                 # Update VAN RECORD
-                type = "VAN Record"
+                type = 'VAN Record'
                 index = 13
-                record = "82-0-0"
+                record = stats.get('CANUCKS')['RECORD']
                 update_text(psxprj, index, record, type)
 
                 # Update OTHER RECORD
-                type = "OTHER Record"
+                type = 'OTHER Record'
                 index = 14
-                record = "0-82-0"
+                record = stats.get('OTHER')['RECORD']
                 update_text(psxprj, index, record, type)
 
                 # Update HOME or AWAY
-                type = "HOME or AWAY"
+                type = 'HOME or AWAY'
                 index = 16
-                where = "HOME"
+                where = 'HOME' if stats.get('CANUCKS')['HOME'] == 'True' else 'AWAY'
                 update_text(psxprj, index, where, type)
             
             except Exception as e:
@@ -139,10 +145,10 @@ def update_psxprj(selected_choice, source):
 
             return True
         
-        case "final-score":
+        case 'final-score':
             return
         
-        case "box-score":
+        case 'box-score':
             return
     
 
@@ -183,22 +189,22 @@ def main():
 
     # Determine date for game
     # TODO
-    date = 'jan9-24'
+    date_file = 'jan9-24'
     
     # Create directory for game date and template if it doesn't exist
-    destination = cwd + f'/json/games/{date}/{selected_choice}-temp/'
+    destination = cwd + f'/json/games/{date_file}/{selected_choice}-temp/'
     create_directory(destination)
 
     # Copy selected template to new directory
     copy_directory(psx_path, destination)
-    source = cwd + f'/json/games/{date}/{selected_choice}-temp'
+    source = cwd + f'/json/games/{date_file}/{selected_choice}-temp'
 
     # Update template copy
-    if not update_psxprj(selected_choice, source):
+    if not update_psxprj(selected_choice, source, date_file):
         return
 
     # Zip updated template
-    zip_directory(source, cwd + f'/json/games/{date}/{selected_choice}.psxprj')
+    zip_directory(source, cwd + f'/json/games/{date_file}/{selected_choice}.psxprj')
     
     print(f'''
     A new {selected_choice} PSX file has been zipped to games/date/{selected_choice}.psxprj.
@@ -206,5 +212,5 @@ def main():
     return
     
     
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
