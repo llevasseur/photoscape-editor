@@ -1,5 +1,5 @@
 {
-    "HOME": [
+    "CANUCKS": [
         {
             "PERIOD": "1",
             "TIME": "4:31",
@@ -61,33 +61,35 @@
             ]
         }
     ],
-    "AWAY": [
-        {
-            "PERIOD": "1",
-            "TIME": "3:38",
-            "SCORER": "TROCHECK (11)",
-            "TYPE": "PP",
-            "ASSISTORS": [
-                "ZIBANEJAD (25)",
-                "PANARIN (31)"
-            ]
-        },
+    "OTHER": [
         {
             "PERIOD": "2",
-            "TIME": "8:19",
-            "SCORER": "PANARIN (26)",
+            "TIME": "1:31",
+            "SCORER": "GIROUX",
             "TYPE": "",
             "ASSISTORS": [
-                "LAFRENIERE (14)"
+                "TKACHUK",
+                "SANDERSON"
             ]
         },
         {
             "PERIOD": "3",
-            "TIME": "3:36",
-            "SCORER": "TROCHECK (12)",
+            "TIME": "0:37",
+            "SCORER": "TARASENKO",
             "TYPE": "",
             "ASSISTORS": [
-                "LAFRENIERE (15)"
+                "GIROUX",
+                "STUTZLE"
+            ]
+        },
+        {
+            "PERIOD": "3",
+            "TIME": "17:29",
+            "SCORER": "TARASENKO",
+            "TYPE": "",
+            "ASSISTORS": [
+                "BATHERSON",
+                "CHABOT"
             ]
         }
     ]

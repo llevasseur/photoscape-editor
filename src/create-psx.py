@@ -7,6 +7,7 @@ import shutil
 import zipfile
 import json
 import argparse
+import traceback
 
 cwd = os.getcwd()
 
@@ -68,6 +69,61 @@ def update_text(psxprj, i, text, type):
         ''')
     return
 
+def make_scorer_text(stat, team):
+    text = ""
+    periods = {
+        "1": "1st",
+        "2": "2nd",
+        "3": "3rd",
+        "OT": "OT"
+    }
+    # CANUCKS Scorer
+    if (team == "CANUCKS"):
+        # Convert period into correct format
+        period = periods.get(stat.get('PERIOD'))
+        time = stat.get('TIME')
+        scorer = stat.get('SCORER')
+        assistors = stat.get('ASSISTORS')
+        n = len(assistors)
+
+        # Construct text
+        text += f'{period} - '
+        text += f'({time})\n'
+        text += f'G: {scorer}\n'
+        text += 'A: '
+        
+        for i in range(0, n):
+            text += f'{assistors[i]}'
+            if (i != n - 1):
+                text += ', '
+
+    # OTHER Team Scorer
+    else:
+        # Convert period into correct format
+        period = periods.get(stat.get('PERIOD'))
+        time = stat.get('TIME')
+        scorer = stat.get('SCORER')
+        assistors = stat.get('ASSISTORS')
+        n = len(assistors)
+
+        # Construct text
+        text += f'({time})'
+        text += f' - {period}\n'
+        text += f'{scorer} :G\n'
+
+        for i in range(0, n):
+            text += f'{assistors[i]}'
+            if (i != n - 1):
+                text += ', ' 
+        text += ' :A'   
+
+    if (DEBUG):
+        print(f'''
+        Update {text} : Complete
+        ''')  
+
+    return text
+
 
 def update_psxprj(selected_choice, source, date_file):
     # Find psxprj from copied template source json
@@ -82,9 +138,10 @@ def update_psxprj(selected_choice, source, date_file):
     with open(cwd + f'/json/games/{date_file}/{selected_choice}.json', 'r') as stats_file:
         stats = json.load(stats_file)
 
-    match selected_choice:
-        case 'game-day':
-            try:
+    try:
+        match selected_choice:
+            case 'game-day':
+                
                 # Update VAN LOGO
                 type = 'VAN Logo'
                 index = 0
@@ -98,6 +155,9 @@ def update_psxprj(selected_choice, source, date_file):
                 index = 1
                 logo = team_lookup.get(stats.get('OTHER')['TEAM'])['IMG']
                 update_logo(source, psxprj, index, logo, type)
+                
+                # Delete OTHER.png from template
+                os.remove(source + '/OTHER.png')
 
                 # Update TIME
                 type = 'Time'
@@ -129,15 +189,7 @@ def update_psxprj(selected_choice, source, date_file):
                 where = 'HOME' if stats.get('CANUCKS')['HOME'] == 'True' else 'AWAY'
                 update_text(psxprj, index, where, type)
             
-            except Exception as e:
-                print(f'''
-                Update {type} : Failed
-                {e}
-                ''')
-                return False
-        
-        case 'final-score':
-            try:
+            case 'final-score':
                 # Update VAN LOGO
                 type = 'VAN Logo'
                 index = 0
@@ -152,6 +204,9 @@ def update_psxprj(selected_choice, source, date_file):
                 index = 1
                 logo = team_lookup.get(stats.get('OTHER')['TEAM'])['IMG']
                 update_logo(source, psxprj, index, logo, type)
+
+                # Delete OTHER.png from template
+                os.remove(source + '/OTHER.png')
 
                 # Update VAN SCORE
                 type = 'VAN Score'
@@ -247,24 +302,109 @@ def update_psxprj(selected_choice, source, date_file):
                     else:
                         win += ' (OT)'
                 update_text(psxprj, index, win, type)
+            
+            case 'box-score':
+                # Create CANUCKS and OTHER SCORERS
+                canucks_scorers = stats.get('CANUCKS')
+                other_scorers = stats.get('OTHER')
+                n = max(len(canucks_scorers) // 7, len(other_scorers) // 7) + 1
 
-            except Exception as e:
-                print(f'''
-                Update {type} : Failed
-                {e}
-                ''')
-                return False
-        
-        case 'box-score':
-            print("hit box-score")
-            return
+                # Keep track of total canucks and other scorers counter
+                canucks_i = other_i = 0
+
+                # Handle first box-score
+                type = f'CANUCKS SCORER'
+                # Iterate over CANUCKS SCORERS
+                # Restrict first box-score to only go to 7
+                for i in range(0, min(len(canucks_scorers), 7)):
+                    # Update CANUCKS SCORER
+                    
+                    index = i + 3
+                    text = make_scorer_text(canucks_scorers[canucks_i], 'CANUCKS')
+                    update_text(psxprj, index, text, type)
+
+                    # Increment canucks scorers index
+                    canucks_i += 1
+
+                type = f'OTHER SCORER'
+                # Iterate over OTHER SCORERS
+                # Restrict first box-score to only go to 7
+                for i in range(0, min(len(other_scorers), 7)):
+                    # Update OTHER SCORER
+                    
+                    index = i + 10
+                    text = make_scorer_text(other_scorers[other_i], 'OTHER')
+                    update_text(psxprj, index, text, type)
+
+                    # Increment other scorers index
+                    other_i += 1
+
+                # Update the source json
+                with open(source + '/psxproject.json', 'w') as json_file:
+                    json.dump(psxprj, json_file, indent=4)
+                    if (DEBUG):
+                        print(f'''
+                        JSON File : Updated!
+                        ''')
+
+                # Handle multiple box-scores if necessary
+                if (n > 1):
+                    psx_path = cwd + "/assets/templates/box-score-temp/"
+                    
+                    for i in range(2, n + 1):
+
+                        destination = cwd + f'/json/games/{date_file}/{selected_choice}-temp-{i}/'
+                        copy_directory(psx_path, destination)
+                        source = cwd + f'/json/games/{date_file}/{selected_choice}-temp-{i}'
+
+                        # Iterate over CANUCKS SCORERS
+                        # Restrict box-score to only go to 7
+                        start = canucks_i
+                        for j in range(start, min(len(canucks_scorers) - start, start + 7)):
+
+                            # Increment canucks scorers index
+                            canucks_i += 1
+
+                        # Iterate over OTHER SCORERS
+                        # Restrict box-score to only go to 7
+                        start = other_i 
+                        for j in range(start, min(len(other_scorers) - start, start + 7)):
+
+                            # Increment other scorers index
+                            other_i += 1
+
+                
+                        # Update the source json
+                        with open(source + '/psxproject.json', 'w') as json_file:
+                            json.dump(psxprj, json_file, indent=4)
+                            if (DEBUG):
+                                print(f'''
+                                JSON File {source}/psxproject.json : Updated!
+                                ''')
+                        # Zip updated template
+                        zip_directory(source, cwd + f'/json/games/{date_file}/{selected_choice}-temp-{i}.psxprj')
+                
+                        print(f'''
+                        A new {selected_choice} PSX file has been zipped to games/date/{selected_choice}-temp-{i}.psxprj.
+                        ''')
+
+                return True
+
+    except Exception as e:
+        print(f'''
+        Update {type} : Failed
+        {e}
+        ''')
+        traceback.print_exc()
+        return False
+            
         
     # Update the source json
     with open(source + '/psxproject.json', 'w') as json_file:
         json.dump(psxprj, json_file, indent=4)
         if (DEBUG):
             print(f'''
-            JSON File : Updated!
+            JSON File {source}/psxproject.json : Updated!
             ''')
     return True
     

@@ -1250,7 +1250,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1ST - (2:23)\nG: BOESER (7)\nA: PETTERSSON (12), HUGHES (9)"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -1571,7 +1571,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1ST - (4:00)\nG: MILLER (6)\nA: BOESER (5), HUGHES (10)"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -1892,7 +1892,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1ST - (8:00)\nG: HUGHES (4)\nA: HRONEK (9), LAFFERTY (2)"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -2213,7 +2213,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1ST - (16:49)\nG: BOESER (8)\nA: KUZMENKO (6), MILLER (9)"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -2534,7 +2534,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "2ND - (1:03)\nG: MIKHEYEV (3)\nA: PETTERSSON (13), SOUCY (1)"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -2855,7 +2855,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "2ND - (8:47)\nG: KUZMENKO (3)\nA: PETTERSSON (14), FRIEDMAN (1)"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -3176,7 +3176,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "2ND - (12:35)\nG: LAFFERTY (3)\nA: HUGHES (11), MILLER (10)"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -3497,7 +3497,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "(5:18) - 1ST\nEKBLAD :G\nVATRANO, LUNDELL :A"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -3818,7 +3818,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "(6:24) - 1ST\nREINHART :G\nBARKOV, GUDAS :A"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -4139,7 +4139,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "(8:46) - 2ND\nREINHART :G\nHUBERDEAU, EKBLAD :A"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -4460,7 +4460,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "(9:12) - 2ND\nMAMIN :G\nVATRANO, LUNDELL :A"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -4781,7 +4781,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "(19:00) - 2ND\nBARKOV :G\nEKBLAD, REINHART :A"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -5102,7 +5102,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "(8:34) - 1ST\nMIlLER :G\nPETTERSSON, HOGLANDER :A"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -5423,7 +5423,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "(8:34) - 1ST\nMIlLER :G\nPETTERSSON, HOGLANDER :A"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
