@@ -33,7 +33,7 @@ def zip_directory(directory_path, zip_name):
 
 def copy_file_to_directory(source_file, destination_directory):
     # Ensure that the destination directory exists
-    os.makedirs(destination_directory, exists_ok=True)
+    os.makedirs(destination_directory, exist_ok=True)
 
     # Build the full path for the destination file
     destination_file = os.path.join(destination_directory, os.path.basename(source_file))
@@ -43,13 +43,14 @@ def copy_file_to_directory(source_file, destination_directory):
 
     return
 
-def update_logo(source, object, logo_path, type):
+def update_logo(source, psxprj, i, logo_path, type):
     # Copy logo into source
     copy_file_to_directory(logo_path, source)
+    
     destination_file = os.path.basename(logo_path)
 
-    # Reference logo basename in object
-    object = destination_file
+    # Reference logo basename in psxprj object
+    psxprj.get('object')['_v'][i]['_v']['image']['_v']['_v'] = destination_file
     
     if (DEBUG):
         print(f'''
@@ -57,8 +58,10 @@ def update_logo(source, object, logo_path, type):
         ''')
     return
 
-def update_text(object, text, type):
-    object = text
+def update_text(psxprj, i, text, type):
+    # Reference new text in psxprj object
+    psxprj.get('object')['_v'][i]['_v']['text']['_v'] = text
+    
     if (DEBUG):
         print(f'''
         Update {type} : Complete
@@ -79,55 +82,60 @@ def update_psxprj(selected_choice, source):
             try:
                 # Update VAN LOGO
                 type = "VAN Logo"
-                object = psxprj.get('object')['_v'][0]['_v']['image']['_v']['_v']
+                index = 0
                 logo = team_lookup.get('VAN')['IMG']
-                update_logo(object, logo, type)
+                update_logo(source, psxprj, index, logo, type)
 
                 # Update OTHER LOGO
                 type = "OTHER Logo"
-                object = psxprj.get('object')['_v'][1]['_v']['image']['_v']['_v']
+                index = 1
                 logo = team_lookup.get('NYI')['IMG']
-                update_logo(object, logo, type)
+                update_logo(source, psxprj, index, logo, type)
 
                 # Update TIME
                 type = "Time"
-                object = psxprj.get('object')['_v'][9]['_v']['text']['_v']
+                index = 9
                 time = "4:00 PM"
-                update_text(object, time, type)
+                update_text(psxprj, index, time, type)
 
                 # Update DATE
                 type = "Date"
-                object = psxprj.get('object')['_v'][10]['_v']['text']['_v']
+                index = 10
                 date = "January 9, 2024"
-                update_text(object, date, type)
+                update_text(psxprj, index, date, type)
 
                 # Update VAN RECORD
                 type = "VAN Record"
-                object = psxprj.get('object')['_v'][13]['_v']['text']['_v']
-                record = "27-11-3"
-                update_text(object, record, type)
+                index = 13
+                record = "82-0-0"
+                update_text(psxprj, index, record, type)
 
                 # Update OTHER RECORD
                 type = "OTHER Record"
-                object = psxprj.get('object')['_v'][14]['_v']['text']['_v']
-                record = "13-16-5"
-                update_text(object, record, type)
+                index = 14
+                record = "0-82-0"
+                update_text(psxprj, index, record, type)
 
                 # Update HOME or AWAY
                 type = "HOME or AWAY"
-                object = psxprj.get('object')['_v'][16]['_v']['text']['_v']
+                index = 16
                 where = "HOME"
-                update_text(object, where, type)
+                update_text(psxprj, index, where, type)
             
-            except:
+            except Exception as e:
                 print(f'''
                 Update {type} : Failed
+                {e}
                 ''')
                 return False
             
             # Update the source json
             with open(source + '/psxproject.json', 'w') as json_file:
                 json.dump(psxprj, json_file, indent=4)
+                if (DEBUG):
+                    print(f'''
+                    JSON File : Updated!
+                    ''')
 
             return True
         
