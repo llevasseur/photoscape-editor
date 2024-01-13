@@ -39,8 +39,12 @@ def get_final_score_data(data, site):
     # Get li_list
     li_list = nav.find_elements(By.TAG_NAME, 'li')
 
-    # Find and click the link with specific text Team Stats    
-    driver.get(li_list[4].find_element(By.TAG_NAME, 'a').get_attribute('href'))
+    # Find and click the link with specific text Team Stats
+    if len(li_list) == 5:
+        index = 3
+    else:
+        index = 4
+    driver.get(li_list[index].find_element(By.TAG_NAME, 'a').get_attribute('href'))
 
     # Confirm Canucks are playing and that it's an ESPN site
     assert "Canucks" and "Game Stats" and "ESPN" in driver.title
@@ -157,9 +161,16 @@ def get_box_score_data(data, site):
         
         # Date is the first span in game_info
         date_text = game_info.find_elements(By.TAG_NAME, "span")[0].text
+
+        print(date_text)
         
         # Parse the date string
-        parsed_date = datetime.strptime(date_text, '%I:%M %p, %B %d, %Y')
+        try:
+            # Try the first format: '1:00 PM, 13 January 2024'
+            parsed_date = datetime.strptime(date_text, '%I:%M %p, %d %B %Y')
+        except ValueError:
+            # If the first format fails, try the second format: '4:00 PM, January 11, 2024'
+            parsed_date  = datetime.strptime(date_text, '%I:%M %p, %B %d, %Y')
 
         # Set data
 
@@ -370,8 +381,6 @@ def fetch_box_score(site):
 
     if not test:
         return False
-    
-    print(date_file)
     
     # Create directory for game date
     destination = cwd + f'/json/games/{date_file}/'
