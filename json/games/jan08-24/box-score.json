@@ -1,4 +1,10 @@
 {
+    "DATE": {
+        "TIME": "4:00 PM",
+        "MONTH": "January",
+        "DAY": 8,
+        "YEAR": 2024
+    },
     "CANUCKS": [
         {
             "PERIOD": "1",
@@ -13,7 +19,7 @@
         {
             "PERIOD": "1",
             "TIME": "6:45",
-            "SCORER": "HOGLANDER (7)",
+            "SCORER": "HOGLANDER (11)",
             "TYPE": "",
             "ASSISTORS": [
                 "AMAN (3)",
@@ -27,7 +33,7 @@
             "TYPE": "",
             "ASSISTORS": [
                 "PETTERSSON (33)",
-                "HUGHES (40)" 
+                "HUGHES (40)"
             ]
         },
         {
@@ -42,7 +48,7 @@
         },
         {
             "PERIOD": "2",
-            "TIME": "15:33",
+            "TIME": "16:47",
             "SCORER": "HOGLANDER (12)",
             "TYPE": "",
             "ASSISTORS": [
@@ -63,35 +69,32 @@
     ],
     "OTHER": [
         {
+            "PERIOD": "1",
+            "TIME": "3:38",
+            "SCORER": "TROCHECK",
+            "TYPE": "PP",
+            "ASSISTORS": [
+                "ZIBANEJAD",
+                "PANARIN"
+            ]
+        },
+        {
             "PERIOD": "2",
-            "TIME": "1:31",
-            "SCORER": "GIROUX",
+            "TIME": "8:19",
+            "SCORER": "PANARIN",
             "TYPE": "",
             "ASSISTORS": [
-                "TKACHUK",
-                "SANDERSON"
+                "LAFRENIERE"
             ]
         },
         {
             "PERIOD": "3",
-            "TIME": "0:37",
-            "SCORER": "TARASENKO",
+            "TIME": "3:36",
+            "SCORER": "TROCHECK",
             "TYPE": "",
             "ASSISTORS": [
-                "GIROUX",
-                "STUTZLE"
-            ]
-        },
-        {
-            "PERIOD": "3",
-            "TIME": "17:29",
-            "SCORER": "TARASENKO",
-            "TYPE": "",
-            "ASSISTORS": [
-                "BATHERSON",
-                "CHABOT"
+                "LAFRENIERE"
             ]
         }
     ]
-
 }

@@ -1,95 +1,79 @@
 {
+    "DATE": {
+        "TIME": "4:30 PM",
+        "MONTH": "January",
+        "DAY": 9,
+        "YEAR": 2024
+    },
     "CANUCKS": [
         {
-            "PERIOD": "1",
-            "TIME": "2:14",
-            "SCORER": "COLE (1)",
+            "SCORER": "Hronek (3)",
             "TYPE": "",
             "ASSISTORS": [
-                "JUULSEN (2)",
-                "MIKHEYEV (11)"
-            ]
+                "Mikheyev (12)",
+                "Garland (14)"
+            ],
+            "PERIOD": "1st",
+            "TIME": "16:25"
         },
         {
-            "PERIOD": "1",
-            "TIME": "12:39",
-            "SCORER": "SUTER (7)",
+            "SCORER": "Hughes (11)",
             "TYPE": "",
             "ASSISTORS": [
-                "LAFFERTY (8)",
-                "MYERS (14)"
-            ]
+                "Unassisted"
+            ],
+            "PERIOD": "1st",
+            "TIME": "18:42"
         },
         {
-            "PERIOD": "1",
-            "TIME": "16:34",
-            "SCORER": "PETTERSSON (14)",
+            "SCORER": "Pettersson (20)",
             "TYPE": "",
             "ASSISTORS": [
-                "SUTER (3)"
-            ]
+                "Miller (36)",
+                "Hronek (31)"
+            ],
+            "PERIOD": "2nd",
+            "TIME": "10:20"
         },
         {
-            "PERIOD": "1",
-            "TIME": "16:58",
-            "SCORER": "MILLER (16)",
+            "SCORER": "Myers (3)",
             "TYPE": "",
             "ASSISTORS": [
-                "ZADOROV (7)",
-                "BOESER (15)"
-            ]
+                "Blueger (12)",
+                "Garland (15)"
+            ],
+            "PERIOD": "2nd",
+            "TIME": "17:24"
         },
         {
-            "PERIOD": "1",
-            "TIME": "17:53",
-            "SCORER": "PETTERSSON (15)",
-            "TYPE": "PP",
+            "SCORER": "Joshua (11)",
+            "TYPE": "EN",
             "ASSISTORS": [
-                "MILLER (34)",
-                "HUGHES (36)"
-            ]
-        },
-        {
-            "PERIOD": "3",
-            "TIME": "17:42",
-            "SCORER": "SUTER (8)",
-            "TYPE": "",
-            "ASSISTORS": [
-                "UNASSISTED"
-            ]
+                "Unassisted"
+            ],
+            "PERIOD": "3rd",
+            "TIME": "18:32"
         }
     ],
     "OTHER": [
         {
-            "PERIOD": "2",
-            "TIME": "1:31",
-            "SCORER": "GIROUX",
-            "TYPE": "",
+            "SCORER": "Nelson",
+            "TYPE": "PP",
             "ASSISTORS": [
-                "TKACHUK",
-                "SANDERSON"
-            ]
+                "Palmieri",
+                "Barzal"
+            ],
+            "PERIOD": "2nd",
+            "TIME": "11:11"
         },
         {
-            "PERIOD": "3",
-            "TIME": "0:37",
-            "SCORER": "TARASENKO",
+            "SCORER": "Nelson",
             "TYPE": "",
             "ASSISTORS": [
-                "GIROUX",
-                "STUTZLE"
-            ]
-        },
-        {
-            "PERIOD": "3",
-            "TIME": "17:29",
-            "SCORER": "TARASENKO",
-            "TYPE": "",
-            "ASSISTORS": [
-                "BATHERSON",
-                "CHABOT"
-            ]
+                "Unassisted"
+            ],
+            "PERIOD": "3rd",
+            "TIME": "15:15"
         }
     ]
-
 }

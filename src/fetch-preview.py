@@ -13,12 +13,12 @@ cwd = os.getcwd()
 
 DEBUG = 1
 
-def getDataFromSite(data, site):
-    home = van_record = other_team = other_record = ''
-    time = month = day = year = date = ''
-
+def get_data_from_site(data, site):
+    # Set Chrome driver and visit site
     driver = webdriver.Chrome()
     driver.get(site)
+    
+    # Confirm Canucks are playing and that it's E
     assert "Canucks" and "ESPN" in driver.title
 
     # Set window size to small so Teams are listed as Acronyms
@@ -56,13 +56,6 @@ def getDataFromSite(data, site):
     # Parse the date string
     parsed_date = datetime.strptime(date_text, '%I:%M %p, %B %d, %Y')
 
-    # Extract individual components
-    month = parsed_date.strftime('%B')
-    day = parsed_date.day
-    year = parsed_date.year
-    time = parsed_date.strftime('%I:%M %p').lstrip('0') # Time with AM/PM with no leading zeros
-    date = f'{parsed_date.strftime("%b").lower()}{day}-{str(year)[-2:]}'
-
     # Remember to close the driver
     driver.quit()
 
@@ -78,14 +71,12 @@ def getDataFromSite(data, site):
         "RECORD": other_record
     }
 
-    data["DATE"] = {
-        "TIME": time,
-        "MONTH": month,
-        "DAY": day,
-        "YEAR": year
-    }
-    if valid_date(date):
-        return date
+    # Extract date using helper.get_date_json
+    # Returns date_file
+    date_file = get_date_json(data, parsed_date)
+    
+    if valid_date(date_file):
+        return date_file
 
     return False
 
@@ -96,7 +87,7 @@ def main():
     data = {}
 
     # Update data structure and get date to be used as dir name
-    date_file = getDataFromSite(data, site)
+    date_file = get_data_from_site(data, site)
 
     if not date_file:
         return

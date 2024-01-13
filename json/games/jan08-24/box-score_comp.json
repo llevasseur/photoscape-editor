@@ -1,0 +1,97 @@
+{
+    "CANUCKS": [
+        {
+            "PERIOD": "1",
+            "TIME": "4:31",
+            "SCORER": "MILLER (19)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "PETTERSSON (32)",
+                "BOESER (18)"
+            ]
+        },
+        {
+            "PERIOD": "1",
+            "TIME": "6:45",
+            "SCORER": "HOGLANDER (11)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "AMAN (3)",
+                "LAFFERTY (9)"
+            ]
+        },
+        {
+            "PERIOD": "1",
+            "TIME": "19:44",
+            "SCORER": "BOESER (25)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "PETTERSSON (33)",
+                "HUGHES (40)" 
+            ]
+        },
+        {
+            "PERIOD": "2",
+            "TIME": "15:33",
+            "SCORER": "PETTERSSON (18)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "BLUEGER (11)",
+                "HRONEK (29)"
+            ]
+        },
+        {
+            "PERIOD": "2",
+            "TIME": "15:33",
+            "SCORER": "HOGLANDER (12)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "SUTER (4)",
+                "HRONEK (30)"
+            ]
+        },
+        {
+            "PERIOD": "3",
+            "TIME": "18:29",
+            "SCORER": "PETTERSSON (19)",
+            "TYPE": "EN",
+            "ASSISTORS": [
+                "BOESER (19)",
+                "MYERS (15)"
+            ]
+        }
+    ],
+    "OTHER": [
+        {
+            "PERIOD": "2",
+            "TIME": "1:31",
+            "SCORER": "GIROUX",
+            "TYPE": "",
+            "ASSISTORS": [
+                "TKACHUK",
+                "SANDERSON"
+            ]
+        },
+        {
+            "PERIOD": "3",
+            "TIME": "0:37",
+            "SCORER": "TARASENKO",
+            "TYPE": "",
+            "ASSISTORS": [
+                "GIROUX",
+                "STUTZLE"
+            ]
+        },
+        {
+            "PERIOD": "3",
+            "TIME": "17:29",
+            "SCORER": "TARASENKO",
+            "TYPE": "",
+            "ASSISTORS": [
+                "BATHERSON",
+                "CHABOT"
+            ]
+        }
+    ]
+
+}
