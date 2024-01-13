@@ -2,48 +2,18 @@
 ## create-psx.py
 
 import os
-import sys
-import shutil
-import zipfile
 import json
 import argparse
 import traceback
 from datetime import datetime
 
+from helpers import *
+
 cwd = os.getcwd()
 
 DEBUG = 1
 
-def create_directory(directory_path):
-    if not os.path.exists(directory_path):
-        os.makedirs(directory_path)
-    return
 
-def copy_directory(source_directory, destination_directory):
-    if os.path.exists(destination_directory):
-        shutil.rmtree(destination_directory)
-    shutil.copytree(source_directory, destination_directory)
-    return
-
-def zip_directory(directory_path, zip_name):
-    with zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED) as zipf:
-        for file in os.listdir(directory_path):
-            file_path = os.path.join(directory_path, file)
-            if os.path.isfile(file_path):
-                zipf.write(file_path, arcname=os.path.basename(file_path))
-    return
-
-def copy_file_to_directory(source_file, destination_directory):
-    # Ensure that the destination directory exists
-    os.makedirs(destination_directory, exist_ok=True)
-
-    # Build the full path for the destination file
-    destination_file = os.path.join(destination_directory, os.path.basename(source_file))
-
-    # Copy the file to the destination directory
-    shutil.copy(source_file, destination_file)
-
-    return
 
 def update_logo(source, psxprj, i, logo_path, type):
     # Copy logo into source
@@ -407,24 +377,27 @@ def update_psxprj(selected_choice, source, date_file):
         JSON File {source}/psxproject.json : Updated!
             ''')
     return True
-
-def valid_date(s):
-    try:
-        return datetime.strptime(s, '%b%d-%y')
-    except:
-        msg = "Invalid date formate. Please use the format: jan09-24."
-        raise argparse.ArgumentTypeError(msg)
     
 
 def main():
+    # Get user input for a date
+    date_file = input("Enter a date using jan09-24 format or hit enter for today:")
+
+    # Determine if date for game is valid
+    if not date_file:
+        date_file = datetime.today().strftime('%b%d-%y').lower()
+    else:
+        date_file = date_file.lower()
+        if not valid_date(date_file):
+            print(f'''
+        Invalid date: {date_file}. Please try again with correct format.
+            ''')
+
     # Create an ArgumentParser object
     parser = argparse.ArgumentParser(description='Creates a PSX project of your choice for the Vancouver Canucks game today or a specified date.')
 
     # Add argument for the choice
     parser.add_argument('--choice', choices=['game-day', 'final-score', 'box-score'], help='Choose which type of PSX project to create.')
-
-    # Add argument for the date
-    parser.add_argument('--date', type=valid_date, help='Date in the format jan09-24.')
 
     # Parse the command line arguments
     args = parser.parse_args()
@@ -450,12 +423,6 @@ def main():
 
     # Copy os-dependent psx project into template
     copy_file_to_directory(cwd + f'/assets/templates/{os.sys.platform}/{selected_choice}/psxproject.json', psx_path)
-
-    # Determine date for game
-    if (args.date):
-        date_file = args.date.strftime('%b%d-%y').lower()
-    else:
-        date_file = datetime.now().strftime('%b%d-%y').lower()
 
     # Create directory for game date and template if it doesn't exist
     destination = cwd + f'/json/games/{date_file}/{selected_choice}-temp/'
