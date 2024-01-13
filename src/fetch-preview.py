@@ -81,8 +81,15 @@ def get_data_from_site(data, site):
     return False
 
 def main():
+    print(f'''
+############################################################
+          
+                FETCH GAME DAY DATE
+
+############################################################
+    ''')
     # Get user input for a URL
-    site = input("Enter an ESPN URL: ")
+    site = input('\nENTER URL: ')
 
     data = {}
 

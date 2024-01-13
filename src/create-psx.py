@@ -43,10 +43,11 @@ def update_text(psxprj, i, text, type):
 def make_scorer_text(stat, team):
     text = ""
     periods = {
-        "1": "1st",
-        "2": "2nd",
-        "3": "3rd",
-        "OT": "OT"
+        "1": "1ST",
+        "2": "2ND",
+        "3": "3RD",
+        "OT": "OT",
+        "SHOOTOUT": "SHOOTOUT"
     }
     # Convert period into correct format
     period = periods.get(stat.get('PERIOD'))
@@ -380,19 +381,6 @@ def update_psxprj(selected_choice, source, date_file):
     
 
 def main():
-    # Get user input for a date
-    date_file = input("Enter a date using jan09-24 format or hit enter for today:")
-
-    # Determine if date for game is valid
-    if not date_file:
-        date_file = datetime.today().strftime('%b%d-%y').lower()
-    else:
-        date_file = date_file.lower()
-        if not valid_date(date_file):
-            print(f'''
-        Invalid date: {date_file}. Please try again with correct format.
-            ''')
-
     # Create an ArgumentParser object
     parser = argparse.ArgumentParser(description='Creates a PSX project of your choice for the Vancouver Canucks game today or a specified date.')
 
@@ -416,6 +404,35 @@ def main():
 
         Use the format: python3 src/create-psx.py --choice game-day
         ''')
+        return
+    
+    print(f'''
+############################################################
+          
+                CREATE {selected_choice.upper()} PSX FILE
+
+############################################################
+    ''')
+    # Get user input for a date
+    date_file = input('\nENTER DATE: ')
+
+    # Determine if date for game is valid
+    accepted = 'ACCEPTED'
+    if not date_file:
+        date_file = datetime.today().strftime('%b%d-%y').lower()
+    else:
+        date_file = date_file.lower()
+        if not valid_date(date_file):
+            accepted = 'REJECTED\n\t\t\t\tACCEPTED FORMAT: jan09-24'
+
+    print(f'''
+############################################################
+              
+                DATE {date_file} {accepted}
+
+############################################################
+        ''')
+    if accepted != 'ACCEPTED':
         return
     
     # Find template path for selected choice

@@ -1245,7 +1245,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1st - (5:44) \nG: BOESER (26)\nA: PETTERSSON (34), MILLER (37)"
+                        "_v": "1ST - (5:44) \nG: BOESER (26)\nA: PETTERSSON (34), MILLER (37)"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -1565,7 +1565,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1st - (6:31) PP\nG: BOESER (27)\nA: MILLER (38), PETTERSSON (35)"
+                        "_v": "1ST - (6:31) PP\nG: BOESER (27)\nA: MILLER (38), PETTERSSON (35)"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -1885,7 +1885,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1st - (17:31) \nG: PETTERSSON (21)\nA: HRONEK (32), MILLER (39)"
+                        "_v": "1ST - (17:31) \nG: PETTERSSON (21)\nA: HRONEK (32), MILLER (39)"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -3485,7 +3485,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": " (16:20) - 1st\nPETTERSSON :G\nHARKINS :A"
+                        "_v": " (16:20) - 1ST\nPETTERSSON :G\nHARKINS :A"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -3805,7 +3805,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": " (6:05) - 2nd\nCROSBY :G\nGUENTZEL, PETTERSSON :A"
+                        "_v": " (6:05) - 2ND\nCROSBY :G\nGUENTZEL, PETTERSSON :A"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -4125,7 +4125,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": " (19:31) - 3rd\nCROSBY :G\nKARLSSON, LETANG :A"
+                        "_v": " (19:31) - 3RD\nCROSBY :G\nKARLSSON, LETANG :A"
                     },
                     "textBrush": {
                         "_t": "string",

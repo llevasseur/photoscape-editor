@@ -414,9 +414,15 @@ def fetch_final_score(site):
     return True
 
 def main():
+    print(f'''
+############################################################
+          
+                FETCH FINAL SCORE AND BOX SCORE DATE
 
+############################################################
+    ''')
     # Get user input for a URL
-    site = input("Enter an ESPN URL: ")
+    site = input('\nENTER URL: ')
 
     if not fetch_box_score(site):
         return
