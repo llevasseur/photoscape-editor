@@ -78,18 +78,19 @@ def make_scorer_text(stat, team):
         "3": "3rd",
         "OT": "OT"
     }
+    # Convert period into correct format
+    period = periods.get(stat.get('PERIOD'))
+    time = stat.get('TIME')
+    type = stat.get('TYPE')
+    scorer = stat.get('SCORER')
+    assistors = stat.get('ASSISTORS')
+    n = len(assistors)
     # CANUCKS Scorer
     if (team == "CANUCKS"):
-        # Convert period into correct format
-        period = periods.get(stat.get('PERIOD'))
-        time = stat.get('TIME')
-        scorer = stat.get('SCORER')
-        assistors = stat.get('ASSISTORS')
-        n = len(assistors)
-
         # Construct text
         text += f'{period} - '
-        text += f'({time})\n'
+        text += f'({time})'
+        text += f' {type}\n'
         text += f'G: {scorer}\n'
         text += 'A: '
         
@@ -100,14 +101,8 @@ def make_scorer_text(stat, team):
 
     # OTHER Team Scorer
     else:
-        # Convert period into correct format
-        period = periods.get(stat.get('PERIOD'))
-        time = stat.get('TIME')
-        scorer = stat.get('SCORER')
-        assistors = stat.get('ASSISTORS')
-        n = len(assistors)
-
         # Construct text
+        text += f'{type} '
         text += f'({time})'
         text += f' - {period}\n'
         text += f'{scorer} :G\n'
@@ -347,6 +342,7 @@ def update_psxprj(selected_choice, source, date_file):
                 if (n > 1):
                     psx_path = cwd + "/assets/templates/box-score-temp/"
                     
+                    # i = 2 because this will make box-score-2, box-score-3, ... box-score-n
                     for i in range(2, n + 1):
 
                         destination = cwd + f'/json/games/{date_file}/{selected_choice}-temp-{i}/'
@@ -357,6 +353,10 @@ def update_psxprj(selected_choice, source, date_file):
                         # Restrict box-score to only go to 7
                         start = canucks_i
                         for j in range(start, min(len(canucks_scorers) - start, start + 7)):
+                            # Update CANUCKS SCORER
+                            index = j - start + 3
+                            text = make_scorer_text(canucks_scorers[canucks_i], 'CANUCKS')
+                            update_text(psxprj, index, text, type)
 
                             # Increment canucks scorers index
                             canucks_i += 1
@@ -365,11 +365,15 @@ def update_psxprj(selected_choice, source, date_file):
                         # Restrict box-score to only go to 7
                         start = other_i 
                         for j in range(start, min(len(other_scorers) - start, start + 7)):
+                            # Update OTHER SCORER
+                    
+                            index = j - start + 10
+                            text = make_scorer_text(other_scorers[other_i], 'OTHER  ')
+                            update_text(psxprj, index, text, type)
 
                             # Increment other scorers index
                             other_i += 1
 
-                
                         # Update the source json
                         with open(source + '/psxproject.json', 'w') as json_file:
                             json.dump(psxprj, json_file, indent=4)
@@ -378,10 +382,10 @@ def update_psxprj(selected_choice, source, date_file):
                                 JSON File {source}/psxproject.json : Updated!
                                 ''')
                         # Zip updated template
-                        zip_directory(source, cwd + f'/json/games/{date_file}/{selected_choice}-temp-{i}.psxprj')
+                        zip_directory(source, cwd + f'/json/games/{date_file}/output/{selected_choice}-{i}.psxprj')
                 
                         print(f'''
-                        A new {selected_choice} PSX file has been zipped to games/date/{selected_choice}-temp-{i}.psxprj.
+                        Another {selected_choice} PSX file has been zipped to games/date/output/{selected_choice}-{i}.psxprj.
                         ''')
 
                 return True
@@ -474,7 +478,7 @@ def main():
     zip_directory(source, cwd + f'/json/games/{date_file}/output/{selected_choice}.psxprj')
     
     print(f'''
-    A new {selected_choice} PSX file has been zipped to games/date/{selected_choice}.psxprj.
+    A new {selected_choice} PSX file has been zipped to games/date/output/{selected_choice}.psxprj.
     ''')
     return
     

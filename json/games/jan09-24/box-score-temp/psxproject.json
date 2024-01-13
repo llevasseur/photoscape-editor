@@ -1245,7 +1245,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1st - (2:14)\nG: COLE (1)\nA: JUULSEN (2), MIKHEYEV (11)"
+                        "_v": "1st - (2:14) \nG: COLE (1)\nA: JUULSEN (2), MIKHEYEV (11)"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -1565,7 +1565,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1st - (12:39)\nG: SUTER (7)\nA: LAFFERTY (8), MYERS (14)"
+                        "_v": "1st - (12:39) \nG: SUTER (7)\nA: LAFFERTY (8), MYERS (14)"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -1885,7 +1885,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1st - (16:34)\nG: PETTERSSON (14)\nA: SUTER (3)"
+                        "_v": "1st - (16:34) \nG: PETTERSSON (14)\nA: SUTER (3)"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -2205,7 +2205,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1st - (16:58)\nG: MILLER (16)\nA: ZADOROV (7), BOESER (15)"
+                        "_v": "1st - (16:58) \nG: MILLER (16)\nA: ZADOROV (7), BOESER (15)"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -2525,7 +2525,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1st - (17:53)\nG: PETTERSSON (15)\nA: MILLER (34), HUGHES (36)"
+                        "_v": "1st - (17:53) PP\nG: PETTERSSON (15)\nA: MILLER (34), HUGHES (36)"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -2845,7 +2845,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "3rd - (17:42)\nG: SUTER (8)\nA: UNASSISTED"
+                        "_v": "3rd - (17:42) \nG: SUTER (8)\nA: UNASSISTED"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -3485,7 +3485,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "(1:31) - 2nd\nGIROUX :G\nTKACHUK, SANDERSON :A"
+                        "_v": " (1:31) - 2nd\nGIROUX :G\nTKACHUK, SANDERSON :A"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -3805,7 +3805,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "(0:37) - 3rd\nTARASENKO :G\nGIROUX, STUTZLE :A"
+                        "_v": " (0:37) - 3rd\nTARASENKO :G\nGIROUX, STUTZLE :A"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -4125,7 +4125,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "(17:29) - 3rd\nTARASENKO :G\nBATHERSON, CHABOT :A"
+                        "_v": " (17:29) - 3rd\nTARASENKO :G\nBATHERSON, CHABOT :A"
                     },
                     "textBrush": {
                         "_t": "string",
