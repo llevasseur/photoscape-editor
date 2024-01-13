@@ -8,6 +8,7 @@ import zipfile
 import json
 import argparse
 import traceback
+from datetime import datetime
 
 cwd = os.getcwd()
 
@@ -117,11 +118,6 @@ def make_scorer_text(stat, team):
                 text += ', ' 
         text += ' :A'   
 
-    if (DEBUG):
-        print(f'''
-        Update {text} : Complete
-        ''')  
-
     return text
 
 
@@ -143,7 +139,7 @@ def update_psxprj(selected_choice, source, date_file):
             case 'game-day':
                 
                 # Update VAN LOGO
-                type = 'VAN Logo'
+                type = 'VAN Logo    '
                 index = 0
                 #NOTE Change IMG to ALT1, ALT2, ALT3
                 logo = team_lookup.get('VAN')['IMG']
@@ -151,7 +147,7 @@ def update_psxprj(selected_choice, source, date_file):
 
                 # Update OTHER LOGO
                 other = stats.get('OTHER')['TEAM']
-                type = f'{other} Logo'
+                type = f'{other} Logo    '
                 index = 1
                 logo = team_lookup.get(stats.get('OTHER')['TEAM'])['IMG']
                 update_logo(source, psxprj, index, logo, type)
@@ -160,25 +156,25 @@ def update_psxprj(selected_choice, source, date_file):
                 os.remove(source + '/OTHER.png')
 
                 # Update TIME
-                type = 'Time'
+                type = 'Time        '
                 index = 9
                 time = stats.get('DATE')['TIME']
                 update_text(psxprj, index, time, type)
 
                 # Update DATE
-                type = 'Date'
+                type = 'Date        '
                 index = 10
                 date = f'{stats.get("DATE")["MONTH"]} {stats.get("DATE")["DAY"]}, {stats.get("DATE")["YEAR"]}'
                 update_text(psxprj, index, date, type)
 
                 # Update VAN RECORD
-                type = 'VAN Record'
+                type = 'VAN Record  '
                 index = 13
                 record = stats.get('CANUCKS')['RECORD']
                 update_text(psxprj, index, record, type)
 
                 # Update OTHER RECORD
-                type = f'{other} Record'
+                type = f'{other} Record  '
                 index = 14
                 record = stats.get('OTHER')['RECORD']
                 update_text(psxprj, index, record, type)
@@ -191,7 +187,7 @@ def update_psxprj(selected_choice, source, date_file):
             
             case 'final-score':
                 # Update VAN LOGO
-                type = 'VAN Logo'
+                type = 'VAN Logo    '
                 index = 0
                 #NOTE Change IMG to ALT1, ALT2, ALT3
                 logo = team_lookup.get('VAN')['IMG']
@@ -200,7 +196,7 @@ def update_psxprj(selected_choice, source, date_file):
                 # Update OTHER LOGO
                 # TODO Make a function
                 other = stats.get('OTHER')['TEAM']
-                type = f'{other} Logo'
+                type = f'{other} Logo    '
                 index = 1
                 logo = team_lookup.get(stats.get('OTHER')['TEAM'])['IMG']
                 update_logo(source, psxprj, index, logo, type)
@@ -209,79 +205,79 @@ def update_psxprj(selected_choice, source, date_file):
                 os.remove(source + '/OTHER.png')
 
                 # Update VAN SCORE
-                type = 'VAN Score'
+                type = 'VAN Score   '
                 index = 11
                 score = stats.get('CANUCKS')['SCORE']
                 update_text(psxprj, index, score, type)
 
                 # Update OTHER SCORE
-                type = f'{other} Score'
+                type = f'{other} Score   '
                 index = 12
                 score = stats.get('OTHER')['SCORE']
                 update_text(psxprj, index, score, type)
 
                 # Update VAN SOG
-                type = 'VAN SOG'
+                type = 'VAN SOG     '
                 index = 20
                 sog = stats.get('CANUCKS')['SOG']
                 update_text(psxprj, index, sog, type)
 
                 # Update VAN HITS
-                type = 'VAN HITS'
+                type = 'VAN HITS    '
                 index = 21
                 hits = stats.get('CANUCKS')['HITS']
                 update_text(psxprj, index, hits, type)
 
                 # Update VAN PP
-                type = 'VAN PP'
+                type = 'VAN PP      '
                 index = 22
                 pp = stats.get('CANUCKS')['PP']
                 update_text(psxprj, index, pp, type)
 
                 # Update VAN PIM
-                type = 'VAN PIM'
+                type = 'VAN PIM     '
                 index = 23
                 pim = stats.get('CANUCKS')['PIM']
                 update_text(psxprj, index, pim, type)
 
                 # Update VAN FO
-                type = 'VAN FO'
+                type = 'VAN FO      '
                 index = 24
                 fo = stats.get('CANUCKS')['FO']
                 update_text(psxprj, index, fo, type)
 
                 # Update OTHER SOG
-                type = f'{other} SOG'
+                type = f'{other} SOG     '
                 index = 25
                 sog = stats.get('OTHER')['SOG']
                 update_text(psxprj, index, sog, type)
 
                 # Update OTHER HITS
-                type = f'{other} HITS'
+                type = f'{other} HITS    '
                 index = 26
                 hits = stats.get('OTHER')['HITS']
                 update_text(psxprj, index, hits, type)
 
                 # Update OTHER PP
-                type = f'{other} PP'
+                type = f'{other} PP      '
                 index = 27
                 pp = stats.get('OTHER')['PP']
                 update_text(psxprj, index, pp, type)
 
                 # Update OTHER PIM
-                type = f'{other} PIM'
+                type = f'{other} PIM     '
                 index = 28
                 pim = stats.get('OTHER')['PIM']
                 update_text(psxprj, index, pim, type)
 
                 # Update OTHER FO
-                type = f'{other} FO'
+                type = f'{other} FO      '
                 index = 29
                 fo = stats.get('OTHER')['FO']
                 update_text(psxprj, index, fo, type)
 
                 # Update DATE
-                type = 'Date'
+                type = 'Date        '
                 index = 30
                 date = f'{stats.get("DATE")["MONTH"]} {stats.get("DATE")["DAY"]}, {stats.get("DATE")["YEAR"]}'
                 update_text(psxprj, index, date, type)
@@ -293,7 +289,7 @@ def update_psxprj(selected_choice, source, date_file):
                 update_text(psxprj, index, where, type)
 
                 # Update WIN or LOSS
-                type = 'WIN or LOSS'
+                type = 'WIN or LOSS '
                 index = 33
                 win = 'WIN' if stats.get('CANUCKS')['WIN'] == 'True' else 'LOSS'
                 if stats.get('CANUCKS')['OT'] == 'True':
@@ -326,14 +322,14 @@ def update_psxprj(selected_choice, source, date_file):
                     # Increment canucks scorers index
                     canucks_i += 1
 
-                type = f'OTHER SCORER'
+                type = f'OTHER SCORER  '
                 # Iterate over OTHER SCORERS
                 # Restrict first box-score to only go to 7
                 for i in range(0, min(len(other_scorers), 7)):
                     # Update OTHER SCORER
                     
                     index = i + 10
-                    text = make_scorer_text(other_scorers[other_i], 'OTHER')
+                    text = make_scorer_text(other_scorers[other_i], 'OTHER  ')
                     update_text(psxprj, index, text, type)
 
                     # Increment other scorers index
@@ -344,7 +340,7 @@ def update_psxprj(selected_choice, source, date_file):
                     json.dump(psxprj, json_file, indent=4)
                     if (DEBUG):
                         print(f'''
-                        JSON File : Updated!
+        JSON File {source}/psxproject.json : Updated!
                         ''')
 
                 # Handle multiple box-scores if necessary
@@ -404,17 +400,27 @@ def update_psxprj(selected_choice, source, date_file):
         json.dump(psxprj, json_file, indent=4)
         if (DEBUG):
             print(f'''
-            JSON File {source}/psxproject.json : Updated!
+        JSON File {source}/psxproject.json : Updated!
             ''')
     return True
+
+def valid_date(s):
+    try:
+        return datetime.strptime(s, '%b%d-%y')
+    except:
+        msg = "Invalid date formate. Please use the format: jan09-24."
+        raise argparse.ArgumentTypeError(msg)
     
 
 def main():
     # Create an ArgumentParser object
-    parser = argparse.ArgumentParser(description='Creates a PSX project of your choice for the Vancouver Canucks game.')
+    parser = argparse.ArgumentParser(description='Creates a PSX project of your choice for the Vancouver Canucks game today or a specified date.')
 
     # Add argument for the choice
     parser.add_argument('--choice', choices=['game-day', 'final-score', 'box-score'], help='Choose which type of PSX project to create.')
+
+    # Add argument for the date
+    parser.add_argument('--date', type=valid_date, help='Date in the format jan09-24.')
 
     # Parse the command line arguments
     args = parser.parse_args()
@@ -436,18 +442,18 @@ def main():
         return
     
     # Find template path for selected choice
-    with open(cwd + '/json/look-up/psx-files.json', 'r') as json_file:
-        psx_type = json.load(json_file).get(selected_choice)
-        psx_path = cwd + psx_type['PATH']
-        
-    print(f'''
-    Selected file path is {psx_path}
-    ''')
+    psx_path = cwd + f'/assets/templates/{selected_choice}-temp/'
+
+    # Copy os-dependent psx project into template
+    copy_file_to_directory(cwd + f'/assets/templates/{os.sys.platform}/{selected_choice}/psxproject.json', psx_path)
 
     # Determine date for game
-    # TODO
-    date_file = 'jan9-24'
-    
+    if (args.date):
+        date_file = args.date.strftime('%b%d-%y').lower()
+    else:
+        date_file = datetime.now().strftime('%b%d-%y').lower()
+    print(date_file)
+
     # Create directory for game date and template if it doesn't exist
     destination = cwd + f'/json/games/{date_file}/{selected_choice}-temp/'
     create_directory(destination)
@@ -456,12 +462,16 @@ def main():
     copy_directory(psx_path, destination)
     source = cwd + f'/json/games/{date_file}/{selected_choice}-temp'
 
+    # Create output directory for PSX Files
+    output = cwd + f'/json/games/{date_file}/output'
+    create_directory(output)
+
     # Update template copy
     if not update_psxprj(selected_choice, source, date_file):
         return
 
     # Zip updated template
-    zip_directory(source, cwd + f'/json/games/{date_file}/{selected_choice}.psxprj')
+    zip_directory(source, cwd + f'/json/games/{date_file}/output/{selected_choice}.psxprj')
     
     print(f'''
     A new {selected_choice} PSX file has been zipped to games/date/{selected_choice}.psxprj.
