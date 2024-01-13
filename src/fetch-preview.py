@@ -45,8 +45,6 @@ def get_data_from_site(data, site):
         van_record = records[1].text.split(',')[0]
         other_record = records[0].text.split(',')[0]
 
-        return False
-
     # DATE
     game_info = driver.find_element(By.XPATH, ".//div[contains(@class, 'GameInfo__Meta')]")
     
