@@ -456,7 +456,6 @@ def main():
         date_file = args.date.strftime('%b%d-%y').lower()
     else:
         date_file = datetime.now().strftime('%b%d-%y').lower()
-    print(date_file)
 
     # Create directory for game date and template if it doesn't exist
     destination = cwd + f'/json/games/{date_file}/{selected_choice}-temp/'
@@ -478,7 +477,7 @@ def main():
     zip_directory(source, cwd + f'/json/games/{date_file}/output/{selected_choice}.psxprj')
     
     print(f'''
-    A new {selected_choice} PSX file has been zipped to games/date/output/{selected_choice}.psxprj.
+    A new {selected_choice} PSX file has been zipped to games/{date_file}/output/{selected_choice}.psxprj.
     ''')
     return
     
