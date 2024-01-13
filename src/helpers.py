@@ -51,11 +51,11 @@ def get_date_json(data, parsed_date):
     # Extract individual components
     month = parsed_date.strftime('%B')
     day = parsed_date.strftime('%d')
-    year = parsed_date.year
+    year = str(parsed_date.year)
     time = parsed_date.strftime('%I:%M %p').lstrip('0') # Time with AM/PM with no leading zeros
     date = f'{parsed_date.strftime("%b").lower()}{day}-{str(year)[-2:]}'
 
-    day = parsed_date.day
+    day = str(parsed_date.day)
 
     data["DATE"] = {
         "TIME": time,
@@ -86,8 +86,7 @@ def get_scorer_and_assistors(data, sentence, remove_nums):
     data['SCORER'] = remove_first_group(split_sentence[0]).upper()
     
     # Determine if special goal type
-    check_type = re.split(r'(.+?)\s*(\(\w+\s*\w*\))', data['SCORER'], maxsplit=1)
-    print(check_type)       
+    check_type = re.split(r'(.+?)\s*(\(\w+\s*\w*\))', data['SCORER'], maxsplit=1)    
     if check_type[3] != '':
         type = check_type[3].strip()
         with open(cwd + '/json/look-up/goal-type.json', 'r') as goal_types:

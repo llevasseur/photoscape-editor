@@ -147,7 +147,7 @@ def update_psxprj(selected_choice, source, date_file):
                 # Update HOME or AWAY
                 type = 'HOME or AWAY'
                 index = 16
-                where = 'HOME' if stats.get('CANUCKS')['HOME'] == 'True' else 'AWAY'
+                where = stats.get('CANUCKS')['HOME']
                 update_text(psxprj, index, where, type)
             
             case 'final-score':
@@ -250,7 +250,7 @@ def update_psxprj(selected_choice, source, date_file):
                 # Update HOME or AWAY
                 type = 'HOME or AWAY'
                 index = 31
-                where = 'HOME' if stats.get('CANUCKS')['HOME'] == 'True' else 'AWAY'
+                where = stats.get('CANUCKS')['HOME']
                 update_text(psxprj, index, where, type)
 
                 # Update WIN or LOSS

@@ -16,85 +16,128 @@ so = False
 home = 'HOME'
 van_score = 0
 other_score = 0
+date_file = ''
+date_obj = {}
 
 DEBUG = 1
 
-def get_final_score_date(data, site):
-    return
+def get_final_score_data(data, site):
+    global ot, so, home, van_score, other_score, date_file, date_obj
+    # Set Chrome driver and visit site
+    driver = webdriver.Chrome()
+    driver.get(site)
+
+    # Confirm Canucks are playing and that it's an ESPN site
+    assert "Canucks" and "ESPN" in driver.title
+
+    # Set window size to mid-big so Team Stats are listed
+    driver.set_window_size(1200, 1200)
+
+    # Get Nav Bar
+    nav = driver.find_element(By.XPATH, ".//nav[contains(@class, 'Nav__Secondary')]")
+
+    # Get li_list
+    li_list = nav.find_elements(By.TAG_NAME, 'li')
+
+    # Find and click the link with specific text Team Stats    
+    driver.get(li_list[4].find_element(By.TAG_NAME, 'a').get_attribute('href'))
+
+    # Confirm Canucks are playing and that it's an ESPN site
+    assert "Canucks" and "Game Stats" and "ESPN" in driver.title
+
+
+    # Set window size to small so Teams are listed as Acronyms
+    driver.set_window_size(800, 800)
+
     # Fetch Team Stats
 # - The two teams
-#    - AWAY
-#    - div w class Gamestrip__Team--away
-#    - div w class Gamestrip__TeamContent
-#    - h2.get text = {away team acronym}
-#    - {lowercase}.png use to fetch logo
-#    - if VAN - vanHome = false
+    away = driver.find_element(By.XPATH, ".//div[contains(@class, 'Gamestrip__Team--away')]")
+    away_content = away.find_element(By.XPATH, ".//div[contains(@class, 'Gamestrip__TeamContent')]")
+    away_team = away_content.find_element(By.TAG_NAME, "h2").text
 
-#    - HOME
-#    - div w class Gamestrip__Team--home
-#    - div w class Gamestrip__TeamContent
-#    - h2.get text = {home team acronym}
-#    - {lowercase}.png use to fetch logo
-
-# - Final Score between the two teams
-#    - AWAY
-#    - div w class Gamestrip__Team--away
-#    - div w class Gamestrip__ScoreContainer
-#    - get text = {away score}
-
-#    - HOME
-#    - div w class Gamestrip__Team--home
-#    - div w class Gamestrip__ScoreContainer
-#    - get text = {home score}
-#    - if {home score} > {away score} XOR vanHom: vanWin = true
+    home_obj = driver.find_element(By.XPATH, ".//div[contains(@class, 'Gamestrip__Team--home')]")
+    home_content = home_obj.find_element(By.XPATH, ".//div[contains(@class, 'Gamestrip__TeamContent')]")
+    home_team = home_content.find_element(By.TAG_NAME, "h2").text
 
 
-#    - div w class PageLayout__Main
-# STATS
-#    - section w class TeamStatsTable, get tr_list
+    data['CANUCKS'] = {
+        "SCORE": str(van_score),
+        "HOME": home,
+        "WIN": "True" if van_score > other_score else "False",
+        "OT": 'True' if ot else 'False',
+        "SO": 'True' if so else 'False'
+    }
 
-# - Shots for both teams
-#    - tr_list[0] get td_list
-#    - "Shots" = td_list[0].getText
-#    - AWAY SHOTS = td_list[1].getText
-#    - HOME SHOTS = td_list[2].getText
+    data['OTHER'] = {
+        "TEAM": away_team if home == 'HOME' else home_team,
+        "SCORE": str(other_score)
+    }
 
-# - Hits for both teams
-#    - tr_list[1] get td_list
-#    - "Hits" = td_list[0].getText
-#    - AWAY HITS = td_list[1]
-#    - HOME HITS = td_list[2]
+    data['DATE'] = {
+        "MONTH": date_obj['MONTH'][:3],
+        "DAY": date_obj['DAY'],
+        "YEAR": date_obj['YEAR']
+    }
 
-# - Faceoff wins for both teams
-#    - tr_list[2] get td_list
-#    - "Faceoffs Won" = td_list[0].getText
-#    - AWAY FOW = td_list[1]
-#    - HOME FOW = td_list[2]
+    stats_table = driver.find_element(By.XPATH, ".//section[contains(@class, 'TeamStatsTable')]")
+    stats = stats_table.find_element(By.XPATH, ".//div[contains(@class, 'Table__Scroller')]")
+    tbody = stats.find_element(By.XPATH, ".//tbody[contains(@class, 'Table__TBODY')]")
 
-# - Power-play opportunities
-#    - tr_list[4] get td_list
-#    - "Power Play Opportunities" = td_list[0].getText
-#    - AWAY PPO = td_list[1]
-#    - HOME PPO = td_list[2]
+    c_ind = 2 if home == 'HOME' else 1
+    o_ind = 1 if home == 'HOME' else 2
 
-# - Power-play goals for both teams
-#    - tr_list[5] get td_list
-#    - "Power Play Goals" = td_list[0].getText
-#    - AWAY PPG = td_list[1]
-#    - AWAY PPRatio = "{AWAY PPG}/{AWAY PPO}
-#    - HOME PPG = td_list[2]
-#    - HOME PPRatio = "{HOME PPG}/{HOME PPO}"   
+    tr_list = tbody.find_elements(By.TAG_NAME, "tr")
+    # SOG
+    td_list = tr_list[0].find_elements(By.TAG_NAME, "td")
 
-    # GAME INFO
-#    - main - section w class GameInfo
-#    - div w class ContentList
-#    - div w class GameInfo__Meta.getText
-#    - filter out first two lines = "January 2, 2024"'
-#    - filter out all but first 3 characters to get abbreviation
-#    - Filter out text without first word and space to get day and year 
+    data['CANUCKS']['SOG'] = td_list[c_ind].text
+    data['OTHER']['SOG'] = td_list[o_ind].text
+
+    # HITS
+    td_list = tr_list[1].find_elements(By.TAG_NAME, "td")
+
+    data['CANUCKS']['HITS'] = td_list[c_ind].text
+    data['OTHER']['HITS'] = td_list[o_ind].text
+
+    # PP OPPORTUNITIES
+    td_list = tr_list[4].find_elements(By.TAG_NAME, "td")
+
+    c_ppo = td_list[c_ind].text
+    o_ppo = td_list[o_ind].text
+
+    # PP GOALS
+    td_list = tr_list[5].find_elements(By.TAG_NAME, "td")
+
+    c_ppg = td_list[c_ind].text
+    o_ppg = td_list[o_ind].text
+
+    data['CANUCKS']['PP'] = f'{c_ppg}/{c_ppo}'
+    data['OTHER']['PP'] = f'{o_ppg}/{o_ppo}'
+
+    # PIM
+    td_list = tr_list[9].find_elements(By.TAG_NAME, "td")
+
+    data['CANUCKS']['PIM'] = td_list[c_ind].text
+    data['OTHER']['PIM'] = td_list[o_ind].text
+
+    # FACEOFFS
+    td_list = tr_list[2].find_elements(By.TAG_NAME, "td")
+
+    data['CANUCKS']['FO'] = td_list[c_ind].text
+    data['OTHER']['FO'] = td_list[o_ind].text
+
+    print(f'''
+            FINAL SCORE Test: Passed
+    ''')
+
+    # Remember to close the driver
+    driver.quit()
+
+    return True
+
 
 def get_box_score_data(data, site):
-    global ot, so, home, van_score, other_score
+    global ot, so, home, van_score, other_score, date_file
     # Set Chrome driver and visit site
     driver = webdriver.Chrome()
     driver.get(site)
@@ -140,6 +183,7 @@ def get_box_score_data(data, site):
         
         print(f'''
             {test_case} Test : Passed
+            HOME: {home}
         ''')
         
         # Fetch Goal Info (BOX SCORE)
@@ -230,7 +274,7 @@ def get_box_score_data(data, site):
                     shooter = extract_second_word(td_list[1].text)
                     # Check if the shootout counter changes
                     # Update data if so
-                    if home == 'False':
+                    if home == 'AWAY':
                         if td_list[2].text != str(van_so):
                             data.get('CANUCKS')[c_len - 1].get("SCORERS").append(shooter)
                             van_so += 1
@@ -239,7 +283,7 @@ def get_box_score_data(data, site):
                             data.get('OTHER')[o_len - 1].get("SCORERS").append(shooter)
                             other_so += 1
 
-                    elif home == 'True':
+                    else:
                         if td_list[3].text != str(van_so):
                             data.get('CANUCKS')[c_len - 1].get("SCORERS").append(shooter)
                             van_so += 1
@@ -258,7 +302,7 @@ def get_box_score_data(data, site):
                         test_case = 'SET DATA'
                         obj = {}
 
-                        if home == 'False':
+                        if home == 'AWAY':
                             if td_list[3].text != str(van_score):
                                 obj['PERIOD'] = period
                                 obj['TIME'] = td_list[0].text
@@ -296,7 +340,6 @@ def get_box_score_data(data, site):
 
                             print(f'''
             {test_case} Test    : Passed
-            {obj}
                             ''')
 
             # Increment period index
@@ -316,16 +359,19 @@ def get_box_score_data(data, site):
     # Remember to close the driver
     driver.quit()
 
-    return date_file
+    return True
 
 def fetch_box_score(site):
+    global date_file, date_obj
     data = {}
 
     # Update data structure and get date to be used as dir name
-    date_file = get_box_score_data(data, site)
+    test = get_box_score_data(data, site)
 
-    if not date_file:
-        return
+    if not test:
+        return False
+    
+    print(date_file)
     
     # Create directory for game date
     destination = cwd + f'/json/games/{date_file}/'
@@ -338,16 +384,20 @@ def fetch_box_score(site):
         print(f'''
         Preview data has been fetched from ESPN and saved to games/{date_file}/box-score.json
         ''')
-    return
+
+    date_obj = data['DATE']
+
+    return True 
 
 def fetch_final_score(site):
+    global date_file
     data = {}
 
     # Update data structure and get date to be used as dir name
-    date_file = False
+    test = get_final_score_data(data, site)
 
-    if not date_file:
-        return
+    if not test:
+        return False
     
     # Create directory for game date
     destination = cwd + f'/json/games/{date_file}/'
@@ -361,15 +411,18 @@ def fetch_final_score(site):
         Preview data has been fetched from ESPN and saved to games/{date_file}/final-score.json
         ''')
 
+    return True
+
 def main():
-    players = {}
 
     # Get user input for a URL
     site = input("Enter an ESPN URL: ")
 
-    fetch_box_score(site)
+    if not fetch_box_score(site):
+        return
 
-    fetch_final_score(site)
+    if not fetch_final_score(site):
+        return
     
     return
 

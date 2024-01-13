@@ -1,0 +1,80 @@
+{
+    "DATE": {
+        "TIME": "4:00 PM",
+        "MONTH": "January",
+        "DAY": "11",
+        "YEAR": "2024"
+    },
+    "CANUCKS": [
+        {
+            "PERIOD": "1",
+            "TIME": "5:44",
+            "SCORER": "BOESER (26)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "PETTERSSON (34)",
+                "MILLER (37)"
+            ]
+        },
+        {
+            "PERIOD": "1",
+            "TIME": "6:31",
+            "SCORER": "BOESER (27)",
+            "TYPE": "PP",
+            "ASSISTORS": [
+                "MILLER (38)",
+                "PETTERSSON (35)"
+            ]
+        },
+        {
+            "PERIOD": "1",
+            "TIME": "17:31",
+            "SCORER": "PETTERSSON (21)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "HRONEK (32)",
+                "MILLER (39)"
+            ]
+        },
+        {
+            "PERIOD": "OT",
+            "TIME": "3:05",
+            "SCORER": "PETTERSSON (22)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "HRONEK (33)"
+            ]
+        }
+    ],
+    "OTHER": [
+        {
+            "PERIOD": "1",
+            "TIME": "16:20",
+            "SCORER": "PETTERSSON",
+            "TYPE": "",
+            "ASSISTORS": [
+                "HARKINS"
+            ]
+        },
+        {
+            "PERIOD": "2",
+            "TIME": "6:05",
+            "SCORER": "CROSBY",
+            "TYPE": "",
+            "ASSISTORS": [
+                "GUENTZEL",
+                "PETTERSSON"
+            ]
+        },
+        {
+            "PERIOD": "3",
+            "TIME": "19:31",
+            "SCORER": "CROSBY",
+            "TYPE": "",
+            "ASSISTORS": [
+                "KARLSSON",
+                "LETANG"
+            ]
+        }
+    ]
+}
