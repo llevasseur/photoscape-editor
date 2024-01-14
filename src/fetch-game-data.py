@@ -228,6 +228,8 @@ def get_box_score_data(data, site):
         van_score = other_score = 0
         data['CANUCKS'] = []
         data['OTHER'] = []
+        # Keep track of shootout markers
+        van_so = other_so = 0
 
         print(f'''
             {test_case} Test      : Passed
@@ -239,13 +241,13 @@ def get_box_score_data(data, site):
         for i in range(1, len(tbody_list)):
             # Define the period using index p and lookup dict
             period = periods[p]
-            test_case = f'{period} GOALS'
+            test_case = f'{ "PERIOD " if period != "SHOOTOUT" and period != "OT" else ""}{period} GOALS'
             # Find each goal info (or shootout attempt) in period
             # tr_list = list of goals in this period
             tr_list = tbody_list[i].find_elements(By.XPATH, ".//tr[contains(@class, 'playByPlay__tableRow')]")
 
             print(f'''
-            {test_case} Test    : Passed
+            GET {test_case}    : Passed
             ''')
 
             # Determine if OT and SO are true
@@ -253,9 +255,19 @@ def get_box_score_data(data, site):
                 ot = True
                 if p == 4:
                     so = True
-                    
-                    # Keep track of shootout markers
-                    van_so = other_so = 0
+                    # Create data objects
+                    data['CANUCKS'].append({
+                        "PERIOD": "SHOOTOUT",
+                        "SCORERS": []
+                    })
+                    canucks_so_index = len(data['CANUCKS']) - 1
+
+                    data["OTHER"].append({
+                        "PERIOD": "SHOOTOUT",
+                        "SCORERS": []
+                    })
+                    other_so_index = len(data['OTHER']) - 1
+
 
             # Iterate through each goal of the period
             for j in range(0, len(tr_list)):
@@ -264,45 +276,34 @@ def get_box_score_data(data, site):
                 td_list = tr_list[j].find_elements(By.TAG_NAME, 'td')
                 
                 # Handle shootout first
-                # TODO Test
                 if so:
-                    test_case = 'SHOOTOUT'
+                    test_case = 'SO SCORER'
 
-                    # Initialize shootout scorer objects
-                    data.get('CANUCKS').append({
-                        "PERIOD": "SHOOTOUT",
-                        "SCORERS": []
-
-                    })
-                    data.get('OTHER').append({
-                        "PERIOD": "SHOOTOUT",
-                        "SCORERS": []
-                    })
-                    # Determine shootout object index using dict len
-                    c_len = len(data.get('CANUCKS'))
-                    o_len = len(data.get('OTHER'))
-
-                    shooter = extract_second_word(td_list[1].text)
+                    shooter = extract_second_word(td_list[1].text).upper()
+                    
                     # Check if the shootout counter changes
                     # Update data if so
                     if home == 'AWAY':
                         if td_list[2].text != str(van_so):
-                            data.get('CANUCKS')[c_len - 1].get("SCORERS").append(shooter)
+                            data['CANUCKS'][canucks_so_index].get("SCORERS").append(shooter)
                             van_so += 1
 
                         elif td_list[3].text != str(other_so):
-                            data.get('OTHER')[o_len - 1].get("SCORERS").append(shooter)
+                            data['OTHER'][other_so_index].get("SCORERS").append(shooter)
                             other_so += 1
 
                     else:
                         if td_list[3].text != str(van_so):
-                            data.get('CANUCKS')[c_len - 1].get("SCORERS").append(shooter)
+                            data['CANUCKS'][canucks_so_index].get("SCORERS").append(shooter)
                             van_so += 1
 
                         elif td_list[2].text != str(other_so):
-                            data.get('OTHER')[o_len - 1].get("SCORERS").append(shooter)
+                            data['OTHER'][other_so_index].get("SCORERS").append(shooter)
                             other_so += 1
 
+                    print(f'''
+            {test_case} Test    : Passed
+                            ''')
 
                 # Determine if goals were scored
                 else:
@@ -349,7 +350,7 @@ def get_box_score_data(data, site):
                                 data.get('OTHER').append(obj)
                                 other_score += 1
 
-                            print(f'''
+                        print(f'''
             {test_case} Test    : Passed
                             ''')
 

@@ -66,13 +66,12 @@ def get_date_json(data, parsed_date):
     
     return date
 
-def extract_second_word(sentence):
+def extract_second_word(input_str):
     # Use regular expression to find the second word
-    match = re.search(r'\b(?:[^\W\d_]+\b[^\W\d_]*){2}', sentence)
-
+    match = re.findall(r'\S+', input_str)
+    
     if match:
-        second_word = match.group().strip()
-        return second_word
+        return match[1]
     else:
         return None
     
@@ -80,10 +79,10 @@ def remove_first_group(input_str):
     return re.sub(r'^\S+\s*', '', input_str, count=1)
 
 
-def get_scorer_and_assistors(data, sentence, remove_nums):
-    split_sentence = sentence.split('\n')
+def get_scorer_and_assistors(data, input_str, remove_nums):
+    split_input_str = input_str.split('\n')
     
-    data['SCORER'] = remove_first_group(split_sentence[0]).upper()
+    data['SCORER'] = remove_first_group(split_input_str[0]).upper()
     
     # Determine if special goal type
     check_type = re.split(r'(.+?)\s*(\(\w+\s*\w*\))', data['SCORER'], maxsplit=1)    
@@ -107,10 +106,10 @@ def get_scorer_and_assistors(data, sentence, remove_nums):
         data['SCORER'] = re.sub(r' \(\d+\)', '', data['SCORER'])
         
 
-    if split_sentence[1] == 'Unassisted':
+    if split_input_str[1] == 'Unassisted':
         data['ASSISTORS'] = ['UNASSISTED']
     else:
-        assists = split_sentence[1].split(', ')
+        assists = split_input_str[1].split(', ')
         assists[0] = assists[0].replace('Assists: ', '')
         a = []
         for i in range(0, len(assists)):

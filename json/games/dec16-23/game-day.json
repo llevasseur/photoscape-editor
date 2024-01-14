@@ -1,0 +1,17 @@
+{
+    "CANUCKS": {
+        "TEAM": "VAN",
+        "HOME": "AWAY",
+        "RECORD": "20-9-2"
+    },
+    "OTHER": {
+        "TEAM": "MIN",
+        "RECORD": "12-12-4"
+    },
+    "DATE": {
+        "TIME": "11:00 AM",
+        "MONTH": "December",
+        "DAY": "16",
+        "YEAR": "2023"
+    }
+}

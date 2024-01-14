@@ -33,12 +33,23 @@ def update_logo(source, psxprj, i, logo_path, type):
 def update_text(psxprj, i, text, type):
     # Reference new text in psxprj object
     psxprj.get('object')['_v'][i]['_v']['text']['_v'] = text
+    print(text)
+    print(psxprj.get('object')['_v'][i]['_v']['pos']['_v'])
     
     if (DEBUG):
         print(f'''
         Update {type} : Complete
         ''')
     return
+
+def make_shootout_text(stat, team):
+    text = ""
+    text += 'SHOOTOUT\n\n'
+    scorers = stat.get('SCORERS')
+    for i in range(0, len(scorers)):
+        text += scorers[i] + '\n\n\n'
+
+    return text
 
 def make_scorer_text(stat, team):
     text = ""
@@ -51,6 +62,12 @@ def make_scorer_text(stat, team):
     }
     # Convert period into correct format
     period = periods.get(stat.get('PERIOD'))
+    
+    # Handle shootout
+    if period == 'SHOOTOUT':
+        return make_shootout_text(stat, team)
+    
+    # Handle other types of periods
     time = stat.get('TIME')
     type = stat.get('TYPE')
     scorer = stat.get('SCORER')
@@ -280,7 +297,6 @@ def update_psxprj(selected_choice, source, date_file):
                 # Restrict first box-score to only go to 7
                 for i in range(0, min(len(canucks_scorers), 7)):
                     # Update CANUCKS SCORER
-                    
                     index = i + 3
                     text = make_scorer_text(canucks_scorers[canucks_i], 'CANUCKS')
                     update_text(psxprj, index, text, type)
@@ -293,7 +309,6 @@ def update_psxprj(selected_choice, source, date_file):
                 # Restrict first box-score to only go to 7
                 for i in range(0, min(len(other_scorers), 7)):
                     # Update OTHER SCORER
-                    
                     index = i + 10
                     text = make_scorer_text(other_scorers[other_i], 'OTHER  ')
                     update_text(psxprj, index, text, type)
