@@ -1,0 +1,41 @@
+{
+    "DATE": {
+        "TIME": "10:00 AM",
+        "MONTH": "January",
+        "DAY": "15",
+        "YEAR": "2024"
+    },
+    "CANUCKS": [
+        {
+            "PERIOD": "1",
+            "TIME": "5:28",
+            "SCORER": "MILLER (20)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "ZADOROV (9)",
+                "PETTERSSON (36)"
+            ]
+        },
+        {
+            "PERIOD": "1",
+            "TIME": "14:54",
+            "SCORER": "GARLAND (6)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "BLUEGER (13)",
+                "JOSHUA (10)"
+            ]
+        }
+    ],
+    "OTHER": [
+        {
+            "PERIOD": "1",
+            "TIME": "5:55",
+            "SCORER": "CHINAKHOV",
+            "TYPE": "",
+            "ASSISTORS": [
+                "GAUDREAU"
+            ]
+        }
+    ]
+}

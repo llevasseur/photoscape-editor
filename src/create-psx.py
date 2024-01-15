@@ -33,8 +33,6 @@ def update_logo(source, psxprj, i, logo_path, type):
 def update_text(psxprj, i, text, type):
     # Reference new text in psxprj object
     psxprj.get('object')['_v'][i]['_v']['text']['_v'] = text
-    print(text)
-    print(psxprj.get('object')['_v'][i]['_v']['pos']['_v'])
     
     if (DEBUG):
         print(f'''

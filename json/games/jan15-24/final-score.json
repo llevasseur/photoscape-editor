@@ -1,0 +1,28 @@
+{
+    "CANUCKS": {
+        "SCORE": "2",
+        "HOME": "AWAY",
+        "WIN": "True",
+        "OT": "False",
+        "SO": "False",
+        "SOG": "14",
+        "HITS": "6",
+        "PP": "0/1",
+        "PIM": "2",
+        "FO": "9"
+    },
+    "OTHER": {
+        "TEAM": "CBJ",
+        "SCORE": "1",
+        "SOG": "9",
+        "HITS": "7",
+        "PP": "0/1",
+        "PIM": "2",
+        "FO": "5"
+    },
+    "DATE": {
+        "MONTH": "Jan",
+        "DAY": "15",
+        "YEAR": "2024"
+    }
+}

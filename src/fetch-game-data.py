@@ -155,14 +155,20 @@ def get_box_score_data(data, site):
     # Initialize test_case
     test_case = 'DATE'
 
+    # Get Nav Bar
+    nav = driver.find_element(By.XPATH, ".//nav[contains(@class, 'Nav__Secondary')]")
+
+    # Get li_list
+    li_list = nav.find_elements(By.TAG_NAME, 'li')
+
+    live = True if len(li_list) <= 5 else False
+
     try:
         # DATE
         game_info = driver.find_element(By.XPATH, ".//div[contains(@class, 'GameInfo__Meta')]")
         
         # Date is the first span in game_info
         date_text = game_info.find_elements(By.TAG_NAME, "span")[0].text
-
-        print(date_text)
         
         # Parse the date string
         try:
@@ -268,6 +274,9 @@ def get_box_score_data(data, site):
                     })
                     other_so_index = len(data['OTHER']) - 1
 
+            # Check if the game is live, if so, goals are listed in reverse order
+            if live:
+                tr_list.reverse()
 
             # Iterate through each goal of the period
             for j in range(0, len(tr_list)):
@@ -356,6 +365,7 @@ def get_box_score_data(data, site):
 
             # Increment period index
             p += 1
+
 
     except Exception as e:
 
