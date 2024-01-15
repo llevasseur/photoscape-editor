@@ -40,7 +40,7 @@ def get_final_score_data(data, site):
     li_list = nav.find_elements(By.TAG_NAME, 'li')
 
     # Find and click the link with specific text Team Stats
-    if len(li_list) == 5:
+    if len(li_list) <= 5:
         index = 3
     else:
         index = 4
