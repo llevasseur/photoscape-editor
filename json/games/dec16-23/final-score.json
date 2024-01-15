@@ -1,0 +1,28 @@
+{
+    "CANUCKS": {
+        "SCORE": "1",
+        "HOME": "AWAY",
+        "WIN": "False",
+        "OT": "True",
+        "SO": "True",
+        "SOG": "36",
+        "HITS": "11",
+        "PP": "0/5",
+        "PIM": "4",
+        "FO": "32"
+    },
+    "OTHER": {
+        "TEAM": "MIN",
+        "SCORE": "1",
+        "SOG": "31",
+        "HITS": "16",
+        "PP": "0/2",
+        "PIM": "10",
+        "FO": "31"
+    },
+    "DATE": {
+        "MONTH": "Dec",
+        "DAY": "16",
+        "YEAR": "2023"
+    }
+}
