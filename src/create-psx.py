@@ -45,7 +45,9 @@ def make_shootout_text(stat, team):
     text += 'SHOOTOUT\n\n'
     scorers = stat.get('SCORERS')
     for i in range(0, len(scorers)):
-        text += scorers[i] + '\n\n\n'
+        text += scorers[i]
+        if (i != len(scorers) - 1):
+            text += '\n'
 
     return text
 
