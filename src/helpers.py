@@ -86,7 +86,7 @@ def get_scorer_and_assistors(data, input_str, remove_nums):
     
     # Determine if special goal type
     check_type = re.split(r'(.+?)\s*(\(\w+\s*\w*\))', data['SCORER'], maxsplit=1)    
-    if check_type[3] != '':
+    if len(check_type) > 3 and check_type[3] != '':
         type = check_type[3].strip()
         with open(cwd + '/json/look-up/goal-type.json', 'r') as goal_types:
             special_goals = json.load(goal_types)

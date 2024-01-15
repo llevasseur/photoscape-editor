@@ -1,24 +1,24 @@
 {
     "CANUCKS": {
-        "SCORE": "2",
+        "SCORE": "3",
         "HOME": "AWAY",
         "WIN": "False",
-        "OT": "False",
-        "SO": "False",
-        "SOG": "18",
-        "HITS": "7",
-        "PP": "0/1",
-        "PIM": "4",
-        "FO": "16"
+        "OT": "True",
+        "SO": "True",
+        "SOG": "30",
+        "HITS": "15",
+        "PP": "1/4",
+        "PIM": "10",
+        "FO": "27"
     },
     "OTHER": {
         "TEAM": "CBJ",
-        "SCORE": "2",
-        "SOG": "16",
-        "HITS": "9",
-        "PP": "1/2",
-        "PIM": "2",
-        "FO": "10"
+        "SCORE": "4",
+        "SOG": "44",
+        "HITS": "18",
+        "PP": "1/5",
+        "PIM": "8",
+        "FO": "23"
     },
     "DATE": {
         "MONTH": "Jan",

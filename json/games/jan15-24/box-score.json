@@ -25,6 +25,20 @@
                 "BLUEGER (13)",
                 "JOSHUA (10)"
             ]
+        },
+        {
+            "PERIOD": "2",
+            "TIME": "7:35",
+            "SCORER": "PETTERSSON (23)",
+            "TYPE": "PP",
+            "ASSISTORS": [
+                "MILLER (40)",
+                "HUGHES (41)"
+            ]
+        },
+        {
+            "PERIOD": "SHOOTOUT",
+            "SCORERS": []
         }
     ],
     "OTHER": [
@@ -45,6 +59,21 @@
             "ASSISTORS": [
                 "BOQVIST",
                 "GAUDREAU"
+            ]
+        },
+        {
+            "PERIOD": "3",
+            "TIME": "10:57",
+            "SCORER": "VORONKOV",
+            "TYPE": "",
+            "ASSISTORS": [
+                "ROSLOVIC"
+            ]
+        },
+        {
+            "PERIOD": "SHOOTOUT",
+            "SCORERS": [
+                "MARCHENKO"
             ]
         }
     ]

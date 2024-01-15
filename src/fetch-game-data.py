@@ -246,7 +246,11 @@ def get_box_score_data(data, site):
 
         tbody_list = tbody_list[1:]
         if live:
-            tbody_list.reverse()
+            # Check if tbody_list.thead.th w class=title == '1st PERIOD'
+            period_list = goal_section.find_elements(By.XPATH, ".//thead[contains(@class, 'Table__THEAD')]")
+            period_title = period_list[1].find_element(By.XPATH, ".//th[contains(@class, 'Table__TH')]").text.lower()
+            if (period_title != '1st period'):
+                tbody_list.reverse()
 
         for i in range(0, len(tbody_list)):
             # Define the period using index p and lookup dict
@@ -280,7 +284,8 @@ def get_box_score_data(data, site):
 
             # Check if the game is live, if so, goals are listed in reverse order
             if live:
-                tr_list.reverse()
+                if (period_title != '1st period'):
+                    tr_list.reverse()
 
             # Iterate through each goal of the period
             for j in range(0, len(tr_list)):
@@ -366,7 +371,9 @@ def get_box_score_data(data, site):
                         print(f'''
             {test_case} Test    : Passed
                             ''')
-
+            if (so):
+                van_score += 1 if van_so > other_so else 0
+                other_score += 1 if van_so < other_so else 0
             # Increment period index
             p += 1
 
