@@ -244,7 +244,11 @@ def get_box_score_data(data, site):
         # Iterate through each period
         # Skip table[0] - Complete summary
 
-        for i in range(1, len(tbody_list)):
+        tbody_list = tbody_list[1:]
+        if live:
+            tbody_list.reverse()
+
+        for i in range(0, len(tbody_list)):
             # Define the period using index p and lookup dict
             period = periods[p]
             test_case = f'{ "PERIOD " if period != "SHOOTOUT" and period != "OT" else ""}{period} GOALS'

@@ -3955,7 +3955,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "1"
+                        "_v": "2"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -6483,7 +6483,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "14"
+                        "_v": "18"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -6803,7 +6803,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "6"
+                        "_v": "7"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -7443,7 +7443,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "2"
+                        "_v": "4"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -7763,7 +7763,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "9"
+                        "_v": "16"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -8083,7 +8083,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "9"
+                        "_v": "16"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -8403,7 +8403,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "7"
+                        "_v": "9"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -8723,7 +8723,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "0/1"
+                        "_v": "1/2"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -9363,7 +9363,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "5"
+                        "_v": "10"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -10611,7 +10611,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "WIN"
+                        "_v": "LOSS"
                     },
                     "textBrush": {
                         "_t": "string",

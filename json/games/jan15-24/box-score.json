@@ -36,6 +36,16 @@
             "ASSISTORS": [
                 "GAUDREAU"
             ]
+        },
+        {
+            "PERIOD": "2",
+            "TIME": "3:28",
+            "SCORER": "VORONKOV",
+            "TYPE": "PP",
+            "ASSISTORS": [
+                "BOQVIST",
+                "GAUDREAU"
+            ]
         }
     ]
 }
