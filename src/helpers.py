@@ -1,10 +1,11 @@
 
+import argparse
+import json
 import os
+import re
 import shutil
 import zipfile
-import argparse
-import re
-import json
+
 from datetime import datetime
 
 cwd = os.getcwd()
