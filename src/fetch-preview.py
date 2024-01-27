@@ -18,19 +18,19 @@ def get_data_from_site( data, site ):
     driver.get( site )
     
     # Confirm Canucks are playing and that it's E
-    assert "Canucks" and "ESPN" in driver.title
+    assert 'Canucks' and 'ESPN' in driver.title
 
     # Set window size to small so Teams are listed as Acronyms
     driver.set_window_size( 800, 800 )
 
     # Fetch Gamestrip
-    gamestrip = driver.find_element( By.XPATH, ".//div[ contains( @class, 'Gamestrip' ) ]" )
+    gamestrip = driver.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip" ) ]' )
     
     # Fetch h2_list which are the two teams
-    h2_list = gamestrip.find_elements( By.XPATH, ".//h2[ contains( @class, 'ScoreCell__TeamName' ) ]" )
+    h2_list = gamestrip.find_elements( By.XPATH, './/h2[ contains( @class, "ScoreCell__TeamName" ) ]' )
 
     # Fetch records
-    records = gamestrip.find_elements( By.XPATH, ".//div[ contains( @class, 'Gamestrip__Record' ) ]" )
+    records = gamestrip.find_elements( By.XPATH, './/div[ contains( @class, "Gamestrip__Record" ) ]' )
     
     # AWAY TEAM is h2_list[ 0 ]
     if ( h2_list[ 0 ].text == 'VAN' ):
@@ -45,10 +45,10 @@ def get_data_from_site( data, site ):
         other_record = records[ 0 ].text.split( ',' )[ 0 ]
 
     # DATE
-    game_info = driver.find_element( By.XPATH, ".//div[ contains( @class, 'GameInfo__Meta' ) ]" )
+    game_info = driver.find_element( By.XPATH, './/div[ contains( @class, "GameInfo__Meta" ) ]' )
     
     # Date is the first span in game_info
-    date_text = game_info.find_elements( By.TAG_NAME, "span" )[ 0 ].text
+    date_text = game_info.find_elements( By.TAG_NAME, 'span' )[ 0 ].text
     
     # Parse the date string
     parsed_date = datetime.strptime( date_text, '%I:%M %p, %B %d, %Y' )
@@ -57,15 +57,15 @@ def get_data_from_site( data, site ):
     driver.quit()
 
     # Set data
-    data[ "CANUCKS" ] = {
-        "TEAM": "VAN",
-        "HOME" : home,
-        "RECORD": van_record
+    data[ 'CANUCKS' ] = {
+        'TEAM': 'VAN',
+        'HOME' : home,
+        'RECORD': van_record
     }
 
-    data[ "OTHER" ] = {
-        "TEAM": other_team,
-        "RECORD": other_record
+    data[ 'OTHER' ] = {
+        'TEAM': other_team,
+        'RECORD': other_record
     }
 
     # Extract date using helper.get_date_json
@@ -81,7 +81,7 @@ def main():
     print( f'''
 ############################################################
           
-                FETCH GAME DAY DATE
+                FETCH GAME DAY DATA
 
 ############################################################
     ''' )

@@ -38,11 +38,14 @@ def update_text( psxprj, i, text, type ):
         ''' )
     return
 
-def make_shootout_text( stat ):
-    text = ""
-    text += 'SHOOTOUT\n\n'
+def make_shootout_text( stat, s = 0 ):
+    # Bug: Need to x text boxes when line count = 3x
+    # Note: First text box has SHOOTOUT\n
+    text = ''
+    if index == 0: 
+        text += 'SHOOTOUT\n'
     scorers = stat.get( 'SCORERS' )
-    for i in range( 0, len( scorers ) ):
+    for i in range( index, len( scorers ) ):
         text += scorers[ i ]
         if ( i != len( scorers ) - 1 ):
             text += '\n'
@@ -50,13 +53,13 @@ def make_shootout_text( stat ):
     return text
 
 def make_scorer_text( stat, team ):
-    text = ""
+    text = ''
     periods = {
-        "1": "1ST",
-        "2": "2ND",
-        "3": "3RD",
-        "OT": "OT",
-        "SHOOTOUT": "SHOOTOUT"
+        '1': '1ST',
+        '2': '2ND',
+        '3': '3RD',
+        'OT': 'OT',
+        'SHOOTOUT': 'SHOOTOUT'
     }
     # Convert period into correct format
     period = periods.get( stat.get( 'PERIOD' ) )
@@ -72,7 +75,7 @@ def make_scorer_text( stat, team ):
     assistors = stat.get( 'ASSISTORS' )
     n = len( assistors )
     # CANUCKS Scorer
-    if ( team == "CANUCKS" ):
+    if ( team == 'CANUCKS' ):
         # Construct text
         text += f'{ period } - '
         text += f'( { time } )'
@@ -324,7 +327,7 @@ def update_psxprj( selected_choice, source, date_file ):
 
                 # Handle multiple box-scores if necessary
                 if ( n > 1 ):
-                    psx_path = cwd + "/assets/templates/box-score-temp/"
+                    psx_path = cwd + '/assets/templates/box-score-temp/'
                     
                     # i = 2 because this will make box-score-2, box-score-3, ... box-score-n
                     for i in range( 2, n + 1 ):
