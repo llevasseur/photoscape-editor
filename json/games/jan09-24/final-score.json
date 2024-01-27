@@ -1,22 +1,22 @@
 {
     "CANUCKS": {
-        "SCORE": "5",
+        "SCORE": "2",
         "HOME": "False",
-        "WIN": "True",
+        "WIN": "False",
         "OT": "False",
         "SO": "False",
         "SOG": "34",
         "HITS": "14",
-        "PP": "0/4",
+        "PP": "0 / 4",
         "PIM": "4",
         "FO": "21"
     },
     "OTHER": {
         "TEAM": "NYI",
-        "SCORE": "2",
+        "SCORE": "5",
         "SOG": "20",
         "HITS": "22",
-        "PP": "1/2",
+        "PP": "1 / 2",
         "PIM": "8",
         "FO": "29"
     },

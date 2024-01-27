@@ -1,0 +1,10 @@
+Essential Components and Tools
+
+1. Chocolatey (installed with Nodejs)
+
+1. make - install using chocolatey
+    $ choco install make
+    
+2. python 3.11.7+ (Make sure executable is called python3.exe on windows)
+
+3. pip : python3 install pip

@@ -1,95 +1,123 @@
-# photoscape-editor
-A project devoted to automating game score updates for social media posts, particularly for sports using PhotoScape X.
+# PhotoScape Editor
 
-## Initial Thoughts
-**Input:** template.psxprj, url for sports stats
-**Output:** jpg
+PhotoScape Editor is a collection of scripts used by [nuckstalk.com](https://www.nuckstalk.com/instagram-posts) to automate the editing process of Canucks game Instagram posts. It streamlines tasks including game day previews, generating final score statistics, and summarizing box scores for social media posts.
+<p align='center'><kbd><img src='/public/images/roster_example.jpg' width='450' /></kbd><kbd><img src='/public/images/standings_example.jpg' width='300' /></kbd><kbd><img src='/public/images/scoreboard_example.jpg' width='500' /></kbd></p>
 
-Will need two projects that work together.
-1. ESPN Stat Scrapper
- - Take url and determine relevant stats.
- - Save as json.
+## Table of Contents
 
-#### Info Needed
- - Who the two teams are
- - Is vancouver Home or Away
- - Final score between the two teams - INT(2)
- - Did van win, was it in ot or shootout?
- - Shots on goal for both teams - INT(3)
- - Hits for both teams - INT(3)
- - Powerplay fraction for both teams - STRING(5)
- - Faceoff wins for both teams - INT(3)
- - Date played
- 
- - For each Canucks goal:
- - Last name of goal scorer, their total goal number, which period, and at what time in the period.
- - Last name of primary assistor, their total assists.
- - Last name of secondary assistor, their total assists.
-
-------------------------------------------------------
-2. PhotoScape Editor
- - Unzip template input json format.
- - Alter json file and zip file as psxprj or jpg.
-
-#### Final Score
- - Canucks Logo
- - Opposition Logo - Need to request from Kyle
- - Final Score between the two teams
- - Shots on goal for both teams
- - Hits for both teams
- - Powerplay fraction for both teams
- - Faceoff wins for both teams
- - Win or Lose
- - Date in form MMM DD, YYYY, could be D
-
-
-#### Box Score
- - Column list of Goal information, left is always Canucks.
- - Period - (Time Scored)
- - G: Last name of goal scorer (# of goals)
- - A: Last name of primary assistor (# of assists)(optional), last name of secondary assistor (# of assists)(optional)
-
- - On the other side:
- - (Time Scored) - Period
- - Last name of goal scorer :G
- - Last name of primary assistor (optional), last name of secondary assistor (optional) :A
-
- #### Unzip Process
- 1. Take .psxprj file and unzip it into a folder called unzip
- 2. Edit psxproject.json as required
-
- #### Zip Process
- 1. In unzip/ recursively zip all files into {DATE}.psxprj
- 2. Open the file in Photoscape X, click edit
- 3. Save file as a jpg.
-
--------------------------------------------------------
-#### PhotoScape Notes
-Note that z-index matters in photoscape json files. This means objects at the bottom of the json appear on top of objects above them.
-
-Note you must change the name of the logo pngs in the json and the template.
-
-Note automatically updating text seems to make it appear smaller than it did before. Update the font sizes accordingly in the templates.
-
-#### Other
-Maybe I should keep a small database for canucks players' stats. That would be useful to get total goals and total assists for players. Also would be interesting to track stats in general about those players as it caters to our audience.
-
-Format: JSON
-ESPN Data:
- - G
- - A
- - +/-
- - S 
+- [Installation](#installation)
+- [Usage](#usage)
+- [Design Decisions](#design-decisions)
+- [License](#license)
 
 ## Installation
-[Todo]
+
+To install and set up the PhotoScape Editor, follow these steps:
+
+1. **Clone the Repository:**
+    ```bash
+    git clone https://github.com/llevasseur/photoscape-editor.git
+    cd photoscape-editor
+    ```
+2. **Install Essential Components and Tools**
+    - [PhotoScapeX](http://x.photoscape.org/)
+
+    - [NodeJS](https://nodejs.org/en) (for Chocolatey)
+
+    - [Python 3.11.x+](https://www.python.org/downloads/) (Make sure executable is called python3.exe on windows)
+
+    - Make:
+    ```bash
+    # Install Make via Chocolatey
+    choco install make
+    ```
+    - Pip
+    ```bash
+    # Install pip via Python
+    python3 install pip
+    ```
+3. **Install Dependencies:**
+    ```bash
+    # Install selenium and any future requirements
+    pip install -r requirements.txt
+    ```
+
+4. **Run the Scripts:**
+    Execute the scripts to automate the editing process.
+    ```bash
+    # Example command
+    make preview
+    ```
 
 ## Usage
-[Todo]
+
+To use the PhotoScape Editor for automating Canucks game Instagram posts editing, follow these guidelines:
+
+1. **Game Day Previews:**
+    Run the following command to initialize a game day preview post.
+    ```bash
+    make preview
+    ```
+
+2. **Final Score Statistics:**
+    Run the following command to initialize a final score statistics post.
+    ```bash
+    make final
+    ```
+
+3. **Box Score Summary:**
+    Run the following command to initialize a box score summary post.
+    ```bash
+    make box
+    ```
+    
+4. **Box Score Summary and Final Score Statistics:**
+    Run the following command to initialize both a final score statistics post and a box score summary post.
+    ```bash
+    make final_full
+    ```
+   **Prompts**
+    When prompt, enter a URL to a Canucks game from [ESPN](https://www.espn.com/nhl/game/_/gameId/401559812).
+    <kbd>![URL Input Example for Game Day Preview](/assets/screenshots/date_example.jpg)</kbd>
+
+    When prompt, enter a date in the form mmmDD-YY
+    []
+
+    - "jan" represents the month abbreviation for January.
+    - "DD" represents the day.
+    - "YY" represents the last two digits of the year.
+
+    **Output**
+    []
+    - Find your output files in json/games/{date-entered}/output/{file}.psxprj.
+    - Open the file with PhotoScape X.
+    - Edit the file to see automated edits.
+
 
 ## Design Decisions
-[Todo]
+
+PhotoScape Editor was designed with the following considerations:
+
+1. **Ease of Use:**
+    - This software is catered for non-technical creators at [nuckstalk.com](https://www.nuckstalk.com/instagram-posts).
+
+2. **Idempotence**
+    - This software can be ran at any point during a game to generate a "final" score or score "summary" even if the game hasn't concluded.
+    - Previews can be made at any point.
+
+3. **Scalability:**
+    - Scripts can be used for any Canucks game that has a [ESPN](https://www.espn.com/nhl/game/_/gameId/401559812) website.
+
+4. **Modularity:**
+    - Scripts are reused based on input parameters.
+    - Example: create-psx.py is reused for each post type.
+    - Example: helper.py supplies functions to be reused by all python scripts.
 
 ## License
-This project is private for now and licensed under [MIT License](https://opensource.org/licenses/MIT).
+
+All Rights Reserved
+
+This project is fully protected by copyright law and is the sole property of [nuckstalk.com](https://www.nuckstalk.com/instagram-posts). No part of this project may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the owner or developer, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.
+
+For permission requests, contact leevonlevasseur@gmail.com.
 

@@ -1,10 +1,3 @@
-Requirements
+# requirements.txt
 
-1. make - install using chocolatey (nodejs)
-    $ choco install make
-    
-2. python 3.11.7+ (Make sure executable is called python3.exe on windows)
-
-3. pip : python3 install pip
-
-4. selenium : pip3 install selenium
+selenium==3.141.0
