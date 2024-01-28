@@ -20,7 +20,7 @@ To install and set up the PhotoScape Editor, follow these steps:
     cd photoscape-editor
     ```
 2. **Install Essential Components and Tools**
-    - [PhotoScapeX](http://x.photoscape.org/)
+    - [PhotoScapeX](http://x.photoscape.org/target="_blank")
 
     - [NodeJS](https://nodejs.org/en) (for Chocolatey)
 
