@@ -1,4 +1,4 @@
-# <kbd><img src='/assets/logos/nucks_talk.png' width='50' /></kbd>PhotoScape Editor
+# [<kbd><img src='/assets/logos/nucks_talk.png' width='50' /></kbd>](https://www.nuckstalk.com/instagram-posts)PhotoScape Editor
 
 PhotoScape Editor is a collection of scripts used by [nuckstalk.com](https://www.nuckstalk.com/instagram-posts) to automate the editing process of Canucks game Instagram posts. It streamlines tasks including game day previews, generating final score statistics, and summarizing box scores for social media posts.
 <p align='center'><kbd><img src='/assets/screenshots/game-day-example.jpg' width='200' /></kbd><kbd><img src='/assets/screenshots/final-score-example.jpg' width='200' /></kbd><kbd><img src='/assets/screenshots/box-score-example.jpg' width='200' /></kbd></p>
