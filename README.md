@@ -1,7 +1,7 @@
 # PhotoScape Editor
 
 PhotoScape Editor is a collection of scripts used by [nuckstalk.com](https://www.nuckstalk.com/instagram-posts) to automate the editing process of Canucks game Instagram posts. It streamlines tasks including game day previews, generating final score statistics, and summarizing box scores for social media posts.
-<p align='center'><kbd><img src='/public/images/roster_example.jpg' width='450' /></kbd><kbd><img src='/public/images/standings_example.jpg' width='300' /></kbd><kbd><img src='/public/images/scoreboard_example.jpg' width='500' /></kbd></p>
+<p align='center'><kbd><img src='/assets/screenshots/game-day-example.jpg' width='200' /></kbd><kbd><img src='/assets/screenshots/final-score-example.jpg' width='200' /></kbd><kbd><img src='/assets/screenshots/box-score-example.jpg' width='200' /></kbd></p>
 
 ## Table of Contents
 
@@ -77,21 +77,23 @@ To use the PhotoScape Editor for automating Canucks game Instagram posts editing
     make final_full
     ```
    **Prompts**
-    When prompt, enter a URL to a Canucks game from [ESPN](https://www.espn.com/nhl/game/_/gameId/401559812).
-    <kbd>![URL Input Example for Game Day Preview](/assets/screenshots/date_example.jpg)</kbd>
+   <p align='center'><kbd><img src='/assets/screenshots/url_example.jpg' width='320' /></kbd><kbd><img src='/assets/screenshots/date_example.jpg' width='290' /></kbd></p>
 
-    When prompt, enter a date in the form mmmDD-YY
-    []
+    - When prompt, enter a URL to a Canucks game from [ESPN](https://www.espn.com/nhl/game/_/gameId/401559812).
 
-    - "jan" represents the month abbreviation for January.
-    - "DD" represents the day.
-    - "YY" represents the last two digits of the year.
+
+    - When prompt, enter a date in the form mmmDD-YY
+
+        - "jan" represents the month abbreviation for January.
+        - "DD" represents the day.
+        - "YY" represents the last two digits of the year.
 
     **Output**
-    []
     - Find your output files in json/games/{date-entered}/output/{file}.psxprj.
     - Open the file with PhotoScape X.
     - Edit the file to see automated edits.
+
+    <kbd>![Output for Game Day Preview](/assets/screenshots/photoscape-edit.jpg)</kbd>
 
 
 ## Design Decisions

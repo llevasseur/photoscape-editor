@@ -38,7 +38,7 @@ def update_text( psxprj, i, text, type ):
         ''' )
     return
 
-def make_shootout_text( stat, s = 0 ):
+def make_shootout_text( stat, index = 0 ):
     # Bug: Need to x text boxes when line count = 3x
     # Note: First text box has SHOOTOUT\n
     text = ''

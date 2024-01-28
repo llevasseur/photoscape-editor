@@ -7,40 +7,19 @@
     },
     "CANUCKS": [
         {
-            "PERIOD": "2",
-            "TIME": "11:11",
-            "SCORER": "NELSON (18)",
-            "TYPE": "PP",
-            "ASSISTORS": [
-                "PALMIERI (13)",
-                "BARZAL (30)"
-            ]
-        },
-        {
-            "PERIOD": "3",
-            "TIME": "15:15",
-            "SCORER": "NELSON (19)",
-            "TYPE": "",
-            "ASSISTORS": [
-                "UNASSISTED"
-            ]
-        }
-    ],
-    "OTHER": [
-        {
             "PERIOD": "1",
             "TIME": "16:25",
-            "SCORER": "HRONEK",
+            "SCORER": "HRONEK (3)",
             "TYPE": "",
             "ASSISTORS": [
-                "MIKHEYEV",
-                "GARLAND"
+                "MIKHEYEV (12)",
+                "GARLAND (14)"
             ]
         },
         {
             "PERIOD": "1",
             "TIME": "18:42",
-            "SCORER": "HUGHES",
+            "SCORER": "HUGHES (11)",
             "TYPE": "",
             "ASSISTORS": [
                 "UNASSISTED"
@@ -49,28 +28,49 @@
         {
             "PERIOD": "2",
             "TIME": "10:20",
-            "SCORER": "PETTERSSON",
+            "SCORER": "PETTERSSON (20)",
             "TYPE": "",
             "ASSISTORS": [
-                "MILLER",
-                "HRONEK"
+                "MILLER (36)",
+                "HRONEK (31)"
             ]
         },
         {
             "PERIOD": "2",
             "TIME": "17:24",
-            "SCORER": "MYERS",
+            "SCORER": "MYERS (3)",
             "TYPE": "",
             "ASSISTORS": [
-                "BLUEGER",
-                "GARLAND"
+                "BLUEGER (12)",
+                "GARLAND (15)"
             ]
         },
         {
             "PERIOD": "3",
             "TIME": "18:32",
-            "SCORER": "JOSHUA",
+            "SCORER": "JOSHUA (11)",
             "TYPE": "EN",
+            "ASSISTORS": [
+                "UNASSISTED"
+            ]
+        }
+    ],
+    "OTHER": [
+        {
+            "PERIOD": "2",
+            "TIME": "11:11",
+            "SCORER": "NELSON ",
+            "TYPE": "PP",
+            "ASSISTORS": [
+                "PALMIERI ",
+                "BARZAL "
+            ]
+        },
+        {
+            "PERIOD": "3",
+            "TIME": "15:15",
+            "SCORER": "NELSON ",
+            "TYPE": "",
             "ASSISTORS": [
                 "UNASSISTED"
             ]

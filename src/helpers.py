@@ -86,12 +86,12 @@ def get_scorer_and_assistors( data, input_str, remove_nums ):
     data[ 'SCORER' ] = remove_first_group( split_input_str[ 0 ] ).upper()
     
     # Determine if special goal type
-    check_type = re.split( r'( .+? )\s*( \( \w+\s*\w*\ ) )', data[ 'SCORER' ], maxsplit=1 )    
+    check_type = re.split( r'(.+?)\s*(\(\w+\s*\w*\))', data[ 'SCORER' ], maxsplit=1 )    
     if len( check_type ) > 3 and check_type[ 3 ] != '':
         type = check_type[ 3 ].strip()
         with open( cwd + '/json/look-up/goal-type.json', 'r' ) as goal_types:
             special_goals = json.load( goal_types )
-            match = re.search( r'\( ( .*? )\ )', type )
+            match = re.search( r'\((.*?)\)', type )
             result = match.group( 1 ) if match else ''
 
             type = special_goals.get( result.lower() )
@@ -104,7 +104,7 @@ def get_scorer_and_assistors( data, input_str, remove_nums ):
         data[ 'TYPE' ] = ''
 
     if remove_nums:
-        data[ 'SCORER' ] = re.sub( r' \( \d+\ )', '', data[ 'SCORER' ] )
+        data[ 'SCORER' ] = re.sub( r'\(\d+\)', '', data[ 'SCORER' ] )
         
 
     if split_input_str[ 1 ] == 'Unassisted':
@@ -117,7 +117,7 @@ def get_scorer_and_assistors( data, input_str, remove_nums ):
             a.append( remove_first_group( assists[ i ] ).upper() )
 
             if remove_nums:
-                a[ i ] = re.sub( r' \( \d+\ )', '', a[ i ] )
+                a[ i ] = re.sub( r'\(\d+\)', '', a[ i ] )
 
         data[ 'ASSISTORS' ] = a
 

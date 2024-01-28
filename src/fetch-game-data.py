@@ -13,7 +13,7 @@ cwd = os.getcwd()
 
 ot = False 
 so = False
-home = 'HOME'
+home = 'True'
 van_score = 0
 other_score = 0
 date_file = ''
@@ -63,7 +63,6 @@ def get_final_score_data( data, site ):
     home_content = home_obj.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip__TeamContent" ) ]' )
     home_team = home_content.find_element( By.TAG_NAME, 'h2' ).text
 
-
     data[ 'CANUCKS' ] = {
         'SCORE': str( van_score ),
         'HOME': home,
@@ -73,7 +72,7 @@ def get_final_score_data( data, site ):
     }
 
     data[ 'OTHER' ] = {
-        'TEAM': away_team if home == 'HOME' else home_team,
+        'TEAM': away_team if home == 'True' else home_team,
         'SCORE': str( other_score )
     }
 
@@ -87,8 +86,8 @@ def get_final_score_data( data, site ):
     stats = stats_table.find_element( By.XPATH, './/div[ contains( @class, "Table__Scroller" ) ]' )
     tbody = stats.find_element( By.XPATH, './/tbody[ contains( @class, "Table__TBODY" ) ]' )
 
-    c_ind = 2 if home == 'HOME' else 1
-    o_ind = 1 if home == 'HOME' else 2
+    c_ind = 2 if home == 'True' else 1
+    o_ind = 1 if home == 'True' else 2
 
     tr_list = tbody.find_elements( By.TAG_NAME, 'tr' )
     # SOG
@@ -301,7 +300,7 @@ def get_box_score_data( data, site ):
                     
                     # Check if the shootout counter changes
                     # Update data if so
-                    if home == 'AWAY':
+                    if home == 'False':
                         if td_list[ 2 ].text != str( van_so ):
                             data[ 'CANUCKS' ][ canucks_so_index ].get( 'SCORERS' ).append( shooter )
                             van_so += 1
@@ -332,7 +331,7 @@ def get_box_score_data( data, site ):
                         test_case = 'SET DATA'
                         obj = {}
 
-                        if home == 'AWAY':
+                        if home == 'False':
                             if td_list[ 3 ].text != str( van_score ):
                                 obj[ 'PERIOD' ] = period
                                 obj[ 'TIME' ] = td_list[ 0 ].text

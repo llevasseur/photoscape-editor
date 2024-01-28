@@ -1245,7 +1245,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "2ND - ( 11:11 ) PP\nG: NELSON (18)\nA: PALMIERI (13), BARZAL (30)"
+                        "_v": "1ST - ( 16:25 ) \nG: HRONEK (3)\nA: MIKHEYEV (12), GARLAND (14)"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -1565,7 +1565,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "3RD - ( 15:15 ) \nG: NELSON (19)\nA: UNASSISTED"
+                        "_v": "1ST - ( 18:42 ) \nG: HUGHES (11)\nA: UNASSISTED"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -1885,7 +1885,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": ""
+                        "_v": "2ND - ( 10:20 ) \nG: PETTERSSON (20)\nA: MILLER (36), HRONEK (31)"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -2205,7 +2205,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": ""
+                        "_v": "2ND - ( 17:24 ) \nG: MYERS (3)\nA: BLUEGER (12), GARLAND (15)"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -2525,7 +2525,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": ""
+                        "_v": "3RD - ( 18:32 ) EN\nG: JOSHUA (11)\nA: UNASSISTED"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -3485,7 +3485,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": " ( 16:25 ) - 1ST\nHRONEK :G\nMIKHEYEV, GARLAND :A"
+                        "_v": "PP ( 11:11 ) - 2ND\nNELSON  :G\nPALMIERI , BARZAL  :A"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -3805,7 +3805,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": " ( 18:42 ) - 1ST\nHUGHES :G\nUNASSISTED :A"
+                        "_v": " ( 15:15 ) - 3RD\nNELSON  :G\nUNASSISTED :A"
                     },
                     "textBrush": {
                         "_t": "string",
@@ -4125,7 +4125,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": " ( 10:20 ) - 2ND\nPETTERSSON :G\nMILLER, HRONEK :A"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -4445,7 +4445,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": " ( 17:24 ) - 2ND\nMYERS :G\nBLUEGER, GARLAND :A"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
@@ -4765,7 +4765,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "EN ( 18:32 ) - 3RD\nJOSHUA :G\nUNASSISTED :A"
+                        "_v": ""
                     },
                     "textBrush": {
                         "_t": "string",
