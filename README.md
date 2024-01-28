@@ -20,11 +20,11 @@ To install and set up the PhotoScape Editor, follow these steps:
     cd photoscape-editor
     ```
 2. **Install Essential Components and Tools**
-    - [PhotoScapeX](http://x.photoscape.org/){:target="_blank"}
+    - [PhotoScapeX](http://x.photoscape.org/)
 
-    - [NodeJS](https://nodejs.org/en){:target="_blank"} (for Chocolatey)
+    - [NodeJS](https://nodejs.org/en) (for Chocolatey)
 
-    - [Python 3.11.x+](https://www.python.org/downloads/){:target="_blank"} (Make sure executable is called python3.exe on windows)
+    - [Python 3.11.x+](https://www.python.org/downloads/) (Make sure executable is called python3.exe on windows)
 
     - Make:
     ```bash
@@ -79,7 +79,7 @@ To use the PhotoScape Editor for automating Canucks game Instagram posts editing
    **Prompts**
    <p align='center'><kbd><img src='/assets/screenshots/url_example.jpg' width='320' /></kbd><kbd><img src='/assets/screenshots/date_example.jpg' width='290' /></kbd></p>
 
-    - When prompt, enter a URL to a Canucks game from [ESPN](https://www.espn.com/nhl/game/_/gameId/401559812){:target="_blank"}.
+    - When prompt, enter a URL to a Canucks game from [ESPN](https://www.espn.com/nhl/game/_/gameId/401559812).
 
 
     - When prompt, enter a date in the form mmmDD-YY
@@ -101,14 +101,14 @@ To use the PhotoScape Editor for automating Canucks game Instagram posts editing
 PhotoScape Editor was designed with the following considerations:
 
 1. **Ease of Use:**
-    - This software is catered for non-technical creators at [nuckstalk.com](https://www.nuckstalk.com/instagram-posts){:target="_blank"}.
+    - This software is catered for non-technical creators at [nuckstalk.com](https://www.nuckstalk.com/instagram-posts).
 
 2. **Idempotence**
     - This software can be ran at any point during a game to generate a "final" score or score "summary" even if the game hasn't concluded.
     - Previews can be made at any point.
 
 3. **Scalability:**
-    - Scripts can be used for any Canucks game that has a [ESPN](https://www.espn.com/nhl/game/_/gameId/401559812){:target="_blank"} website.
+    - Scripts can be used for any Canucks game that has a [ESPN](https://www.espn.com/nhl/game/_/gameId/401559812) website.
 
 4. **Modularity:**
     - Scripts are reused based on input parameters.
@@ -119,7 +119,7 @@ PhotoScape Editor was designed with the following considerations:
 
 All Rights Reserved
 
-This project is fully protected by copyright law and is the sole property of [nuckstalk.com](https://www.nuckstalk.com/instagram-posts){target="_blank"}. No part of this project may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the owner or developer, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.
+This project is fully protected by copyright law and is the sole property of [nuckstalk.com](https://www.nuckstalk.com/instagram-posts). No part of this project may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the owner or developer, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.
 
 For permission requests, contact leevonlevasseur@gmail.com.
 
