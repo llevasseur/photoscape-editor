@@ -8,6 +8,9 @@ from helpers import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import TimeoutException
 
 cwd = os.getcwd()
 
@@ -46,6 +49,16 @@ def get_final_score_data( data, site ):
     # Set window size to mid-big so Team Stats are listed
     driver.set_window_size( 1200, 1200 )
 
+    # Confirm site is loaded
+    timeout = 3
+    try:
+        element_present = EC.presence_of_element_located(( By.XPATH, './/div[ contains( @class, "Gamestrip" ) ]' ))
+        WebDriverWait(driver, timeout).until(element_present)
+
+    except TimeoutException:
+        error = "Timed out waiting for ESPN Gamecast to load. Make sure the link is correct or increase allotted time."
+        return False
+    
     # Get Nav Bar
     nav = driver.find_element( By.XPATH, './/nav[ contains( @class, "Nav__Secondary" ) ]' )
 
@@ -68,6 +81,15 @@ def get_final_score_data( data, site ):
     # Set window size to small so Teams are listed as Acronyms
     driver.set_window_size( 800, 800 )
 
+    # Confirm site is loaded
+    try:
+        element_present = EC.presence_of_element_located(( By.XPATH, './/div[ contains( @class, "Gamestrip__Team--away" ) ]' ))
+        WebDriverWait(driver, timeout).until(element_present)
+
+    except TimeoutException:
+        error = "Timed out waiting for ESPN Team Stats to load. Make sure the link is correct or increase allotted time."
+        return False
+
     # Fetch Team Stats
 # - The two teams
     away = driver.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip__Team--away" ) ]' )
@@ -77,7 +99,6 @@ def get_final_score_data( data, site ):
     home_obj = driver.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip__Team--home" ) ]' )
     home_content = home_obj.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip__TeamContent" ) ]' )
     home_team = home_content.find_element( By.TAG_NAME, 'h2' ).text
-    print(f"home team: {home_team}")
 
     data[ 'CANUCKS' ] = {
         'SCORE': str( van_score ),
@@ -170,9 +191,19 @@ def get_box_score_data( data, site ):
     # Initialize test_case
     test_case = 'DATE'
 
+    # Confirm site is loaded
+    timeout = 3
+    try:
+        element_present = EC.presence_of_element_located(( By.XPATH, './/nav[ contains( @class, "Nav__Secondary" ) ]' ))
+        WebDriverWait(driver, timeout).until(element_present)
+
+    except TimeoutException:
+        error = "Timed out waiting for ESPN Gamecast to load. Make sure the link is correct or increase allotted time."
+        return False
+
     # Get Nav Bar
     nav = driver.find_element( By.XPATH, './/nav[ contains( @class, "Nav__Secondary" ) ]' )
-
+    
     # Get li_list
     li_list = nav.find_elements( By.TAG_NAME, 'li' )
 

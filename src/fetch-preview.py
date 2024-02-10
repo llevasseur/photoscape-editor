@@ -7,6 +7,9 @@ from helpers import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import TimeoutException
 
 cwd = os.getcwd()
 
@@ -23,6 +26,16 @@ def get_data_from_site( data, site ):
     # Set window size to small so Teams are listed as Acronyms
     driver.set_window_size( 800, 800 )
 
+    # Confirm site is loaded
+    timeout = 3
+    try:
+        element_present = EC.presence_of_element_located(( By.XPATH, './/div[ contains( @class, "Gamestrip" ) ]' ))
+        WebDriverWait(driver, timeout).until(element_present)
+
+    except TimeoutException:
+        error = "Timed out waiting for ESPN Gamecast to load. Make sure the link is correct or increase allotted time."
+        return False
+    
     # Fetch Gamestrip
     gamestrip = driver.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip" ) ]' )
 
