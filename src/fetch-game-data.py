@@ -25,17 +25,17 @@ date_obj = {}
 DEBUG = 1
 error = 'Undefined'
 
-def find_team_stats_index( li_list ):
+def find_nav_index( li_list, txt ):
     # Robust change to determine index based on text.
     for i in range( 0, len( li_list ) ):
         index = i
         try:
-            team_stats = li_list[ i ].find_element( By.XPATH, './/span[contains(text(), "Team Stats")]' )
+            found = li_list[ i ].find_element( By.XPATH, f'.//span[contains(text(), {txt})]' )
             return index
 
         except:
             continue
-    return -1
+    return False
 
 def get_final_score_data( data, site ):
     global ot, so, home, van_score, other_score, date_file, date_obj, error
@@ -66,8 +66,8 @@ def get_final_score_data( data, site ):
     li_list = nav.find_elements( By.TAG_NAME, 'li' )
 
 
-    index = find_team_stats_index( li_list )
-    if index == -1:
+    index = find_nav_index( li_list, 'Team Stats' )
+    if not index:
         error = 'Could not find Team Stats nav item.'
         return False
 
@@ -207,7 +207,11 @@ def get_box_score_data( data, site ):
     # Get li_list
     li_list = nav.find_elements( By.TAG_NAME, 'li' )
 
-    live = True if len( li_list ) <= 5 else False
+    # Determine if it's live by checking if navbar has Recap option
+    index = find_nav_index( li_list,  'Recap')
+    live = False
+    if not index:
+        live = True
 
     try:
         # DATE
