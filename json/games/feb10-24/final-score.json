@@ -1,0 +1,28 @@
+{
+    "CANUCKS": {
+        "SCORE": "3",
+        "HOME": "AWAY",
+        "WIN": "False",
+        "OT": "True",
+        "SO": "False",
+        "SOG": "31",
+        "HITS": "18",
+        "PP": "0/3",
+        "PIM": "24",
+        "FO": "32"
+    },
+    "OTHER": {
+        "TEAM": "DET",
+        "SCORE": "4",
+        "SOG": "28",
+        "HITS": "14",
+        "PP": "1/4",
+        "PIM": "19",
+        "FO": "22"
+    },
+    "DATE": {
+        "MONTH": "Feb",
+        "DAY": "10",
+        "YEAR": "2024"
+    }
+}

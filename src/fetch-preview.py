@@ -16,7 +16,7 @@ def get_data_from_site( data, site ):
     # Set Chrome driver and visit site
     driver = webdriver.Chrome()
     driver.get( site )
-    
+
     # Confirm Canucks are playing and that it's E
     assert 'Canucks' and 'ESPN' in driver.title
 
@@ -25,13 +25,13 @@ def get_data_from_site( data, site ):
 
     # Fetch Gamestrip
     gamestrip = driver.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip" ) ]' )
-    
+
     # Fetch h2_list which are the two teams
     h2_list = gamestrip.find_elements( By.XPATH, './/h2[ contains( @class, "ScoreCell__TeamName" ) ]' )
 
     # Fetch records
     records = gamestrip.find_elements( By.XPATH, './/div[ contains( @class, "Gamestrip__Record" ) ]' )
-    
+
     # AWAY TEAM is h2_list[ 0 ]
     if ( h2_list[ 0 ].text == 'VAN' ):
         home, other_team = 'AWAY', h2_list[ 1 ].text
@@ -46,10 +46,10 @@ def get_data_from_site( data, site ):
 
     # DATE
     game_info = driver.find_element( By.XPATH, './/div[ contains( @class, "GameInfo__Meta" ) ]' )
-    
+
     # Date is the first span in game_info
     date_text = game_info.find_elements( By.TAG_NAME, 'span' )[ 0 ].text
-    
+
     # Parse the date string
     parsed_date = datetime.strptime( date_text, '%I:%M %p, %B %d, %Y' )
 
@@ -71,7 +71,7 @@ def get_data_from_site( data, site ):
     # Extract date using helper.get_date_json
     # Returns date_file
     date_file = get_date_json( data, parsed_date )
-    
+
     if valid_date( date_file ):
         return date_file
 
@@ -80,7 +80,7 @@ def get_data_from_site( data, site ):
 def main():
     print( f'''
 ############################################################
-          
+
                 FETCH GAME DAY DATA
 
 ############################################################
@@ -95,7 +95,7 @@ def main():
 
     if not date_file:
         return
-    
+
     # Create directory for game date
     destination = cwd + f'/json/games/{ date_file }/'
     create_directory( destination )
@@ -107,7 +107,7 @@ def main():
         print( f'''
         Preview data has been fetched from ESPN and saved to games/{ date_file }/game-day.json
         ''' )
-    
+
     return
 
 

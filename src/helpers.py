@@ -47,7 +47,7 @@ def valid_date( s ):
     except:
         msg = 'Invalid date formate. Please use the format: jan09-24.'
         raise argparse.ArgumentTypeError( msg )
-    
+
 def get_date_json( data, parsed_date ):
     # Extract individual components
     month = parsed_date.strftime( '%B' )
@@ -64,29 +64,29 @@ def get_date_json( data, parsed_date ):
         'DAY': day,
         'YEAR': year
     }
-    
+
     return date
 
 def extract_second_word( input_str ):
     # Use regular expression to find the second word
     match = re.findall( r'\S+', input_str )
-    
+
     if match:
         return match[ 1 ]
     else:
         return None
-    
+
 def remove_first_group( input_str ):
     return re.sub( r'^\S+\s*', '', input_str, count=1 )
 
 
 def get_scorer_and_assistors( data, input_str, remove_nums ):
     split_input_str = input_str.split( '\n' )
-    
+
     data[ 'SCORER' ] = remove_first_group( split_input_str[ 0 ] ).upper()
-    
+
     # Determine if special goal type
-    check_type = re.split( r'(.+?)\s*(\(\w+\s*\w*\))', data[ 'SCORER' ], maxsplit=1 )    
+    check_type = re.split( r'(.+?)\s*(\(\w+\s*\w*\))', data[ 'SCORER' ], maxsplit=1 )
     if len( check_type ) > 3 and check_type[ 3 ] != '':
         type = check_type[ 3 ].strip()
         with open( cwd + '/json/look-up/goal-type.json', 'r' ) as goal_types:
@@ -99,13 +99,13 @@ def get_scorer_and_assistors( data, input_str, remove_nums ):
             data[ 'TYPE' ] = type
 
             data[ 'SCORER' ] = check_type[ 1 ] + ' ' + check_type[ 2 ]
-            
+
     else:
         data[ 'TYPE' ] = ''
 
     if remove_nums:
-        data[ 'SCORER' ] = re.sub( r'\(\d+\)', '', data[ 'SCORER' ] )
-        
+        data[ 'SCORER' ] = re.sub( r'\(\d+\)', '', data[ 'SCORER' ] ).strip()
+
 
     if split_input_str[ 1 ] == 'Unassisted':
         data[ 'ASSISTORS' ] = [ 'UNASSISTED' ]
@@ -114,10 +114,10 @@ def get_scorer_and_assistors( data, input_str, remove_nums ):
         assists[ 0 ] = assists[ 0 ].replace( 'Assists: ', '' )
         a = []
         for i in range( 0, len( assists ) ):
-            a.append( remove_first_group( assists[ i ] ).upper() )
+            a.append( remove_first_group( assists[ i ] ).upper().strip() )
 
             if remove_nums:
-                a[ i ] = re.sub( r'\(\d+\)', '', a[ i ] )
+                a[ i ] = re.sub( r'\(\d+\)', '', a[ i ] ).strip()
 
         data[ 'ASSISTORS' ] = a
 

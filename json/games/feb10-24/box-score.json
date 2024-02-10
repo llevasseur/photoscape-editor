@@ -1,0 +1,81 @@
+{
+    "DATE": {
+        "TIME": "10:00 AM",
+        "MONTH": "February",
+        "DAY": "10",
+        "YEAR": "2024"
+    },
+    "CANUCKS": [
+        {
+            "PERIOD": "2",
+            "TIME": "1:09",
+            "SCORER": "HOGLANDER (15)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "HRONEK (34)",
+                "PETTERSSON (39)"
+            ]
+        },
+        {
+            "PERIOD": "2",
+            "TIME": "11:10",
+            "SCORER": "HRONEK (4)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "MIKHEYEV (14)",
+                "PETTERSSON (40)"
+            ]
+        },
+        {
+            "PERIOD": "2",
+            "TIME": "13:27",
+            "SCORER": "PETTERSSON (28)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "SUTER (7)",
+                "HRONEK (35)"
+            ]
+        }
+    ],
+    "OTHER": [
+        {
+            "PERIOD": "1",
+            "TIME": "0:45",
+            "SCORER": "RAYMOND",
+            "TYPE": "",
+            "ASSISTORS": [
+                "PERRON",
+                "PETRY"
+            ]
+        },
+        {
+            "PERIOD": "3",
+            "TIME": "2:34",
+            "SCORER": "SPRONG",
+            "TYPE": "PP",
+            "ASSISTORS": [
+                "KANE",
+                "VELENO"
+            ]
+        },
+        {
+            "PERIOD": "3",
+            "TIME": "7:51",
+            "SCORER": "RASMUSSEN",
+            "TYPE": "",
+            "ASSISTORS": [
+                "WALMAN",
+                "FISCHER"
+            ]
+        },
+        {
+            "PERIOD": "OT",
+            "TIME": "0:23",
+            "SCORER": "WALMAN",
+            "TYPE": "PS",
+            "ASSISTORS": [
+                "UNASSISTED"
+            ]
+        }
+    ]
+}
