@@ -3,6 +3,7 @@
 import json
 import os
 import traceback
+import sys
 
 from helpers import *
 from selenium import webdriver
@@ -30,17 +31,21 @@ def find_nav_index( li_list, txt ):
     for i in range( 0, len( li_list ) ):
         index = i
         try:
-            found = li_list[ i ].find_element( By.XPATH, f'.//span[contains(text(), {txt})]' )
+            found = li_list[ i ].find_element( By.XPATH, f'.//span[contains(text(), "{txt}")]' )
             return index
 
         except:
             continue
+
     return False
 
 def get_final_score_data( data, site ):
     global ot, so, home, van_score, other_score, date_file, date_obj, error
+    # Disable pop ups
+    
     # Set Chrome driver and visit site
     driver = webdriver.Chrome()
+    
     driver.get( site )
 
     # Confirm Canucks are playing and that it's an ESPN site
@@ -50,7 +55,7 @@ def get_final_score_data( data, site ):
     driver.set_window_size( 1200, 1200 )
 
     # Confirm site is loaded
-    timeout = 3
+    timeout = 1
     try:
         element_present = EC.presence_of_element_located(( By.XPATH, './/div[ contains( @class, "Gamestrip" ) ]' ))
         WebDriverWait(driver, timeout).until(element_present)
@@ -67,6 +72,7 @@ def get_final_score_data( data, site ):
 
 
     index = find_nav_index( li_list, 'Team Stats' )
+    print(index)
     if not index:
         error = 'Could not find Team Stats nav item.'
         return False
@@ -178,6 +184,8 @@ def get_final_score_data( data, site ):
 
 def get_box_score_data( data, site ):
     global ot, so, home, van_score, other_score, date_file, error
+    # Disable pop ups
+
     # Set Chrome driver and visit site
     driver = webdriver.Chrome()
     driver.get( site )
@@ -192,7 +200,7 @@ def get_box_score_data( data, site ):
     test_case = 'DATE'
 
     # Confirm site is loaded
-    timeout = 3
+    timeout = 1
     try:
         element_present = EC.presence_of_element_located(( By.XPATH, './/nav[ contains( @class, "Nav__Secondary" ) ]' ))
         WebDriverWait(driver, timeout).until(element_present)
@@ -509,13 +517,13 @@ def main():
 
     if not fetch_box_score( site ):
         print(f"Oh no! Could not fetch box score. Error: {error} ")
-        return
+        sys.exit(400)
 
     if not fetch_final_score( site ):
         print(f"Oh no! Could not fetch final score. Error: {error} ")
-        return
+        sys.exit(401)
 
-    return
+    sys.exit(0)
 
 if __name__ == '__main__':
     main()

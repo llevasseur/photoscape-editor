@@ -78,7 +78,7 @@ def make_scorer_text( stat, team ):
     if ( team == 'CANUCKS' ):
         # Construct text
         text += f'{ period } - '
-        text += f'( { time } )'
+        text += f'({ time })'
         text += f' { type }\n'
         text += f'G: { scorer }\n'
         text += 'A: '
@@ -92,7 +92,7 @@ def make_scorer_text( stat, team ):
     else:
         # Construct text
         text += f'{ type } '
-        text += f'( { time } )'
+        text += f'({ time })'
         text += f' - { period }\n'
         text += f'{ scorer } :G\n'
 
