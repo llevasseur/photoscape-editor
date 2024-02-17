@@ -42,10 +42,10 @@ def find_nav_index( li_list, txt ):
 def get_final_score_data( data, site ):
     global ot, so, home, van_score, other_score, date_file, date_obj, error
     # Disable pop ups
-    
+
     # Set Chrome driver and visit site
     driver = webdriver.Chrome()
-    
+
     driver.get( site )
 
     # Confirm Canucks are playing and that it's an ESPN site
@@ -63,7 +63,7 @@ def get_final_score_data( data, site ):
     except TimeoutException:
         error = "Timed out waiting for ESPN Gamecast to load. Make sure the link is correct or increase allotted time."
         return False
-    
+
     # Get Nav Bar
     nav = driver.find_element( By.XPATH, './/nav[ contains( @class, "Nav__Secondary" ) ]' )
 
@@ -211,7 +211,7 @@ def get_box_score_data( data, site ):
 
     # Get Nav Bar
     nav = driver.find_element( By.XPATH, './/nav[ contains( @class, "Nav__Secondary" ) ]' )
-    
+
     # Get li_list
     li_list = nav.find_elements( By.TAG_NAME, 'li' )
 
@@ -252,10 +252,20 @@ def get_box_score_data( data, site ):
 
         test_case = 'HOME or AWAY'
 
-        with open( cwd + f'/json/games/{ date_file }/game-day.json', 'r' ) as json_file:
-            # Determine if canucks are HOME or AWAY
-            file = json.load( json_file )
-            home = file.get( 'CANUCKS' )[ 'HOME' ]
+        # It is possible that date_file has not been created.
+        # This makes the preview a dependency, want to reduce number of dependencies
+
+        # Fetch Gamestrip
+        gamestrip = driver.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip" ) ]' )
+
+        # Fetch h2_list which are the two teams
+        h2_list = gamestrip.find_elements( By.XPATH, './/h2[ contains( @class, "ScoreCell__TeamName" ) ]' )
+
+        # AWAY TEAM is h2_list[ 0 ]
+        if ( h2_list[ 0 ].text == 'VAN' ):
+            home = 'AWAY'
+        else:
+            home = 'HOME'
 
         print( f'''
             { test_case } Test : Passed
