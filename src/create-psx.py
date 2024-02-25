@@ -16,12 +16,12 @@ DEBUG = 1
 def update_logo( source, psxprj, i, logo_path, type ):
     # Copy logo into source
     copy_file_to_directory( logo_path, source )
-    
+
     destination_file = os.path.basename( logo_path )
 
     # Reference logo basename in psxprj object
     psxprj.get( 'object' )[ '_v' ][ i ][ '_v' ][ 'image' ][ '_v' ][ '_v' ] = destination_file
-    
+
     if ( DEBUG ):
         print( f'''
         Update { type } : Complete
@@ -31,7 +31,7 @@ def update_logo( source, psxprj, i, logo_path, type ):
 def update_text( psxprj, i, text, type ):
     # Reference new text in psxprj object
     psxprj.get( 'object' )[ '_v' ][ i ][ '_v' ][ 'text' ][ '_v' ] = text
-    
+
     if ( DEBUG ):
         print( f'''
         Update { type } : Complete
@@ -39,11 +39,11 @@ def update_text( psxprj, i, text, type ):
     return
 
 def make_shootout_text( stat, skip = True, index = 0, initial = True, number_of_spaces = 0 ):
-    # Handles all situations of the shootout. i.e., if there are 
+    # Handles all situations of the shootout. i.e., if there are
     # 8 scorers for one team and 7 for the other, it groups them in 3's other than the first one
     text = ''
     scorers = stat.get( 'SCORERS' )
-    if initial: 
+    if initial:
         text += 'SHOOTOUT\n\n'
         if skip:
             for i in range( index, len( scorers ) ):
@@ -51,7 +51,7 @@ def make_shootout_text( stat, skip = True, index = 0, initial = True, number_of_
                 if ( i != len( scorers ) - 1 ):
                     text += '\n'
             return text
-        
+
         elif len( scorers ) > 0:
             text += scorers[ index ]
     else:
@@ -74,12 +74,12 @@ def make_scorer_text( stat, team ):
     }
     # Convert period into correct format
     period = periods.get( stat.get( 'PERIOD' ) )
-    
+
     # Handle shootout and know it's only one page.
     if period == 'SHOOTOUT':
-        skip = True # just handle it like normal, too messed up thinking about all the possibilities 
+        skip = True # just handle it like normal, too messed up thinking about all the possibilities
         return make_shootout_text( stat, skip )
-    
+
     # Handle other types of periods
     time = stat.get( 'TIME' )
     type = stat.get( 'TYPE' )
@@ -94,7 +94,7 @@ def make_scorer_text( stat, team ):
         text += f' { type }\n'
         text += f'G: { scorer }\n'
         text += 'A: '
-        
+
         for i in range( 0, n ):
             text += f'{ assistors[ i ] }'
             if ( i != n - 1 ):
@@ -111,8 +111,8 @@ def make_scorer_text( stat, team ):
         for i in range( 0, n ):
             text += f'{ assistors[ i ] }'
             if ( i != n - 1 ):
-                text += ', ' 
-        text += ' :A'   
+                text += ', '
+        text += ' :A'
 
     return text
 
@@ -121,7 +121,7 @@ def update_psxprj( selected_choice, source, date_file ):
     # Find psxprj from copied template source json
     with open( source + '/psxproject.json', 'r' ) as json_file:
         psxprj = json.load( json_file )
-        
+
     # Get team logo data from team look-up json
     with open( cwd + '/json/look-up/teams.json', 'r' ) as logo_file:
         team_lookup = json.load( logo_file )
@@ -133,7 +133,7 @@ def update_psxprj( selected_choice, source, date_file ):
     try:
         match selected_choice:
             case 'game-day':
-                
+
                 # Update VAN LOGO
                 type = 'VAN Logo    '
                 index = 0
@@ -147,7 +147,7 @@ def update_psxprj( selected_choice, source, date_file ):
                 index = 1
                 logo = team_lookup.get( stats.get( 'OTHER' )[ 'TEAM' ] )[ 'IMG' ]
                 update_logo( source, psxprj, index, logo, type )
-                
+
                 # Delete OTHER.png from template
                 os.remove( source + '/OTHER.png' )
 
@@ -180,7 +180,7 @@ def update_psxprj( selected_choice, source, date_file ):
                 index = 16
                 where = stats.get( 'CANUCKS' )[ 'HOME' ]
                 update_text( psxprj, index, where, type )
-            
+
             case 'final-score':
                 # Update VAN LOGO
                 type = 'VAN Logo    '
@@ -290,43 +290,46 @@ def update_psxprj( selected_choice, source, date_file ):
                 win = 'WIN' if stats.get( 'CANUCKS' )[ 'WIN' ] == 'True' else 'LOSS'
                 if stats.get( 'CANUCKS' )[ 'OT' ] == 'True':
                     if stats.get( 'CANUCKS' )[ 'SO' ] == 'True':
-                        win += ' ( SO )'
+                        win += ' (SO)'
                     else:
-                        win += ' ( OT )'
+                        win += ' (OT)'
                 update_text( psxprj, index, win, type )
-            
+
             case 'box-score':
                 # Create CANUCKS and OTHER SCORERS
                 canucks_scorers = stats.get( 'CANUCKS' )
                 other_scorers = stats.get( 'OTHER' )
-                print(other_scorers, len(other_scorers))
-                
-                # If there is a Shootout section in CANUCKS, determine the length 
-                # of the SCORERS tab for both CANUCKS and OTHER, add 1 and divide 
+
+                # If there is a Shootout section in CANUCKS, determine the length
+                # of the SCORERS tab for both CANUCKS and OTHER, add 1 and divide
                 # that by 3 and add 1:
                 # case 1: 2 // 3 = 0 + 1 = 1
                 # case 2: 3 // 3 = 1 + 1 = 2
                 # case 3: 4 // 3 = 1 + 1 = 2
                 # case 4: 5 // 3 = 1 + 1 = 2
                 # case 5: 6 // 3 = 2 + 1 = 3
-                so_canucks = canucks_scorers[ len( canucks_scorers ) - 1 ]
-                so_other = other_scorers[ len( other_scorers ) - 1 ]
+                if canucks_scorers:
+                    so_canucks = canucks_scorers[ -1 ]
+                if other_scorers:
+                    so_other = other_scorers[ -1 ]
+
                 so = False
                 canucks_so_n = 0
                 other_so_n = 0
                 so_n = 0
 
                 # If Canucks table has SHOOTOUT, we know Other table has SHOOTOUT
-                if  so_canucks.get( 'PERIOD' ) == 'SHOOTOUT':
+                if  ( so_canucks and so_canucks.get( 'PERIOD' ) == 'SHOOTOUT' ) or \
+                    ( so_other and so_other.get( 'PERIOD' ) == 'SHOOTOUT' ):
                     so = True
-                    canucks_so_n = ( 1 + len( so_canucks.get( 'SCORERS' ) ) ) // 3 + 1
-                    other_so_n = ( 1 + len( so_other.get( 'SCORERS' ) ) ) // 3 + 1 
-                    so_n = max( 
-                         canucks_so_n,  
+                    canucks_so_n = ( 1 + len( so_canucks.get( 'SCORERS' ) ) ) // 3 + 1 if so_canucks else 0
+                    other_so_n = ( 1 + len( so_other.get( 'SCORERS' ) ) ) // 3 + 1 if so_other else 0
+                    so_n = max(
+                         canucks_so_n,
                          other_so_n
                     )
                     so_n -= 1 # Minus 1 because n calculated below takes into account the SHOOTOUT element in the list of scorers
-                    
+
 
                 n = max( ( len( canucks_scorers ) + 6 ) // 7, ( len( other_scorers ) + 6 ) // 7 ) + so_n
 
@@ -368,7 +371,7 @@ def update_psxprj( selected_choice, source, date_file ):
 
                 # Handle multiple box-scores if necessary
                 if ( n > 1 ):
-                    
+
                     # i = 2 because this will make box-score-2, box-score-3, ... box-score-n
                     for i in range( 2, n + 1 ):
                         # Find template path for selected choice
@@ -389,7 +392,7 @@ def update_psxprj( selected_choice, source, date_file ):
                         with open( source + f'/psxproject.json', 'r' ) as json_file:
                             psxprj = json.load( json_file )
                         '''
-                        
+
                         # Find template path for selected choice
                         psx_path = cwd + f'/assets/templates/box-score-temp-{i}/'
 
@@ -437,7 +440,7 @@ def update_psxprj( selected_choice, source, date_file ):
                                         # set shooter index to match what has been added
                                         canucks_so_i += min( canucks_so_n - canucks_so_i, 3 )
 
-                                    
+
                                 # Don't update canucks_i, that way we can hit this again if needed in a new box-score
                                 # Leave the loop
                                 break
@@ -451,9 +454,9 @@ def update_psxprj( selected_choice, source, date_file ):
 
                         # Iterate over OTHER SCORERS
                         # Restrict box-score to only go to 7
-                        start = other_i 
+                        start = other_i
                         other_so_i = 0
-                        
+
                         for j in range( start, min( len( other_scorers ), start + 7 ) ):
                             # Update OTHER SCORER
                             if so and other_i == len( other_scorers ) - 1:
@@ -495,7 +498,7 @@ def update_psxprj( selected_choice, source, date_file ):
                                 ''' )
                         # Zip updated template
                         zip_directory( source, cwd + f'/json/games/{ date_file }/output/{ selected_choice }-{ i }.psxprj' )
-                
+
                         print( f'''
                         Another { selected_choice } PSX file has been zipped to games/date/output/{ selected_choice }-{ i }.psxprj.
                         ''' )
@@ -509,8 +512,8 @@ def update_psxprj( selected_choice, source, date_file ):
         ''' )
         traceback.print_exc()
         return False
-            
-        
+
+
     # Update the source json
     with open( source + '/psxproject.json', 'w' ) as json_file:
         json.dump( psxprj, json_file, indent=4 )
@@ -519,7 +522,7 @@ def update_psxprj( selected_choice, source, date_file ):
         JSON File { source }/psxproject.json : Updated!
             ''' )
     return True
-    
+
 
 def main():
     # Create an ArgumentParser object
@@ -536,7 +539,7 @@ def main():
 
     # Perform actions based on the selected choice
     if selected_choice not in [ 'game-day', 'final-score', 'box-score' ]:
-        
+
         print( f'''
         Invalid choice: { selected_choice }. Please choose from the available options:
               game-day
@@ -546,10 +549,10 @@ def main():
         Use the format: python3 src/create-psx.py --choice game-day
         ''' )
         return
-    
+
     print( f'''
 ############################################################
-          
+
                 CREATE { selected_choice.upper() } PSX FILE
 
 ############################################################
@@ -568,14 +571,14 @@ def main():
 
     print( f'''
 ############################################################
-              
+
                 DATE { date_file } { accepted }
 
 ############################################################
         ''' )
     if accepted != 'ACCEPTED':
         return
-    
+
     # Find template path for selected choice
     psx_path = cwd + f'/assets/templates/{ selected_choice }-temp/'
 
@@ -600,12 +603,12 @@ def main():
 
     # Zip updated template
     zip_directory( source, cwd + f'/json/games/{ date_file }/output/{ selected_choice }.psxprj' )
-    
+
     print( f'''
     A new { selected_choice } PSX file has been zipped to games/{ date_file }/output/{ selected_choice }.psxprj.
     ''' )
     return
-    
-    
+
+
 if __name__ == '__main__':
     main()

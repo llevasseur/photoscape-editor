@@ -72,7 +72,6 @@ def get_final_score_data( data, site ):
 
 
     index = find_nav_index( li_list, 'Team Stats' )
-    print(index)
     if not index:
         error = 'Could not find Team Stats nav item.'
         return False
