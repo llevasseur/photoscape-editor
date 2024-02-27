@@ -127,7 +127,7 @@ def update_psxprj( selected_choice, source, date_file ):
         team_lookup = json.load( logo_file )
 
     # Get selected choice data from related json
-    with open( cwd + f'/json/games/{ date_file }/{ selected_choice }.json', 'r' ) as stats_file:
+    with open( cwd + f'/games/{ date_file }/{ selected_choice }.json', 'r' ) as stats_file:
         stats = json.load( stats_file )
 
     try:
@@ -381,12 +381,12 @@ def update_psxprj( selected_choice, source, date_file ):
                         copy_file_to_directory( cwd + f'/assets/templates/{ os.sys.platform }/{ selected_choice }/psxproject.json', psx_path )
 
                         # Create directory for game date and template if it doesn't exist
-                        destination = cwd + f'/json/games/{ date_file }/{ selected_choice }-temp-{i}/'
+                        destination = cwd + f'/games/{ date_file }/{ selected_choice }-temp-{i}/'
                         create_directory( destination )
 
                         # Copy selected template to new directory
                         copy_directory( psx_path, destination )
-                        source = cwd + f'/json/games/{ date_file }/{ selected_choice }-temp-{i}'
+                        source = cwd + f'/games/{ date_file }/{ selected_choice }-temp-{i}'
 
                         # Find psxprj from copied template source json
                         with open( source + f'/psxproject.json', 'r' ) as json_file:
@@ -396,7 +396,7 @@ def update_psxprj( selected_choice, source, date_file ):
                         # Find template path for selected choice
                         psx_path = cwd + f'/assets/templates/box-score-temp-{i}/'
 
-                        source = cwd + f'/json/games/{ date_file }/{ selected_choice }-temp-{i}'
+                        source = cwd + f'/{ date_file }/{ selected_choice }-temp-{i}'
                         # Copy os-dependent psx project into template
                         copy_file_to_directory( source + f'/psxproject.json', psx_path )
 
@@ -404,9 +404,9 @@ def update_psxprj( selected_choice, source, date_file ):
                         with open( source + f'/psxproject.json', 'r' ) as json_file:
                             psxprj = json.load( json_file )
 
-                        destination = cwd + f'/json/games/{ date_file }/{ selected_choice }-temp-{ i }/'
+                        destination = cwd + f'/games/{ date_file }/{ selected_choice }-temp-{ i }/'
                         copy_directory( psx_path, destination )
-                        source = cwd + f'/json/games/{ date_file }/{ selected_choice }-temp-{ i }'''
+                        source = cwd + f'/games/{ date_file }/{ selected_choice }-temp-{ i }'''
 
                         # Iterate over CANUCKS SCORERS
                         # Restrict box-score to only go to 7
@@ -497,7 +497,7 @@ def update_psxprj( selected_choice, source, date_file ):
                                 JSON File { source }/psxproject.json : Updated!
                                 ''' )
                         # Zip updated template
-                        zip_directory( source, cwd + f'/json/games/{ date_file }/output/{ selected_choice }-{ i }.psxprj' )
+                        zip_directory( source, cwd + f'/games/{ date_file }/output/{ selected_choice }-{ i }.psxprj' )
 
                         print( f'''
                         Another { selected_choice } PSX file has been zipped to games/date/output/{ selected_choice }-{ i }.psxprj.
@@ -550,15 +550,8 @@ def main():
         ''' )
         return
 
-    print( f'''
-############################################################
-
-                CREATE { selected_choice.upper() } PSX FILE
-
-############################################################
-    ''' )
-    # Get user input for a date
-    date_file = input( '\nENTER DATE: ' )
+    # Get date which was set in the fetch script
+    date_file = os.environ.get('FETCHED_DATE')
 
     # Determine if date for game is valid
     accepted = 'ACCEPTED'
@@ -573,11 +566,18 @@ def main():
 ############################################################
 
                 DATE { date_file } { accepted }
+''')
+    if accepted != 'ACCEPTED':
+        print(f'''
+############################################################
+''')
+        return
+
+    print( f'''
+                CREATE { selected_choice.upper() } PSX FILE
 
 ############################################################
-        ''' )
-    if accepted != 'ACCEPTED':
-        return
+    ''' )
 
     # Find template path for selected choice
     psx_path = cwd + f'/assets/templates/{ selected_choice }-temp/'
@@ -586,15 +586,15 @@ def main():
     copy_file_to_directory( cwd + f'/assets/templates/{ os.sys.platform }/{ selected_choice }/psxproject.json', psx_path )
 
     # Create directory for game date and template if it doesn't exist
-    destination = cwd + f'/json/games/{ date_file }/{ selected_choice }-temp/'
+    destination = cwd + f'/games/{ date_file }/{ selected_choice }-temp/'
     create_directory( destination )
 
     # Copy selected template to new directory
     copy_directory( psx_path, destination )
-    source = cwd + f'/json/games/{ date_file }/{ selected_choice }-temp'
+    source = cwd + f'/games/{ date_file }/{ selected_choice }-temp'
 
     # Create output directory for PSX Files
-    output = cwd + f'/json/games/{ date_file }/output'
+    output = cwd + f'/games/{ date_file }/output'
     create_directory( output )
 
     # Update template copy
@@ -602,7 +602,7 @@ def main():
         return
 
     # Zip updated template
-    zip_directory( source, cwd + f'/json/games/{ date_file }/output/{ selected_choice }.psxprj' )
+    zip_directory( source, cwd + f'/games/{ date_file }/output/{ selected_choice }.psxprj' )
 
     print( f'''
     A new { selected_choice } PSX file has been zipped to games/{ date_file }/output/{ selected_choice }.psxprj.

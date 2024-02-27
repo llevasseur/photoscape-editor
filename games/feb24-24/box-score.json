@@ -1,0 +1,61 @@
+{
+    "DATE": {
+        "TIME": "4:00 PM",
+        "MONTH": "February",
+        "DAY": "24",
+        "YEAR": "2024"
+    },
+    "CANUCKS": [
+        {
+            "PERIOD": "3",
+            "TIME": "12:49",
+            "SCORER": "BOESER (32)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "ZADOROV (10)",
+                "MILLER (48)"
+            ]
+        },
+        {
+            "PERIOD": "3",
+            "TIME": "18:49",
+            "SCORER": "HRONEK (5)",
+            "TYPE": "",
+            "ASSISTORS": [
+                "MILLER (49)",
+                "PETTERSSON (45)"
+            ]
+        },
+        {
+            "PERIOD": "OT",
+            "TIME": "1:34",
+            "SCORER": "BOESER (33)",
+            "TYPE": "PP",
+            "ASSISTORS": [
+                "MILLER (50)",
+                "HUGHES (58)"
+            ]
+        }
+    ],
+    "OTHER": [
+        {
+            "PERIOD": "2",
+            "TIME": "5:27",
+            "SCORER": "BOQVIST",
+            "TYPE": "",
+            "ASSISTORS": [
+                "BRAZEAU"
+            ]
+        },
+        {
+            "PERIOD": "2",
+            "TIME": "11:15",
+            "SCORER": "HEINEN",
+            "TYPE": "",
+            "ASSISTORS": [
+                "FREDERIC",
+                "GEEKIE"
+            ]
+        }
+    ]
+}

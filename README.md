@@ -89,7 +89,7 @@ To use the PhotoScape Editor for automating Canucks game Instagram posts editing
         - "YY" represents the last two digits of the year.
 
     **Output**
-    - Find your output files in json/games/{date-entered}/output/{file}.psxprj.
+    - Find your output files in games/{date-entered}/output/{file}.psxprj.
     - Open the file with PhotoScape X.
     - Edit the file to see automated edits.
 

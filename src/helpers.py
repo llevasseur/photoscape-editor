@@ -4,6 +4,8 @@ import json
 import os
 import re
 import shutil
+import sys
+import time
 import zipfile
 
 from datetime import datetime
@@ -75,6 +77,26 @@ def extract_second_word( input_str ):
         return match[ 1 ]
     else:
         return None
+
+def loading_animation():
+
+    loading_speed = 4 # number of characters to print out per second
+    loading_string = '.' * 6 # characters to print out one by one (6 dots in this example)
+    sys.stdout.write('Collecting pucks')
+    while os.environ.get('LOADING') == 'True':
+
+        for index, char in enumerate(loading_string):
+            if os.environ.get('LOADING') != 'True':
+                break
+            sys.stdout.write(char)  # write the next char to STDOUT
+            sys.stdout.flush()  # flush the output
+            time.sleep(1.0 / loading_speed)  # wait to match our speed
+
+        index += 1  # lists are zero indexed, we need to increase by one for the accurate count
+        # backtrack the written characters, overwrite them with space, backtrack again:
+        sys.stdout.write("\b" * index + " " * index + "\b" * index)
+        sys.stdout.flush()  # flush the output
+
 
 def remove_first_group( input_str ):
     return re.sub( r'^\S+\s*', '', input_str, count=1 )

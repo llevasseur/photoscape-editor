@@ -1,9 +1,11 @@
 # Fetch player data for canucks
 
+import argparse
 import json
 import os
-import traceback
 import sys
+import threading
+import traceback
 
 from helpers import *
 from selenium import webdriver
@@ -23,7 +25,7 @@ other_score = 0
 date_file = ''
 date_obj = {}
 
-DEBUG = 1
+DEBUG = 0
 error = 'Undefined'
 
 def find_nav_index( li_list, txt ):
@@ -39,13 +41,29 @@ def find_nav_index( li_list, txt ):
 
     return False
 
+def fetch_date( driver ):
+    # DATE
+    game_info = driver.find_element( By.XPATH, './/div[ contains( @class, "GameInfo__Meta" ) ]' )
+
+    # Date is the first span in game_info
+    date_text = game_info.find_elements( By.TAG_NAME, 'span' )[ 0 ].text
+
+    # Parse the date string
+    try:
+        # Try the first format: '1:00 PM, 13 January 2024'
+        parsed_date = datetime.strptime( date_text, '%I:%M %p, %d %B %Y' )
+    except ValueError:
+        # If the first format fails, try the second format: '4:00 PM, January 11, 2024'
+        parsed_date  = datetime.strptime( date_text, '%I:%M %p, %B %d, %Y' )
+
+    return parsed_date
+
 def get_final_score_data( data, site ):
     global ot, so, home, van_score, other_score, date_file, date_obj, error
     # Disable pop ups
 
     # Set Chrome driver and visit site
     driver = webdriver.Chrome()
-
     driver.get( site )
 
     # Confirm Canucks are playing and that it's an ESPN site
@@ -57,6 +75,12 @@ def get_final_score_data( data, site ):
     # Confirm site is loaded
     timeout = 1
     try:
+        # Collecting pucks... animation
+        os.environ['LOADING'] = 'True'
+        # Access loading_animation in helpers.py
+        loading_thread = threading.Thread(target=loading_animation)
+        loading_thread.start()
+
         element_present = EC.presence_of_element_located(( By.XPATH, './/div[ contains( @class, "Gamestrip" ) ]' ))
         WebDriverWait(driver, timeout).until(element_present)
 
@@ -95,6 +119,18 @@ def get_final_score_data( data, site ):
         error = "Timed out waiting for ESPN Team Stats to load. Make sure the link is correct or increase allotted time."
         return False
 
+    if date_file == '':
+        # Set data
+        parsed_date = fetch_date( driver )
+
+        # Extract date using helper.get_date_json
+        # Returns date_file
+        date_file = get_date_json( data, parsed_date )
+
+        if not valid_date( date_file ):
+            error = f'Invalid date: {date_file}'
+            return False
+
     # Fetch Team Stats
 # - The two teams
     away = driver.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip__Team--away" ) ]' )
@@ -118,10 +154,11 @@ def get_final_score_data( data, site ):
         'SCORE': str( other_score )
     }
 
+
     data[ 'DATE' ] = {
-        'MONTH': date_obj[ 'MONTH' ][ :3 ],
-        'DAY': date_obj[ 'DAY' ],
-        'YEAR': date_obj[ 'YEAR' ]
+        'MONTH': date_file[:3].capitalize(),
+        'DAY': date_file[3:5],
+        'YEAR': '20' + date_file[-2:]
     }
 
     stats_table = driver.find_element( By.XPATH, './/section[ contains( @class, "TeamStatsTable" ) ]' )
@@ -171,10 +208,6 @@ def get_final_score_data( data, site ):
     data[ 'CANUCKS' ][ 'FO' ] = td_list[ c_ind ].text
     data[ 'OTHER' ][ 'FO' ] = td_list[ o_ind ].text
 
-    print( f'''
-            FINAL SCORE Test: Passed
-    ''' )
-
     # Remember to close the driver
     driver.quit()
 
@@ -195,12 +228,15 @@ def get_box_score_data( data, site ):
     # Set window size to small so Teams are listed as Acronyms
     driver.set_window_size( 800, 800 )
 
-    # Initialize test_case
-    test_case = 'DATE'
-
     # Confirm site is loaded
     timeout = 1
     try:
+        # Collecting pucks... animation
+        os.environ['LOADING'] = 'True'
+        # Access loading_animation in helpers.py
+        loading_thread = threading.Thread(target=loading_animation)
+        loading_thread.start()
+
         element_present = EC.presence_of_element_located(( By.XPATH, './/nav[ contains( @class, "Nav__Secondary" ) ]' ))
         WebDriverWait(driver, timeout).until(element_present)
 
@@ -221,32 +257,24 @@ def get_box_score_data( data, site ):
         live = True
 
     try:
-        # DATE
-        game_info = driver.find_element( By.XPATH, './/div[ contains( @class, "GameInfo__Meta" ) ]' )
+        # Initialize test_case
+        test_case = 'DATE'
 
-        # Date is the first span in game_info
-        date_text = game_info.find_elements( By.TAG_NAME, 'span' )[ 0 ].text
+        if date_file == '':
+            # Set data
+            parsed_date = fetch_date( driver )
 
-        # Parse the date string
-        try:
-            # Try the first format: '1:00 PM, 13 January 2024'
-            parsed_date = datetime.strptime( date_text, '%I:%M %p, %d %B %Y' )
-        except ValueError:
-            # If the first format fails, try the second format: '4:00 PM, January 11, 2024'
-            parsed_date  = datetime.strptime( date_text, '%I:%M %p, %B %d, %Y' )
+            # Extract date using helper.get_date_json
+            # Returns date_file
+            date_file = get_date_json( data, parsed_date )
 
-        # Set data
+            if not valid_date( date_file ):
+                error = f'Invalid date: {date_file}'
+                return False
 
-        # Extract date using helper.get_date_json
-        # Returns date_file
-        date_file = get_date_json( data, parsed_date )
-
-        if not valid_date( date_file ):
-            error = f'Invalid date: {date_file}'
-            return False
-
-        print( f'''
-            { test_case } Test         : Passed
+        if DEBUG == 1:
+            print( f'''
+                { test_case } Test     : Passed
         ''' )
 
         test_case = 'HOME or AWAY'
@@ -266,9 +294,9 @@ def get_box_score_data( data, site ):
         else:
             home = 'HOME'
 
-        print( f'''
+        if DEBUG == 1:
+            print( f'''
             { test_case } Test : Passed
-            HOME: { home }
         ''' )
 
         # Fetch Goal Info ( BOX SCORE )
@@ -305,7 +333,8 @@ def get_box_score_data( data, site ):
         # Keep track of shootout markers
         van_so = other_so = 0
 
-        print( f'''
+        if DEBUG == 1:
+            print( f'''
             { test_case } Test      : Passed
         ''' )
 
@@ -328,7 +357,8 @@ def get_box_score_data( data, site ):
             # tr_list = list of goals in this period
             tr_list = tbody_list[ i ].find_elements( By.XPATH, './/tr[ contains( @class, "playByPlay__tableRow" ) ]' )
 
-            print( f'''
+            if DEBUG == 1:
+                print( f'''
             GET { test_case }    : Passed
             ''' )
 
@@ -387,7 +417,8 @@ def get_box_score_data( data, site ):
                             data[ 'OTHER' ][ other_so_index ].get( 'SCORERS' ).append( shooter )
                             other_so += 1
 
-                    print( f'''
+                    if DEBUG == 1:
+                        print( f'''
             { test_case } Test    : Passed
                             ''' )
 
@@ -436,7 +467,8 @@ def get_box_score_data( data, site ):
                                 data.get( 'OTHER' ).append( obj )
                                 other_score += 1
 
-                        print( f'''
+                        if DEBUG == 1:
+                            print( f'''
             { test_case } Test    : Passed
                             ''' )
             if ( so ):
@@ -469,19 +501,23 @@ def fetch_box_score( site ):
     # Update data structure and get date to be used as dir name
     test = get_box_score_data( data, site )
 
+    # Stop loading
+    os.environ['LOADING'] = 'False'
+    print('Done!')
+
     if not test:
         return False
 
     # Create directory for game date
-    destination = cwd + f'/json/games/{ date_file }/'
+    destination = cwd + f'/games/{ date_file }/'
     create_directory( destination )
 
     # Dump data to game-day.json
-    with open( cwd + f'/json/games/{ date_file }/box-score.json', 'w' ) as json_file:
+    with open( cwd + f'/games/{ date_file }/box-score.json', 'w' ) as json_file:
         json.dump( data, json_file, indent=4 )
 
         print( f'''
-        Preview data has been fetched from ESPN and saved to games/{ date_file}/box-score.json
+        Box score data has been fetched from ESPN and saved to games/{ date_file}/box-score.json
         ''' )
 
     date_obj = data[ 'DATE' ]
@@ -495,42 +531,98 @@ def fetch_final_score( site ):
     # Update data structure and get date to be used as dir name
     test = get_final_score_data( data, site )
 
+    # Stop loading
+    os.environ['LOADING'] = 'False'
+    print('Done!')
+
     if not test:
         return False
 
     # Create directory for game date
-    destination = cwd + f'/json/games/{ date_file }/'
+    destination = cwd + f'/games/{ date_file }/'
     create_directory( destination )
 
     # Dump data to game-day.json
-    with open( cwd + f'/json/games/{ date_file }/final-score.json', 'w' ) as json_file:
+    with open( cwd + f'/games/{ date_file }/final-score.json', 'w' ) as json_file:
         json.dump( data, json_file, indent=4 )
 
         print( f'''
-        Preview data has been fetched from ESPN and saved to games/{ date_file }/final-score.json
+
+        Final score data has been fetched from ESPN and saved to games/{ date_file }/final-score.json
+
         ''' )
 
     return True
 
 def main():
     global error
+    # Create an ArgumentParser object
+    parser = argparse.ArgumentParser( description='Creates a PSX project of your choice for the Vancouver Canucks game today or a specified date.' )
+
+    # Add argument for the choice
+    parser.add_argument( '--choice', choices=[ 'all', 'final-score', 'box-score' ], help='Choose which type of PSX project to create.' )
+
+    # Parse the command line arguments
+    args = parser.parse_args()
+
+    # Access the selected choice
+    selected_choice = args.choice
+
+    # Perform actions based on the selected choice
+    if selected_choice not in [ 'all', 'final-score', 'box-score' ]:
+
+        print( f'''
+        Invalid choice: { selected_choice }. Please choose from the available options:
+              all
+              final-score
+              box-score
+
+        Use the format: python3 src/fetch-game-data.py --choice game-day
+        ''' )
+        return
     print( f'''
 ############################################################
 
-                FETCH FINAL SCORE AND BOX SCORE DATA
+                    FETCH {selected_choice.upper()} DATA
 
 ############################################################
     ''' )
     # Get user input for a URL
     site = input( '\nENTER URL: ' )
 
-    if not fetch_box_score( site ):
-        print(f"Oh no! Could not fetch box score. Error: {error} ")
-        sys.exit(400)
+    if selected_choice == 'all' or selected_choice == 'box-score':
 
-    if not fetch_final_score( site ):
-        print(f"Oh no! Could not fetch final score. Error: {error} ")
-        sys.exit(401)
+        if not fetch_box_score( site ):
+
+            # Stop loading
+            os.environ['LOADING'] = 'False'
+            print('Error!')
+            print(f"Oh no! Could not fetch box score. Error: {error} ")
+            sys.exit(400)
+
+        else:
+
+            # Set the environment variable
+            os.environ['FETCHED_DATE'] = date_file
+            # Run create-psx.py for game-day
+            os.system('python3 src/create-psx.py --choice box-score')
+
+    if selected_choice == 'all' or selected_choice == 'final-score':
+
+        if not fetch_final_score( site ):
+
+            # Stop loading
+            os.environ['LOADING'] = 'False'
+            print('Error!')
+            print(f"Oh no! Could not fetch final score. Error: {error} ")
+            sys.exit(401)
+
+        else:
+
+            # Set the environment variable
+            os.environ['FETCHED_DATE'] = date_file
+            # Run create-psx.py for game-day
+            os.system('python3 src/create-psx.py --choice final-score')
 
     sys.exit(0)
 
