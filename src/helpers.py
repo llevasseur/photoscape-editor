@@ -76,7 +76,7 @@ def extract_second_word( input_str ):
     if match:
         return match[ 1 ]
     else:
-        return None
+        return ''
 
 def loading_animation():
 

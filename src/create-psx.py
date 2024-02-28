@@ -11,7 +11,7 @@ from helpers import *
 
 cwd = os.getcwd()
 
-DEBUG = 1
+DEBUG = 0
 
 def update_logo( source, psxprj, i, logo_path, type ):
     # Copy logo into source
@@ -378,7 +378,7 @@ def update_psxprj( selected_choice, source, date_file ):
                         psx_path = cwd + f'/assets/templates/{ selected_choice }-temp/'
 
                         # Copy os-dependent psx project into template
-                        copy_file_to_directory( cwd + f'/assets/templates/{ os.sys.platform }/{ selected_choice }/psxproject.json', psx_path )
+                        copy_file_to_directory( cwd + f'/assets/templates/{ sys.platform }/{ selected_choice }/psxproject.json', psx_path )
 
                         # Create directory for game date and template if it doesn't exist
                         destination = cwd + f'/games/{ date_file }/{ selected_choice }-temp-{i}/'
@@ -465,15 +465,17 @@ def update_psxprj( selected_choice, source, date_file ):
                                     index = k - start + 3
                                     if k == j:
                                         # Need SHOOTOUT\n\n
+                                        skip = False
                                         is_initial = True
-                                        text = make_shootout_text( other_scorers[ other_i ], other_so_i, is_initial)
+                                        text = make_shootout_text( other_scorers[ other_i ], skip, other_so_i, is_initial)
                                         other_so_i += 1
                                     else:
                                         # Just list scorers, however we don't want space between at the top.
                                         # Thus, append x \n's, where x is 4 - ( min( other_so_n - other_so_i, 3 ) )
+                                        skip = False
                                         is_initial = False
                                         number_of_spaces = 4 - ( min( other_so_n - other_so_i, 3 ) )
-                                        text = make_shootout_text( other_scorers[ other_i ], other_so_i, is_initial, number_of_spaces )
+                                        text = make_shootout_text( other_scorers[ other_i ], skip, other_so_i, is_initial, number_of_spaces )
                                         # set shooter index to match what has been added
                                         other_so_i += min( other_so_n - other_so_i, 3 )
 
@@ -506,10 +508,11 @@ def update_psxprj( selected_choice, source, date_file ):
                 return True
 
     except Exception as e:
-        print( f'''
+        if DEBUG == 1:
+            print( f'''
         Update { type } : Failed
         { e }
-        ''' )
+            ''' )
         traceback.print_exc()
         return False
 
@@ -583,7 +586,7 @@ def main():
     psx_path = cwd + f'/assets/templates/{ selected_choice }-temp/'
 
     # Copy os-dependent psx project into template
-    copy_file_to_directory( cwd + f'/assets/templates/{ os.sys.platform }/{ selected_choice }/psxproject.json', psx_path )
+    copy_file_to_directory( cwd + f'/assets/templates/{ sys.platform }/{ selected_choice }/psxproject.json', psx_path )
 
     # Create directory for game date and template if it doesn't exist
     destination = cwd + f'/games/{ date_file }/{ selected_choice }-temp/'

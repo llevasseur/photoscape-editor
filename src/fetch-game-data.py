@@ -12,7 +12,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 
 cwd = os.getcwd()
@@ -100,8 +100,10 @@ def get_final_score_data( data, site ):
         error = 'Could not find Team Stats nav item.'
         return False
 
-        # Noticed that it's not always in the 4th position
-    driver.get( li_list[ index ].find_element( By.TAG_NAME, 'a' ).get_attribute( 'href' ) )
+    # Noticed that it's not always in the 4th position
+    url = li_list[ index ].find_element( By.TAG_NAME, 'a' ).get_attribute( 'href' )
+    if url:
+        driver.get( url )
 
     # Confirm Canucks are playing and that it's an ESPN site
     assert 'Canucks' and 'Game Stats' and 'ESPN' in driver.title
