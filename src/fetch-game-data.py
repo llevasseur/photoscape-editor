@@ -19,9 +19,6 @@ cwd = os.getcwd()
 
 ot = False
 so = False
-home = 'HOME'
-van_score = 0
-other_score = 0
 date_file = ''
 date_obj = {}
 
@@ -59,7 +56,7 @@ def fetch_date( driver ):
     return parsed_date
 
 def get_final_score_data( data, site ):
-    global ot, so, home, van_score, other_score, date_file, date_obj, error
+    global ot, so, date_file, date_obj, error
     # Disable pop ups
 
     # Set Chrome driver and visit site
@@ -138,13 +135,23 @@ def get_final_score_data( data, site ):
     away = driver.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip__Team--away" ) ]' )
     away_content = away.find_element( By.XPATH, './/div[ contains(@class, "Gamestrip__TeamContent" ) ]')
     away_team = away_content.find_element( By.TAG_NAME, 'h2' ).text
+    away_score = away_content.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip__Score" ) ]' ).text
 
     home_obj = driver.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip__Team--home" ) ]' )
     home_content = home_obj.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip__TeamContent" ) ]' )
     home_team = home_content.find_element( By.TAG_NAME, 'h2' ).text
+    home_score = home_content.find_element( By.XPATH, './/div[ contains( @class, "Gamestrip__Score" ) ]' ).text
+
+    home = 'HOME' if home_team == 'VAN' else 'AWAY'
+    if home == 'HOME':
+        van_score = home_score
+        other_score = away_score
+    else:
+        van_score = away_score
+        other_score = home_score
 
     data[ 'CANUCKS' ] = {
-        'SCORE': str( van_score ),
+        'SCORE': van_score,
         'HOME': home,
         'WIN': 'True' if van_score > other_score else 'False',
         'OT': 'True' if ot else 'False',
@@ -153,7 +160,7 @@ def get_final_score_data( data, site ):
 
     data[ 'OTHER' ] = {
         'TEAM': away_team if home == 'HOME' else home_team,
-        'SCORE': str( other_score )
+        'SCORE': other_score
     }
 
 
@@ -217,7 +224,7 @@ def get_final_score_data( data, site ):
 
 
 def get_box_score_data( data, site ):
-    global ot, so, home, van_score, other_score, date_file, error
+    global ot, so, date_file, error
     # Disable pop ups
 
     # Set Chrome driver and visit site
@@ -348,7 +355,7 @@ def get_box_score_data( data, site ):
             # Check if tbody_list.thead.th w class=title == '1st PERIOD'
             period_list = goal_section.find_elements( By.XPATH, './/thead[ contains( @class, "Table__THEAD" ) ]' )
             period_title = period_list[ 1 ].find_element( By.XPATH, './/th[ contains( @class, "Table__TH" ) ]' ).text.lower()
-            if ( period_title != '1st period' ):
+            if ( len( tbody_list ) != 1 and period_title != '1st period' ):
                 tbody_list.reverse()
 
         for i in range( 0, len( tbody_list ) ):
@@ -384,7 +391,7 @@ def get_box_score_data( data, site ):
 
             # Check if the game is live, if so, goals are listed in reverse order
             if live:
-                if ( period_title != '1st period' ):
+                if ( len( tbody_list ) != 1 and period_title != '1st period' ):
                     tr_list.reverse()
 
             # Iterate through each goal of the period
@@ -432,7 +439,6 @@ def get_box_score_data( data, site ):
                         # Identified a goal scorer this period
                         test_case = 'SET DATA'
                         obj = {}
-
                         if home == 'AWAY':
                             if td_list[ 3 ].text != str( van_score ):
                                 obj[ 'PERIOD' ] = period

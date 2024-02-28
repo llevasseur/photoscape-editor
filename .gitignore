@@ -258,3 +258,6 @@ out/
 
 # Package locked
 package-lock.json
+
+# photoscape-files
+games/

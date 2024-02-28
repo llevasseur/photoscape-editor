@@ -308,6 +308,7 @@ def update_psxprj( selected_choice, source, date_file ):
                 # case 3: 4 // 3 = 1 + 1 = 2
                 # case 4: 5 // 3 = 1 + 1 = 2
                 # case 5: 6 // 3 = 2 + 1 = 3
+                so_canucks = so_other = ''
                 if canucks_scorers:
                     so_canucks = canucks_scorers[ -1 ]
                 if other_scorers:
