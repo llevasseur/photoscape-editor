@@ -1,9 +1,14 @@
 {
+    "DATE": {
+        "MONTH": "Feb",
+        "DAY": "24",
+        "YEAR": "2024"
+    },
     "CANUCKS": {
         "SCORE": "3",
         "HOME": "HOME",
         "WIN": "True",
-        "OT": "True",
+        "OT": "False",
         "SO": "False",
         "SOG": "39",
         "HITS": "45",
@@ -19,10 +24,5 @@
         "PP": "0/4",
         "PIM": "4",
         "FO": "28"
-    },
-    "DATE": {
-        "MONTH": "Feb",
-        "DAY": "24",
-        "YEAR": "2024"
     }
 }

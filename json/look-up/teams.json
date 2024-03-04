@@ -43,8 +43,8 @@
         "ALT": "./assets/logos/atlantic/FLA_1.png"
     },
     "LA": {
-        "IMG": "./assets/logos/pacific/LA.png",
-        "ALT": "./assets/logos/pacific/LA_1.png"
+        "ALT": "./assets/logos/pacific/LA.png",
+        "IMG": "./assets/logos/pacific/LA_1.png"
     },
     "MIN": {
         "IMG": "./assets/logos/central/MIN.png"

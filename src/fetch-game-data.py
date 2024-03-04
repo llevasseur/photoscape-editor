@@ -7,6 +7,7 @@ import sys
 import threading
 import traceback
 
+from datetime import datetime
 from helpers import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -20,7 +21,6 @@ cwd = os.getcwd()
 ot = False
 so = False
 date_file = ''
-date_obj = {}
 
 DEBUG = 0
 error = 'Undefined'
@@ -56,7 +56,7 @@ def fetch_date( driver ):
     return parsed_date
 
 def get_final_score_data( data, site ):
-    global ot, so, date_file, date_obj, error
+    global ot, so, date_file, error
     # Disable pop ups
 
     # Set Chrome driver and visit site
@@ -503,7 +503,7 @@ def get_box_score_data( data, site ):
     return True
 
 def fetch_box_score( site ):
-    global date_file, date_obj
+    global date_file
     data = {}
 
     # Update data structure and get date to be used as dir name
@@ -527,8 +527,6 @@ def fetch_box_score( site ):
         print( f'''
         Box score data has been fetched from ESPN and saved to games/{ date_file}/box-score.json
         ''' )
-
-    date_obj = data[ 'DATE' ]
 
     return True
 
@@ -612,7 +610,7 @@ def main():
 
             # Set the environment variable
             os.environ['FETCHED_DATE'] = date_file
-            # Run create-psx.py for game-day
+            # Run create-psx.py for box-score
             os.system('python3 src/create-psx.py --choice box-score')
 
     if selected_choice == 'all' or selected_choice == 'final-score':
@@ -629,7 +627,7 @@ def main():
 
             # Set the environment variable
             os.environ['FETCHED_DATE'] = date_file
-            # Run create-psx.py for game-day
+            # Run create-psx.py for final-score
             os.system('python3 src/create-psx.py --choice final-score')
 
     sys.exit(0)

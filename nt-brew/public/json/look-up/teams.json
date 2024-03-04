@@ -1,0 +1,108 @@
+{
+    "ANA": {
+        "IMG": "/pacific/ANA.webp",
+        "ALT": "/pacific/ANA_1.webp"
+    },
+    "ARI": {
+        "IMG": "/central/ARI.png",
+        "ALT": "/central/ARI_1.png"
+    },
+    "BOS": {
+        "IMG": "/atlantic/BOS.png"
+    },
+    "BUF": {
+        "IMG": "/atlantic/BUF.png",
+        "ALT": "/atlantic/BUF_1.png"
+    },
+    "CAR": {
+        "IMG": "/metro/CAR.png"
+    },
+    "CBJ": {
+        "IMG": "/metro/CBJ.png"
+    },
+    "CGY": {
+        "IMG": "/pacific/CGY.png"
+    },
+    "CHI": {
+        "IMG": "/central/CHI.png"
+    },
+    "COL": {
+        "IMG": "/central/COL.png"
+    },
+    "DAL": {
+        "IMG": "/central/DAL.png"
+    },
+    "DET": {
+        "IMG": "/atlantic/DET.png"
+    },
+    "EDM": {
+        "IMG": "/pacific/EDM.png"
+    },
+    "FLA": {
+        "IMG": "/atlantic/FLA.png",
+        "ALT": "/atlantic/FLA_1.png"
+    },
+    "LA": {
+        "ALT": "/pacific/LA.png",
+        "IMG": "/pacific/LA_1.png"
+    },
+    "MIN": {
+        "IMG": "/central/MIN.png"
+    },
+    "MTL": {
+        "IMG": "/atlantic/MTL.png"
+    },
+    "NJD": {
+        "IMG": "/metro/NJD.png"
+    },
+    "NSH": {
+        "IMG": "/central/NSH.png"
+    },
+    "NYI": {
+        "IMG": "/metro/NYI.png"
+    },
+    "NYR": {
+        "IMG": "/metro/NYR.png"
+    },
+    "OTT": {
+        "IMG": "/atlantic/OTT.png"
+    },
+    "PHI": {
+        "IMG": "/metro/PHI.png"
+    },
+    "PIT": {
+        "IMG": "/metro/PIT.png"
+    },
+    "SEA": {
+        "IMG": "/pacific/SEA.png"
+    },
+    "SJS": {
+        "IMG": "/pacific/SJS.png"
+    },
+    "STL": {
+        "IMG": "/central/STL.png",
+        "ALT": "/central/STL_1.png"
+    },
+    "TBL": {
+        "IMG": "/atlantic/TBL.png"
+    },
+    "TOR": {
+        "IMG": "/atlantic/TOR.png"
+    },
+    "VAN": {
+        "IMG": "/pacific/VAN.png",
+        "ALT1": "/pacific/VAN_1.png",
+        "ALT2": "/pacific/VAN_2.png",
+        "ALT3": "/pacific/VAN_3.png"
+    },
+    "VGK": {
+        "IMG": "/pacific/VGK.png"
+    },
+    "WPG": {
+        "IMG": "/central/WPG.png",
+        "ALT": "/central/WPG_1.png"
+    },
+    "WSH": {
+        "IMG": "/metro/WAS.png"
+    }
+}

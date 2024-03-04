@@ -1,13 +1,17 @@
 import React from 'react'
-import URLInput from './Components/URLInput'
-import './App.css' 
+import Form from './Components/Form'
+import Logo from './Components/Logo'
+import './App.css'
 
 function App() {
   return (
     <div className="App">
-      <URLInput/>
+      <div className="logos">
+        <Logo />
+      </div>
+      <Form />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,0 +1,221 @@
+.custom-form {
+  position: relative;
+  margin-top: 20px;
+  text-align: center;
+  background-color: #000;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.select-wrapper {
+  --translate-factor: 0.0036;
+  /* Adjust the factor as needed */
+
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 10vh;
+}
+
+.select-wrapper .single-image-button {
+  width: 15vw;
+  height: 15vw;
+  border: 3px solid #EF343F;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+}
+
+.select-wrapper .single-image-button:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  border-color: #FFD100;
+}
+
+
+.select-wrapper .single-image-button.selected {
+  transform: scale(1.2);
+  border-color: #FFD100;
+}
+
+/* Double Image button */
+.image-container {
+  position: relative;
+  width: 14vw;
+  height: 14vw;
+}
+
+.select-wrapper .double-image-button {
+  background-color: #000;
+  border: 3px solid #EF343F;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  /* Add transition effect */
+}
+
+.select-wrapper .double-image-button .image1,
+.select-wrapper .double-image-button .image2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 999;
+}
+
+.select-wrapper .double-image-button .image1 {
+  transition: transform 0.4s ease;
+  /* Adjust transition duration for rotation */
+  transform: translateY(2px) translateX(-5px);
+  transform: translateY(calc(100vh * var(--translate-factor))) translateX(calc(-1 * 100vw * var(--translate-factor)))
+}
+
+.select-wrapper .double-image-button .image2 {
+  transition: transform 0.4s ease;
+  /* Adjust transition duration for rotation */
+  transform: translateY(calc(-1 * 100vh * var(--translate-factor))) translateX(calc(100vw * var(--translate-factor)))
+}
+
+.select-wrapper .double-image-button:hover .image1 {
+  transform: rotate(-12deg) translateX(-20px);
+}
+
+.select-wrapper .double-image-button:hover .image2 {
+  transform: rotate(12deg) translateX(20px);
+}
+
+.select-wrapper .double-image-button:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  border-color: #FFD100;
+}
+
+
+.select-wrapper .double-image-button.selected .image1 {
+  transform: rotate(-12deg) translateX(-20px);
+}
+
+.select-wrapper .double-image-button.selected .image2 {
+  transform: rotate(12deg) translateX(20px);
+}
+
+.select-wrapper .double-image-button.selected {
+  transform: scale(1.2);
+  border-color: #FFD100;
+}
+
+/* Both Buttons */
+.select-wrapper .single-image-button:active,
+.select-wrapper .double-image-button:active {
+  transform: scale(1.1)
+}
+
+/* Url Bar */
+.custom-form .url-bar {
+  width: 80vw;
+  max-width: 550px;
+
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #EF343F;
+  border-radius: 5px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #000;
+  color: white;
+}
+
+.custom-form .url-bar::placeholder {
+  color: #999;
+  opacity: 0.6;
+}
+
+.custom-form .url-bar:focus {
+  border-color: #FFD100;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+}
+
+.custom-form .url-bar:hover {
+  border-color: #FFD100;
+}
+
+/* Media query for responsiveness */
+@media screen and (max-width: 768px) {
+  .custom-form .url-bar {
+    font-size: 14px;
+    /* Adjusting font size for smaller screens */
+  }
+}
+
+/* Submit Container */
+.submit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Error Message Paragraph */
+.error-message {
+  opacity: 0;
+  transition: transform 0.5s ease-in-out;
+}
+
+.error-message.show {
+  opacity: 1;
+}
+
+/* Loading animation */
+.loading-container {
+  margin: 11.5px;
+}
+
+.loading-animation {
+  position: relative;
+  border: 4px solid white;
+  border-left-color: #333;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Submit button */
+.submit-button {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  border: 2px solid #EF343F;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.submit-button span {
+  color: #EF343F;
+}
+
+.submit-button span:last-child {
+  color: #FFD100;
+}
+
+.submit-button:hover {
+  border-color: #FFD100;
+}

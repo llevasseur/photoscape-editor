@@ -622,7 +622,7 @@
                     },
                     "refSize": {
                         "_t": "sizef",
-                        "_v": "1080,1080"
+                        "_v": "300,300"
                     },
                     "rotation": {
                         "_t": "double",
@@ -10611,7 +10611,7 @@
                     },
                     "text": {
                         "_t": "string",
-                        "_v": "WIN (OT)"
+                        "_v": "WIN"
                     },
                     "textBrush": {
                         "_t": "string",

@@ -2,8 +2,9 @@
 ## create-psx.py
 
 import argparse
-import os
 import json
+import os
+import sys
 import traceback
 
 from datetime import datetime
