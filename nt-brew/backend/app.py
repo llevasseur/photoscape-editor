@@ -1,9 +1,23 @@
+'''
+BUNDLE COMMANDS
+
+python3 -m PyInstaller --onefile create-psx.py 
+python3 -m PyInstaller --onefile --add-binary=./dist/create-psx:lib app.py
+
+KILL PROCESS ON 5000
+kill $(lsof -t -i:5000)
+'''
+
 import fetch_espn
+import helpers as h
 import os
 import subprocess
+import sys
+import time
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+
 
 error = "Undefined"
 
@@ -12,18 +26,28 @@ CORS(app)  # enable cors for all origins
 
 
 def run_create_psx(choice):
-    # path to the directory containing the create-psx executable
-    create_psx_dir = os.path.join(os.path.dirname(__file__), "../../create-psx")
-
     # Determine operating system to alter call to executable
     ext = ".exe" if os.name == "nt" else ""
+    if h.running_from_executable():
+        # path for create-psx.py when running from an executable
+        script_path = os.path.join(sys._MEIPASS, f"lib/create-psx{ext}")
+        command = [
+            script_path,
+            "--choice",
+            choice,
+        ]
 
-    # Command to run the create-psx app executable with the desired choice (game-day, final-score, box-score, final_full)
-    command = [
-        os.path.join(create_psx_dir, f"create-psx{ext}"),
-        "--choice",
-        choice,
-    ]
+    else:
+        # path for create-psx.py when running from a .py script
+        script_path = os.path.join(os.path.dirname(__file__), 'create-psx.py')
+        executable = sys.executable
+        command = [
+            executable,
+            script_path,
+            "--choice",
+            choice,
+        ]
+    print(f'script_path: {script_path} Choice: {choice}, command: {command}')
 
     # Run the create-psx executable
     process = subprocess.Popen(

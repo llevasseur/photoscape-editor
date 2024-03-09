@@ -50,7 +50,8 @@ function logToFile(logFilePath, message) {
 }
 
 // Log File Path
-const logDirectory = path.join(app.getPath('documents'), 'NT', 'logs')
+const NTPath = path.join(app.getPath('documents'), 'NT')
+const logDirectory = path.join(NTPath, 'logs')
 const logFilePath = path.join(logDirectory, 'electron.log')
 
 // Create the log directory if it doesn't exist
@@ -58,25 +59,62 @@ if (!fs.existsSync(logDirectory)) {
   fs.mkdirSync(logDirectory, { recursive: true })
 }
 
+// assets and json
+const assetsSource = isPackaged
+  ? path.join(__dirname, 'Resources', 'app', 'public', 'assets')
+  : path.join(__dirname, 'public', 'assets')
+
+const jsonSource = isPackaged
+  ? path.join(__dirname, 'Resources', 'app', 'public', 'json')
+  : path.join(__dirname, 'public', 'json')
+
+const assetDirectory = path.join(NTPath, 'assets')
+const jsonDestination = path.join(NTPath, 'json')
+
+function copyFiles(source, destination) {
+  // create the destination if it doesn't exist
+  if (!fs.existsSync(destination)) {
+    fs.mkdirSync(destination, { recursive: true })
+  }
+
+  // copy file into destination
+  //fs.copyFileSync(source, destination)
+
+  const isDirectory = fs.statSync(source).isDirectory()
+
+  if (isDirectory) {
+    // If it's a directory recursively traverse its contents
+    fs.readdirSync(source).forEach((item) => {
+      const sourcePath = path.join(source, item)
+      const destinationPath = path.join(destination, item)
+
+      if (fs.statSync(sourcePath).isDirectory()) {
+        // if it's a directory, recursively copy its contents
+        copyFiles(sourcePath, destinationPath)
+      } else {
+        // if its a file, copy it to the destination path
+        fs.copyFileSync(sourcePath, destinationPath)
+      }
+    })
+  }
+}
+
+copyFiles(assetsSource, assetDirectory)
+copyFiles(jsonSource, jsonDestination)
+
 // Start Flask Server
 let backendPath = isPackaged
   ? os.platform() === 'win32'
-    ? path.join(
-        __dirname,
-        'Resources',
-        'app',
-        'backend',
-        'dist',
-        'app',
-        'app.exe'
-      )
-    : path.join(__dirname, 'Resources', 'app', 'backend', 'dist', 'app', 'app')
+    ? path.join(__dirname, 'Resources', 'app', 'backend', 'dist', 'app.exe')
+    : path.join(__dirname, 'Resources', 'app', 'backend', 'dist', 'app')
   : os.platform() === 'win32'
-  ? path.join(__dirname, 'backend', 'dist', 'app', 'app.exe')
-  : path.join(__dirname, 'backend', 'dist', 'app', 'app')
+  ? path.join(__dirname, 'backend', 'dist', 'app.exe')
+  : path.join(__dirname, 'backend', 'dist', 'app')
 
 logToFile(logFilePath, `__dirname: ${__dirname}`)
 logToFile(logFilePath, `backend path: ${backendPath}`)
+
+console.log(`backendPath: ${backendPath} `)
 
 let flaskProcess = execFile(backendPath)
 

@@ -18,6 +18,12 @@ documents_folder = (
     else os.path.expanduser("~/Documents")
 )
 
+NT_folder = (
+    os.path.join(documents_folder, "NT")
+    if h.running_from_executable()
+    else os.path.join(os.path.dirname(__file__), "../public")
+)
+
 DEBUG = 1
 
 
@@ -140,7 +146,9 @@ def update_psxprj(selected_choice, source, date_file):
         psxprj = json.load(json_file)
 
     # Get team logo data from team look-up json
-    with open(cwd + "/../../../../public/json/look-up/teams.json", "r") as logo_file:
+    with open(
+        NT_folder + "/json/look-up/teams.json", "r"
+    ) as logo_file:
         team_lookup = json.load(logo_file)
 
     # Get selected choice data from related json
@@ -158,14 +166,18 @@ def update_psxprj(selected_choice, source, date_file):
                 type = "VAN Logo    "
                 index = 0
                 # NOTE Change IMG to ALT1, ALT2, ALT3
-                logo = cwd + f'/../../../../public/assets/logos{team_lookup.get("VAN")["IMG"]}'
+                logo = (
+                    NT_folder + f'/assets/logos{team_lookup.get("VAN")["IMG"]}'
+                )
                 update_logo(source, psxprj, index, logo, type)
 
                 # Update OTHER LOGO
                 other = stats.get("OTHER")["TEAM"]
                 type = f"{ other } Logo    "
                 index = 1
-                logo = cwd + f'/../../../../public/assets/logos{team_lookup.get(stats.get("OTHER")["TEAM"])["IMG"]}'
+                logo = (
+                    NT_folder + f'/assets/logos{team_lookup.get(stats.get("OTHER")["TEAM"])["IMG"]}'
+                )
                 update_logo(source, psxprj, index, logo, type)
 
                 # Delete OTHER.png from template
@@ -206,7 +218,9 @@ def update_psxprj(selected_choice, source, date_file):
                 type = "VAN Logo    "
                 index = 0
                 # NOTE Change IMG to ALT1, ALT2, ALT3
-                logo = cwd + f'/../../../../public/assets/logos{team_lookup.get("VAN")["IMG"]}'
+                logo = (
+                    NT_folder + f'/assets/logos{team_lookup.get("VAN")["IMG"]}'
+                )
                 update_logo(source, psxprj, index, logo, type)
 
                 # Update OTHER LOGO
@@ -214,7 +228,9 @@ def update_psxprj(selected_choice, source, date_file):
                 other = stats.get("OTHER")["TEAM"]
                 type = f"{ other } Logo    "
                 index = 1
-                logo = cwd + f'/../../../../public/assets/logos{team_lookup.get(stats.get("OTHER")["TEAM"])["IMG"]}'
+                logo = (
+                    NT_folder + f'/assets/logos{team_lookup.get(stats.get("OTHER")["TEAM"])["IMG"]}'
+                )
                 update_logo(source, psxprj, index, logo, type)
 
                 # Delete OTHER.png from template
@@ -412,29 +428,27 @@ def update_psxprj(selected_choice, source, date_file):
                     for i in range(2, n + 1):
                         # Find template path for selected choice
                         psx_path = (
-                            cwd
-                            + f"/../../../../public/assets/templates/{ selected_choice }-temp/"
+                            NT_folder
+                            + f"/assets/templates/{ selected_choice }-temp/"
                         )
 
                         # Copy os-dependent psx project into template
                         h.copy_file_to_directory(
-                            cwd
-                            + f"/../../../../public/assets/templates/{ sys.platform }/{ selected_choice }/psxproject.json",
+                            NT_folder
+                            + f"/assets/templates/{ sys.platform }/{ selected_choice }/psxproject.json",
                             psx_path,
                         )
 
                         # Create directory for game date and template if it doesn't exist
                         destination = (
-                            documents_folder
-                            + f"/NT/games/{ date_file }/{ selected_choice }-temp-{i}/"
+                            documents_folder + f"/NT/games/{ date_file }/{ selected_choice }-temp-{i}/"
                         )
                         h.create_directory(destination)
 
                         # Copy selected template to new directory
                         h.copy_directory(psx_path, destination)
                         source = (
-                            documents_folder
-                            + f"/NT/games/{ date_file }/{ selected_choice }-temp-{i}"
+                            documents_folder + f"/NT/games/{ date_file }/{ selected_choice }-temp-{i}"
                         )
 
                         # Find psxprj from copied template source json
@@ -445,7 +459,7 @@ def update_psxprj(selected_choice, source, date_file):
                         """
 
                         # Find template path for selected choice
-                        psx_path = cwd + f'../../public/assets/templates/box-score-temp-{i}/'
+                        psx_path = sys._MEIPASS, f'/assets/templates/box-score-temp-{i}/')
 
                         source = cwd + f'/{ date_file }/{ selected_choice }-temp-{i}'
                         # Copy os-dependent psx project into template
@@ -592,8 +606,7 @@ def update_psxprj(selected_choice, source, date_file):
                         # Zip updated template
                         h.zip_directory(
                             source,
-                            documents_folder
-                            + f"/NT/games/{ date_file }/output/{ selected_choice }-{ i }.psxprj",
+                            documents_folder + f"/NT/games/{ date_file }/output/{ selected_choice }-{ i }.psxprj",
                         )
 
                         print(
@@ -697,26 +710,18 @@ def main():
     )
 
     # Find template path for selected choice
-    psx_path = cwd + f"/../../../../public/assets/templates/{ selected_choice }-temp/"
-
-    # Copy os-dependent psx project into template
-    h.copy_file_to_directory(
-        cwd
-        + f"/../../../../public/assets/templates/{ sys.platform }/{ selected_choice }/psxproject.json",
-        psx_path,
+    psx_path = (
+        NT_folder
+        + f"/assets/templates/{ sys.platform }/{ selected_choice }-temp/"
     )
 
     # Create directory for game date and template if it doesn't exist
-    destination = (
-        documents_folder + f"/NT/games/{ date_file }/{ selected_choice }-temp/"
-    )
+    destination = documents_folder + f"/NT/games/{ date_file }/{ selected_choice }-temp/"
     h.create_directory(destination)
 
     # Copy selected template to new directory
     h.copy_directory(psx_path, destination)
-    source = (
-        documents_folder + f"/NT/games/{ date_file }/{ selected_choice }-temp"
-    )
+    source = documents_folder + f"/NT/games/{ date_file }/{ selected_choice }-temp"
 
     # Create output directory for PSX Files
     output = documents_folder + f"/NT/games/{ date_file }/output"
@@ -729,8 +734,7 @@ def main():
     # Zip updated template
     h.zip_directory(
         source,
-        documents_folder
-        + f"/NT/games/{ date_file }/output/{ selected_choice }.psxprj",
+        documents_folder + f"/NT/games/{ date_file }/output/{ selected_choice }.psxprj",
     )
 
     print(

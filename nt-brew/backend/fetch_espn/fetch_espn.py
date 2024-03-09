@@ -15,7 +15,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 
-cwd = os.getcwd()
 
 documents_folder = (
     os.path.join(os.environ["USERPROFILE"], "Documents")
@@ -750,13 +749,6 @@ def fetch_final_score(site):
     destination = documents_folder + f"/NT/games/{ date_file }/"
     h.create_directory(destination)
 
-    print(
-        f"""
-############################################
-          cwd: {cwd}
-############################################
-          """
-    )
     # Dump data to game-day.json
     with open(
         documents_folder + f"/NT/games/{ date_file }/final-score.json", "w"

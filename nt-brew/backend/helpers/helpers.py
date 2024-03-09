@@ -19,6 +19,7 @@ def create_directory(directory_path):
 
 
 def copy_directory(source_directory, destination_directory):
+    print(f"source {source_directory} dest: {destination_directory}")
     if os.path.exists(destination_directory):
         shutil.rmtree(destination_directory)
     shutil.copytree(source_directory, destination_directory)
@@ -159,3 +160,14 @@ def get_scorer_and_assistors(data, input_str, remove_nums):
         data["ASSISTORS"] = a
 
     return
+
+
+def running_from_executable():
+    # check if the script is frozen (compiled into an executable)
+    if getattr(sys, 'frozen', False):
+        return True
+    # If running from a script, it's not frozen
+    return False
+
+def test():
+    return 'hi'
