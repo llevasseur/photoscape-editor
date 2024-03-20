@@ -22,6 +22,8 @@ documents_folder = (
     else os.path.expanduser("~/Documents")
 )
 
+log_file_path = os.path.join(documents_folder, "NT", "logs", "electron.log")
+
 ot = False
 so = False
 date_file = ""
@@ -62,6 +64,12 @@ def fetch_date(driver):
     except ValueError:
         # If the first format fails, try the second format: '4:00 PM, January 11, 2024'
         parsed_date = datetime.strptime(date_text, "%I:%M %p, %B %d, %Y")
+
+    h.log_info(
+        "fetch_espn > fetch_date",
+        f"Parsed_date: {parsed_date}",
+        log_file_path,
+    )
 
     return parsed_date
 
@@ -402,12 +410,13 @@ def get_box_score_data(data, site):
                 error = f"Invalid date: {date_file}"
                 return False
 
-        if DEBUG == 1:
-            print(
-                f"""
+        h.log_info(
+            "fetch_espn > get_box_score_data",
+            f"""
                 { test_case } Test     : Passed
-        """
-            )
+            """,
+            log_file_path,
+        )
 
         test_case = "HOME or AWAY"
 
@@ -430,12 +439,13 @@ def get_box_score_data(data, site):
         else:
             home = "HOME"
 
-        if DEBUG == 1:
-            print(
-                f"""
-            { test_case } Test : Passed
-        """
-            )
+        h.log_info(
+            "fetch_espn > get_box_score_data",
+            f"""
+                { test_case } Test     : Passed
+            """,
+            log_file_path,
+        )
 
         test_case = "PERIODS"
         # Get div w class tabs__content
@@ -459,12 +469,13 @@ def get_box_score_data(data, site):
         # Keep track of shootout markers
         van_so = other_so = 0
 
-        if DEBUG == 1:
-            print(
-                f"""
-            { test_case } Test      : Passed
-        """
-            )
+        h.log_info(
+            "fetch_espn > get_box_score_data",
+            f"""
+                { test_case } Test     : Passed
+            """,
+            log_file_path,
+        )
 
         # Iterate through each period
         # Skip table[ 0 ] - Complete summary
@@ -495,12 +506,13 @@ def get_box_score_data(data, site):
                 By.XPATH, './/tr[ contains( @class, "playByPlay__tableRow" ) ]'
             )
 
-            if DEBUG == 1:
-                print(
-                    f"""
+            h.log_info(
+                "fetch_espn > get_box_score_data",
+                f"""
             GET { test_case }    : Passed
-            """
-                )
+                """,
+                log_file_path,
+            )
 
             # Determine if OT and SO are true
             if p > 2:
@@ -561,12 +573,13 @@ def get_box_score_data(data, site):
                             )
                             other_so += 1
 
-                    if DEBUG == 1:
-                        print(
-                            f"""
-            { test_case } Test    : Passed
-                            """
-                        )
+                    h.log_info(
+                        "fetch_espn > get_box_score_data",
+                        f"""
+                { test_case } Test    : Passed
+                        """,
+                        log_file_path,
+                    )
 
                 # Determine if goals were scored
                 else:
@@ -620,12 +633,13 @@ def get_box_score_data(data, site):
                                 data.get("OTHER").append(obj)
                                 other_score += 1
 
-                        if DEBUG == 1:
-                            print(
-                                f"""
-            { test_case } Test    : Passed
-                            """
-                            )
+                        h.log_info(
+                            "fetch_espn > get_box_score_data",
+                            f"""
+                    { test_case } Test    : Passed
+                            """,
+                            log_file_path,
+                        )
             if so:
                 van_score += 1 if van_so > other_so else 0
                 other_score += 1 if van_so < other_so else 0
@@ -634,10 +648,13 @@ def get_box_score_data(data, site):
 
     except Exception as e:
 
-        print(
+        h.log_error(
+            "fetch_espn > get_box_score_data",
+            800,
             f"""
-        { test_case } Test : Failed
-        """
+            { test_case } Test : Failed
+            """,
+            log_file_path,
         )
         traceback.print_exc()
         error = e
@@ -657,13 +674,17 @@ def fetch_game_preview(site):
 
     # Stop loading
     os.environ["LOADING"] = "False"
-    print("Done!")
 
     if not date_file:
         # Set the environment variable
-        os.environ["FETCHED_DATE"] = "DATE_GAMER"
+        os.environ["FETCHED_DATE"] = "DATE_ERROR"
 
-        print("REACHED AN ERROR")
+        h.log_error(
+            "fetch_espn > fetch_game_preview",
+            801,
+            f"Date file error, fetched_date = DATE_ERROR",
+            log_file_path,
+        )
         # Stop loading
         return False
 
@@ -677,12 +698,14 @@ def fetch_game_preview(site):
     ) as json_file:
         json.dump(data, json_file, indent=4)
 
-        print(
+        h.log_info(
+            "fetch_espn > fetch_game_preview",
             f"""
 
         Preview data has been fetched from ESPN and saved to Documents/NT/games/{ date_file }/game-day.json
 
-        """
+            """,
+            log_file_path,
         )
 
     # Set the environment variable
@@ -700,11 +723,15 @@ def fetch_box_score(site):
 
     # Stop loading
     os.environ["LOADING"] = "False"
-    print("Done!")
 
     if not test:
         # Set the environment variable
         os.environ["FETCHED_DATE"] = "DATE_ERROR"
+        h.log_error(
+            "fetch_espn > fetch_box_score",
+            f"Date file error, fetched_date = DATE_ERROR",
+            log_file_path,
+        )
         return False
 
     # Create directory for game date
@@ -717,10 +744,14 @@ def fetch_box_score(site):
     ) as json_file:
         json.dump(data, json_file, indent=4)
 
-        print(
+        h.log_info(
+            "fetch_espn > fetch_box_score",
             f"""
+
         Box score data has been fetched from ESPN and saved to Documents/NT/games/{ date_file}/box-score.json
-        """
+
+            """,
+            log_file_path,
         )
 
     # Set the environment variable
@@ -738,11 +769,15 @@ def fetch_final_score(site):
 
     # Stop loading
     os.environ["LOADING"] = "False"
-    print("Done!")
 
     if not test:
         # Set the environment variable
         os.environ["FETCHED_DATE"] = "DATE_ERROR"
+        h.log_error(
+            "fetch_espn > fetch_final_score",
+            f"Date file error, fetched_date = DATE_ERROR",
+            log_file_path,
+        )
         return False
 
     # Create directory for game date
@@ -755,12 +790,14 @@ def fetch_final_score(site):
     ) as json_file:
         json.dump(data, json_file, indent=4)
 
-        print(
+        h.log_info(
+            "fetch_espn > fetch_final_score",
             f"""
 
         Final score data has been fetched from ESPN and saved to Documents/NT/games/{ date_file }/final-score.json
 
-        """
+            """,
+            log_file_path,
         )
 
     # Set the environment variable

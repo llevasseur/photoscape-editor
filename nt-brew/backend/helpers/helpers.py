@@ -11,6 +11,39 @@ from datetime import datetime
 
 cwd = os.path.join(os.path.dirname(__file__))
 
+documents_folder = (
+    os.path.join(os.environ["USERPROFILE"], "Documents")
+    if os.name == "nt"
+    else os.path.expanduser("~/Documents")
+)
+
+log_file_path = os.path.join(documents_folder, "NT", "logs", "electron.log")
+
+
+def log_to_file(log_file_path, message):
+    timestamp = datetime.now().isoformat()
+    log_message = f"{timestamp}: {message}\n"
+    with open(log_file_path, "a") as file:
+        file.write(log_message)
+
+
+def log_error(module, error_code, message, log_file_path):
+    formatted_message = f"[ERROR][{module}][{error_code}] {message}"
+    print(formatted_message, file=sys.stderr)
+    log_to_file(log_file_path, formatted_message)
+
+
+def log_info(module, message, log_file_path):
+    formatted_message = f"[INFO][{module}] {message}"
+    print(formatted_message)
+    log_to_file(log_file_path, formatted_message)
+
+
+def log_warning(module, message, log_file_path):
+    formatted_message = f"[WARNING][{module}] {message}"
+    print(formatted_message)
+    log_to_file(log_file_path, formatted_message)
+
 
 def create_directory(directory_path):
     if not os.path.exists(directory_path):
@@ -19,7 +52,11 @@ def create_directory(directory_path):
 
 
 def copy_directory(source_directory, destination_directory):
-    print(f"source {source_directory} dest: {destination_directory}")
+    log_info(
+        "helpers > copy_directory",
+        f"source {source_directory} dest: {destination_directory}",
+        log_file_path,
+    )
     if os.path.exists(destination_directory):
         shutil.rmtree(destination_directory)
     shutil.copytree(source_directory, destination_directory)
@@ -91,6 +128,7 @@ def loading_animation():
     loading_string = (
         "." * 6
     )  # characters to print out one by one (6 dots in this example)
+    log_info("helpers loading_animation", "Collecting pucks", log_file_path)
     sys.stdout.write("Collecting pucks")
     while os.environ.get("LOADING") == "True":
 
@@ -112,12 +150,12 @@ def remove_first_group(input_str):
 
 
 def get_scorer_and_assistors(data, input_str, remove_nums):
-    
+
     goal_types = {
         "power play": "PP",
         "shorthanded": "SH",
         "empty net": "EN",
-        "penalty shot": "PS"
+        "penalty shot": "PS",
     }
 
     split_input_str = input_str.split("\n")
@@ -164,10 +202,7 @@ def get_scorer_and_assistors(data, input_str, remove_nums):
 
 def running_from_executable():
     # check if the script is frozen (compiled into an executable)
-    if getattr(sys, 'frozen', False):
+    if getattr(sys, "frozen", False):
         return True
     # If running from a script, it's not frozen
     return False
-
-def test():
-    return 'hi'

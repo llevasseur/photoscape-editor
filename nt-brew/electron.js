@@ -6,7 +6,7 @@ const BrowserWindow = electron.BrowserWindow
 const isPackaged = require('electron-is-packaged').isPackaged
 const fs = require('fs')
 const os = require('os')
-const { exec, execFile, spawn } = require('child_process')
+const { execFile } = require('child_process')
 
 let name = 'nt-brew'
 let version = '0.1.0'
@@ -42,12 +42,7 @@ app.on('ready', createWindow)
 // Backend
 
 // Logging
-function logToFile(logFilePath, message) {
-  const timestamp = new Date().toISOString()
-  const logMessage = `${timestamp}: ${message}\n`
-
-  fs.appendFileSync(logFilePath, logMessage)
-}
+const Logger = require('./logger')
 
 // Log File Path
 const NTPath = path.join(app.getPath('documents'), 'NT')
@@ -105,16 +100,32 @@ copyFiles(jsonSource, jsonDestination)
 // Start Flask Server
 let backendPath = isPackaged
   ? os.platform() === 'win32'
-    ? path.join(__dirname, 'Resources', 'app', 'backend', 'dist', 'app.exe')
-    : path.join(__dirname, 'Resources', 'app', 'backend', 'dist', 'app')
+    ? path.join(
+        __dirname,
+        'Resources',
+        'app',
+        'asar',
+        'unpacked',
+        'backend',
+        'dist',
+        'app.exe'
+      )
+    : path.join(
+        __dirname,
+        'Resources',
+        'app',
+        'asar',
+        'unpacked',
+        'backend',
+        'dist',
+        'app'
+      )
   : os.platform() === 'win32'
   ? path.join(__dirname, 'backend', 'dist', 'app.exe')
   : path.join(__dirname, 'backend', 'dist', 'app')
 
-logToFile(logFilePath, `__dirname: ${__dirname}`)
-logToFile(logFilePath, `backend path: ${backendPath}`)
-
-console.log(`backendPath: ${backendPath} `)
+Logger.logInfo('main', `__dirname: ${__dirname}`, logFilePath)
+Logger.logError('main', 200, `backend path: ${backendPath}`, logFilePath)
 
 let flaskProcess = execFile(backendPath)
 
@@ -127,7 +138,7 @@ flaskProcess.stdout.on('data', (data) => {
 // Log any errors that occur
 flaskProcess.stderr.on('data', (data) => {
   const errorMessage = `Error message: ${data}`
-  logToFile(logFilePath, errorMessage)
+  Logger.logError('main > flaskProcess', 501, errorMessage, logFilePath)
 })
 
 // Handle Cleanup

@@ -2,6 +2,9 @@ module.exports = {
   packagerConfig: {
     icon: 'public/icons/icon',
   },
+  asar: {
+    unpack: ['**/backend/dist/**/*', '**/public/**/*'],
+  },
   rebuildConfig: {},
   makers: [
     {
@@ -11,14 +14,6 @@ module.exports = {
     {
       name: '@electron-forge/maker-dmg',
       platforms: ['darwin'],
-      config: {},
-    },
-    {
-      name: '@electron-forge/maker-deb',
-      config: {},
-    },
-    {
-      name: '@electron-forge/maker-rpm',
       config: {},
     },
   ],

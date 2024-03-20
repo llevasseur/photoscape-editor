@@ -1,4 +1,4 @@
-'''
+"""
 BUNDLE COMMANDS
 
 python3 -m PyInstaller --onefile create-psx.py 
@@ -6,7 +6,7 @@ python3 -m PyInstaller --onefile --add-binary=./dist/create-psx:lib app.py
 
 KILL PROCESS ON 5000
 kill $(lsof -t -i:5000)
-'''
+"""
 
 import fetch_espn
 import helpers as h
@@ -24,6 +24,14 @@ error = "Undefined"
 app = Flask(__name__)
 CORS(app)  # enable cors for all origins
 
+documents_folder = (
+    os.path.join(os.environ["USERPROFILE"], "Documents")
+    if os.name == "nt"
+    else os.path.expanduser("~/Documents")
+)
+
+log_file_path = os.path.join(documents_folder, "NT", "logs", "electron.log")
+
 
 def run_create_psx(choice):
     # Determine operating system to alter call to executable
@@ -39,7 +47,7 @@ def run_create_psx(choice):
 
     else:
         # path for create-psx.py when running from a .py script
-        script_path = os.path.join(os.path.dirname(__file__), 'create-psx.py')
+        script_path = os.path.join(os.path.dirname(__file__), "create-psx.py")
         executable = sys.executable
         command = [
             executable,
@@ -47,7 +55,11 @@ def run_create_psx(choice):
             "--choice",
             choice,
         ]
-    print(f'script_path: {script_path} Choice: {choice}, command: {command}')
+    h.log_info(
+        "app > run_create_psx",
+        f"script_path: {script_path} Choice: {choice}, command: {command}",
+        log_file_path,
+    )
 
     # Run the create-psx executable
     process = subprocess.Popen(
@@ -67,7 +79,11 @@ def process_url():
         return jsonify(
             {"error": "Invalid request. Missing or malformed JSON data."}
         )
-    print(data)
+    h.log_info(
+        "app > process_url",
+        f"data: {data}",
+        log_file_path,
+    )
     url = data["url"]  # Extract the url field from the JSON Data
     selected_choice = data["choice"]
     date_file = "undefined"
@@ -78,7 +94,12 @@ def process_url():
 
             # Stop loading
             os.environ["LOADING"] = "False"
-            print("Error!")
+            h.log_error(
+                "app > process_url",
+                600,
+                f"Could not fetch box score. Error: {error}",
+                log_file_path,
+            )
             return (
                 jsonify(
                     {
@@ -95,18 +116,28 @@ def process_url():
 
             # Check if the application ran successfully
             if returncode == 0:
-                print("create-psx ran successfully.")
-                print("Output:")
-                print(stdout.decode("utf-8"))
+                h.log_info(
+                    "app > process_url",
+                    f"create-psx on box score ran successfully. Output: {stdout.decode('utf-8')}",
+                    log_file_path,
+                )
 
                 date_file = os.environ.get("FETCHED_DATE")
 
-                print(f'Date_file: {date_file}')
+                h.log_info(
+                    "app > process_url",
+                    f"date_file: {date_file}",
+                    log_file_path,
+                )
 
             else:
-                print("Error running create-psx.")
-                print("Error message:")
-                print(stderr.decode("utf-8"))
+
+                h.log_error(
+                    "app > process_url",
+                    601,
+                    f"Error running create-psx in box score. Error message: {stderr.decode('utf-8')}",
+                    log_file_path,
+                )
 
     if selected_choice == "final-full" or selected_choice == "final-score":
 
@@ -114,7 +145,12 @@ def process_url():
 
             # Stop loading
             os.environ["LOADING"] = "False"
-            print("Error!")
+            h.log_error(
+                "app > process_url",
+                602,
+                f"Could not fetch final score. Error: {error}",
+                log_file_path,
+            )
             return (
                 jsonify(
                     {
@@ -132,18 +168,27 @@ def process_url():
 
             # Check if the application ran successfully
             if returncode == 0:
-                print("create-psx ran successfully.")
-                print("Output:")
-                print(stdout.decode("utf-8"))
+                h.log_info(
+                    "app > process_url",
+                    f"create-psx on final score ran successfully. Output: {stdout.decode('utf-8')}",
+                    log_file_path,
+                )
 
                 date_file = os.environ.get("FETCHED_DATE")
 
-                print(f'Date_file: {date_file}')
+                h.log_info(
+                    "app > process_url",
+                    f"date_file: {date_file}",
+                    log_file_path,
+                )
 
             else:
-                print("Error running create-psx.")
-                print("Error message:")
-                print(stderr.decode("utf-8"))
+                h.log_error(
+                    "app > process_url",
+                    603,
+                    f"Error running create-psx in final score. Error message: {stderr.decode('utf-8')}",
+                    log_file_path,
+                )
 
     if selected_choice == "game-day":
 
@@ -151,7 +196,12 @@ def process_url():
 
             # Stop loading
             os.environ["LOADING"] = "False"
-            print("Error!")
+            h.log_error(
+                "app > process_url",
+                604,
+                f"Could not fetch game preview. Error: {error}",
+                log_file_path,
+            )
             return (
                 jsonify(
                     {
@@ -169,18 +219,27 @@ def process_url():
 
             # Check if the application ran successfully
             if returncode == 0:
-                print("create-psx ran successfully.")
-                print("Output:")
-                print(stdout.decode("utf-8"))
+                h.log_info(
+                    "app > process_url",
+                    f"create-psx on game day ran successfully. Output: {stdout.decode('utf-8')}",
+                    log_file_path,
+                )
 
                 date_file = os.environ.get("FETCHED_DATE")
 
-                print(f'Date_file: {date_file}')
+                h.log_info(
+                    "app > process_url",
+                    f"date_file: {date_file}",
+                    log_file_path,
+                )
 
             else:
-                print("Error running create-psx.")
-                print("Error message:")
-                print(stderr.decode("utf-8"))
+                h.log_error(
+                    "app > process_url",
+                    605,
+                    f"Error running create-psx in game day. Error message: {stderr.decode('utf-8')}",
+                    log_file_path,
+                )
 
     # Return message stating url received and pass the date_file
     # while( date_file == 'undefined'):
@@ -190,5 +249,4 @@ def process_url():
 
 
 if __name__ == "__main__":
-    print(fetch_espn)
     app.run(debug=True)

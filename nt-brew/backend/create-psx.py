@@ -24,6 +24,8 @@ NT_folder = (
     else os.path.join(os.path.dirname(__file__), "../public")
 )
 
+log_file_path = os.path.join(documents_folder, "NT", "logs", "electron.log")
+
 DEBUG = 1
 
 
@@ -36,12 +38,12 @@ def update_logo(source, psxprj, i, logo_path, type):
     # Reference logo basename in psxprj object
     psxprj.get("object")["_v"][i]["_v"]["image"]["_v"]["_v"] = destination_file
 
-    if DEBUG:
-        print(
-            f"""
-        Update { type } : Complete
-        """
-        )
+    h.log_info(
+        "create-psx > update_logo",
+        f"Update {type} : Complete",
+        log_file_path,
+    )
+
     return
 
 
@@ -49,12 +51,11 @@ def update_text(psxprj, i, text, type):
     # Reference new text in psxprj object
     psxprj.get("object")["_v"][i]["_v"]["text"]["_v"] = text
 
-    if DEBUG:
-        print(
-            f"""
-        Update { type } : Complete
-        """
-        )
+    h.log_info(
+        "create-psx > update_text",
+        f"Update {type} : Complete",
+        log_file_path,
+    )
     return
 
 
@@ -146,9 +147,7 @@ def update_psxprj(selected_choice, source, date_file):
         psxprj = json.load(json_file)
 
     # Get team logo data from team look-up json
-    with open(
-        NT_folder + "/json/look-up/teams.json", "r"
-    ) as logo_file:
+    with open(NT_folder + "/json/look-up/teams.json", "r") as logo_file:
         team_lookup = json.load(logo_file)
 
     # Get selected choice data from related json
@@ -176,7 +175,8 @@ def update_psxprj(selected_choice, source, date_file):
                 type = f"{ other } Logo    "
                 index = 1
                 logo = (
-                    NT_folder + f'/assets/logos{team_lookup.get(stats.get("OTHER")["TEAM"])["IMG"]}'
+                    NT_folder
+                    + f'/assets/logos{team_lookup.get(stats.get("OTHER")["TEAM"])["IMG"]}'
                 )
                 update_logo(source, psxprj, index, logo, type)
 
@@ -229,7 +229,8 @@ def update_psxprj(selected_choice, source, date_file):
                 type = f"{ other } Logo    "
                 index = 1
                 logo = (
-                    NT_folder + f'/assets/logos{team_lookup.get(stats.get("OTHER")["TEAM"])["IMG"]}'
+                    NT_folder
+                    + f'/assets/logos{team_lookup.get(stats.get("OTHER")["TEAM"])["IMG"]}'
                 )
                 update_logo(source, psxprj, index, logo, type)
 
@@ -414,12 +415,14 @@ def update_psxprj(selected_choice, source, date_file):
                 # Update the source json
                 with open(source + "/psxproject.json", "w") as json_file:
                     json.dump(psxprj, json_file, indent=4)
-                    if DEBUG:
-                        print(
-                            f"""
+
+                    h.log_info(
+                        "create-psx > update_psxprj box_score",
+                        f"""
         JSON File { source }/psxproject.json : Updated!
-                        """
-                        )
+                        """,
+                        log_file_path,
+                    )
 
                 # Handle multiple box-scores if necessary
                 if n > 1:
@@ -441,14 +444,16 @@ def update_psxprj(selected_choice, source, date_file):
 
                         # Create directory for game date and template if it doesn't exist
                         destination = (
-                            documents_folder + f"/NT/games/{ date_file }/{ selected_choice }-temp-{i}/"
+                            documents_folder
+                            + f"/NT/games/{ date_file }/{ selected_choice }-temp-{i}/"
                         )
                         h.create_directory(destination)
 
                         # Copy selected template to new directory
                         h.copy_directory(psx_path, destination)
                         source = (
-                            documents_folder + f"/NT/games/{ date_file }/{ selected_choice }-temp-{i}"
+                            documents_folder
+                            + f"/NT/games/{ date_file }/{ selected_choice }-temp-{i}"
                         )
 
                         # Find psxprj from copied template source json
@@ -597,46 +602,55 @@ def update_psxprj(selected_choice, source, date_file):
                             source + f"/psxproject.json", "w"
                         ) as json_file:
                             json.dump(psxprj, json_file, indent=4)
-                            if DEBUG:
-                                print(
-                                    f"""
-                                JSON File { source }/psxproject.json : Updated!
-                                """
-                                )
+
+                            h.log_info(
+                                "create-psx > update_psxprj",
+                                f"""
+                JSON File { source }/psxproject.json : Updated!
+                                """,
+                                log_file_path,
+                            )
                         # Zip updated template
                         h.zip_directory(
                             source,
-                            documents_folder + f"/NT/games/{ date_file }/output/{ selected_choice }-{ i }.psxprj",
+                            documents_folder
+                            + f"/NT/games/{ date_file }/output/{ selected_choice }-{ i }.psxprj",
                         )
 
-                        print(
+                        h.log_info(
+                            "create-psx > update_psxprj",
                             f"""
-                        Another { selected_choice } PSX file has been zipped to Documents/NT/games/date/output/{ selected_choice }-{ i }.psxprj.
-                        """
+                Another { selected_choice } PSX file has been zipped to Documents/NT/games/date/output/{ selected_choice }-{ i }.psxprj.!
+                            """,
+                            log_file_path,
                         )
 
                 return True
 
     except Exception as e:
-        if DEBUG == 1:
-            print(
-                f"""
-        Update { type } : Failed
-        { e }
-            """
-            )
+
+        h.log_error(
+            "create-psx > update_logo",
+            700,
+            f"""
+            Update { type } : Failed
+            { e }
+                """,
+            log_file_path,
+        )
         traceback.print_exc()
         return False
 
     # Update the source json
     with open(source + "/psxproject.json", "w") as json_file:
         json.dump(psxprj, json_file, indent=4)
-        if DEBUG:
-            print(
-                f"""
+        h.log_info(
+            "create-psx > update_psxprj",
+            f"""
         JSON File { source }/psxproject.json : Updated!
-            """
-            )
+            """,
+            log_file_path,
+        )
     return True
 
 
@@ -661,16 +675,13 @@ def main():
 
     # Perform actions based on the selected choice
     if selected_choice not in ["game-day", "final-score", "box-score"]:
-
-        print(
+        h.log_error(
+            "create-psx > update_logo",
+            701,
             f"""
-        Invalid choice: { selected_choice }. Please choose from the available options:
-              game-day
-              final-score
-              box-score
-
-        Use the format: python3 src/create-psx.py --choice game-day
-        """
+        Invalid choice: { selected_choice }
+            """,
+            log_file_path,
         )
         return
 
@@ -686,27 +697,33 @@ def main():
         if not h.valid_date(date_file):
             accepted = "REJECTED\n\t\t\t\tACCEPTED FORMAT: jan09-24"
 
-    print(
+    h.log_info(
+        "create-psx",
         f"""
 ############################################################
 
-                DATE { date_file } { accepted }
-"""
+            DATE { date_file } { accepted }
+        """,
+        log_file_path,
     )
     if accepted != "ACCEPTED":
-        print(
+        h.log_info(
+            "create-psx",
             f"""
 ############################################################
-"""
+            """,
+            log_file_path,
         )
         return
 
-    print(
+    h.log_info(
+        "create-psx",
         f"""
                 CREATE { selected_choice.upper() } PSX FILE
 
 ############################################################
-    """
+        """,
+        log_file_path,
     )
 
     # Find template path for selected choice
@@ -716,12 +733,16 @@ def main():
     )
 
     # Create directory for game date and template if it doesn't exist
-    destination = documents_folder + f"/NT/games/{ date_file }/{ selected_choice }-temp/"
+    destination = (
+        documents_folder + f"/NT/games/{ date_file }/{ selected_choice }-temp/"
+    )
     h.create_directory(destination)
 
     # Copy selected template to new directory
     h.copy_directory(psx_path, destination)
-    source = documents_folder + f"/NT/games/{ date_file }/{ selected_choice }-temp"
+    source = (
+        documents_folder + f"/NT/games/{ date_file }/{ selected_choice }-temp"
+    )
 
     # Create output directory for PSX Files
     output = documents_folder + f"/NT/games/{ date_file }/output"
@@ -734,13 +755,16 @@ def main():
     # Zip updated template
     h.zip_directory(
         source,
-        documents_folder + f"/NT/games/{ date_file }/output/{ selected_choice }.psxprj",
+        documents_folder
+        + f"/NT/games/{ date_file }/output/{ selected_choice }.psxprj",
     )
 
-    print(
+    h.log_info(
+        "create-psx",
         f"""
     A new { selected_choice } PSX file has been zipped to Documents/NT/games/{ date_file }/output/{ selected_choice }.psxprj.
-    """
+        """,
+        log_file_path,
     )
 
 
