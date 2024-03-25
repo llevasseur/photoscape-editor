@@ -11,8 +11,8 @@
         "IMG": "/atlantic/BOS.png"
     },
     "BUF": {
-        "IMG": "/atlantic/BUF.png",
-        "ALT": "/atlantic/BUF_1.png"
+        "ALT": "/atlantic/BUF.png",
+        "IMG": "/atlantic/BUF_1.png"
     },
     "CAR": {
         "IMG": "/metro/CAR.png"

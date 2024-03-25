@@ -10,13 +10,17 @@ kill $(lsof -t -i:5000)
 
 import fetch_espn
 import helpers as h
+import multiprocessing
 import os
+import psutil
+import pyautogui
 import subprocess
 import sys
 import time
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from signal import SIGKILL
 
 
 error = "Undefined"
@@ -248,5 +252,36 @@ def process_url():
     return jsonify({"date_file": date_file}), 200
 
 
+def close_port( port: int ): 
+    # TODO
+    return
+    for proc in psutil.process_iter():
+        try:
+            # Check if the process is a zombie
+            if psutil.Process(proc.pid).status() == psutil.STATUS_ZOMBIE:
+                continue # Skip zombie process
+
+            for conns in proc.connections(kind='inet'):
+                if conns.laddr.port == port:
+                    proc.send_signal(SIGKILL) # or SIGKILL
+                    h.log_info(
+                        "app > close_port",
+                        f"Port {port} closed!",
+                        log_file_path,
+                    )
+                    time.sleep(3)
+                    return
+        except (psutil.NoSuchProcess, psutil.ZombieProcess):
+            # Handle the case where the process no longer exists
+            h.log_error(
+                "app > close_port",
+                606,
+                f"Something went wrong!",
+                log_file_path,
+            )
+
+
+
 if __name__ == "__main__":
+    close_port(5000)
     app.run(debug=True)
